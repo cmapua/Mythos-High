@@ -8,7 +8,7 @@ public class SpriteControl : MonoBehaviour {
 	protected OTAnimation anim;
 	protected OTAnimatingSprite sprite;
 	protected bool wait = false;
-	protected DamageControl dc;	
+	private DamageControl dc;	
 	
 	// Use this for initialization
 	protected void Awake () {
