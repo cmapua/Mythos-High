@@ -7,12 +7,13 @@
 
 Alpha version: 
 
-~4 backgrounds + battlefield background
+~4 backgrounds + battlefield background + effect backgrounds
  - classroom
  - hall of pantheons
  - armory (?)
  - hallway
- - hallway battle
+ - [battle] hallway
+ - [effect] sunburst effect
 
 ~6 characters:
  - hero
