@@ -1,0 +1,31 @@
+1. prologue
+2. scene 1: classroom (classroom bg) + name input window
+3. scene 2: hall of pantheons (-skip personality test- aphrodite default) (HoP bg)
+4. pre-tutorial scenes (scene 4 & 5) (classroom/armory bg)
+5. tutorial (battle) (hallway bg)
+6. post-tutorial (scene 5)? (hallway bg)
+
+Alpha version: 
+
+~4 backgrounds + battlefield background
+ - classroom
+ - hall of pantheons
+ - armory (?)
+ - hallway
+ - hallway battle
+
+~6 characters:
+ - hero
+ - aphrodite
+ - osiris
+ - lani (former champion)
+ - [optional] classmates (outline)
+ - seth (rival)
+
+- splash screen
+ - unity logo (~2 sec)
+ - "studio" logo (~3 sec)
+ - game title logo (~3 sec)
+- main menu screen
+ - game title logo
+ - choices
