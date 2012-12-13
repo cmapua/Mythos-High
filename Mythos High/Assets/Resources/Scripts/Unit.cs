@@ -36,7 +36,7 @@ public class Unit : MonoBehaviour {
 	
 	IEnumerator CoUpdate() {
 		//print ("CoUpdate() called.");
-		if(!mmc.target)
+		if(mmc.canSearch())
 			yield return StartCoroutine(SearchForTarget());
 	}
 	
@@ -84,8 +84,7 @@ public class Unit : MonoBehaviour {
 			mmc.setTargetUnit(newTarget);
 			print (gameObject.name + " found a target.");
 		}
-		
-		yield return new WaitForSeconds(2);
+		yield return new WaitForEndOfFrame();
 	}
 	
 	// Update is called once per frame
