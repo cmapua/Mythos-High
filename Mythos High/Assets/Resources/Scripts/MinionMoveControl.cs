@@ -4,7 +4,9 @@ using System.Collections;
 public class MinionMoveControl : SpriteControl {
 	public Transform target;
 	
-	public float range, unitTypeNumber;
+	public float range;
+	public int unitTypeNumber;
+	public bool newType = false;
 	private bool isAttacking = false, playAnimation = false;
 	private Unit unit, targetUnit;
 	
@@ -18,7 +20,9 @@ public class MinionMoveControl : SpriteControl {
 	
 	
 	void Awake() { 
-		base.Awake();
+		if(!newType)
+			base.Awake();
+		
 		unit = GetComponent<Unit>();
 		if(unitTypeNumber == 1){
 			isMage = true;
@@ -32,21 +36,32 @@ public class MinionMoveControl : SpriteControl {
 			isSwordsman = true;
 			unitType = "swordsman";
 		}
+		else if(unitTypeNumber == 0){
+			isCastle = true;
+			unitType = "castle";
+		}
 		else{
 			unitType = "hero";
 		}
 	}
 	
 	void Start() {
+		if(newType) {
+			anim = gameObject.GetComponentInChildren<OTAnimation>(); //transform.Find("animSprite").GetComponent<OTAnimation>();
+			sprite = gameObject.GetComponentInChildren<OTAnimatingSprite>(); //transform.Find("animSprite").GetComponent<OTAnimatingSprite>();
+		}
+
 		if(target)
 			targetUnit = target.gameObject.GetComponent<Unit>();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-
+		if  (isCastle){
+			playAnimation = true;
+		}
 		//if at last frame of attack animation for archer, stop playing and deal damage
-		if(isArcher && isAttacking && sprite.CurrentFrame().index  == 13) {
+		else if(isArcher && isAttacking && sprite.CurrentFrame().index  == 13) {
 			targetUnit.HP -= unit.damage/5;
 
 			isAttacking = false;
@@ -77,7 +92,10 @@ public class MinionMoveControl : SpriteControl {
 			}
 			else if(isArcher) {
 				sprite.PlayLoop("archer-attack");
-			}			
+			}
+			else if (isCastle) {
+				sprite.Stop();
+			}
 			isAttacking = true;
 		}
 		

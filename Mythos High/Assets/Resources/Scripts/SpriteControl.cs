@@ -1,13 +1,13 @@
 using UnityEngine;
 using System.Collections;
 
-[RequireComponent(typeof(OTAnimatingSprite))]
+//[RequireComponent(typeof(OTAnimatingSprite))]
 public class SpriteControl : MonoBehaviour {
 	public float moveSpeed;
 	
-	protected OTAnimation anim;
-	protected OTAnimatingSprite sprite;
-	protected bool isArcher = false, isMage = false, isSwordsman = false;
+	public OTAnimation anim;
+	public OTAnimatingSprite sprite;
+	protected bool isArcher = false, isMage = false, isSwordsman = false, isCastle = false;
 	protected bool wait = false;
 	protected string unitType;
 	private DamageControl dc;
@@ -69,10 +69,9 @@ public class SpriteControl : MonoBehaviour {
 			sprite.PlayLoop ("Run");
 		if(unitType == "archer")
 			sprite.PlayLoop ("archer-run");
-		if(unitType == "swordsman")
+		if(unitType == "swordsman") 
 			sprite.PlayLoop ("swordie-run");
 		if(unitType == "mage")
 			sprite.PlayLoop ("mage-run");
-			
 	}
 }

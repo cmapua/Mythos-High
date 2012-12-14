@@ -8,6 +8,7 @@ public class Unit : MonoBehaviour {
 	private int layer;
 	private Transform unitTransform;
 	public MinionMoveControl mmc;
+	public bool isStatic = false;
 
 	//put stats whatevs here
 	public float HP, maxHP;
@@ -16,7 +17,8 @@ public class Unit : MonoBehaviour {
 	void Awake() {
 		manager = UnitManager.getInstance();
 		unitTransform = transform;
-		mmc = GetComponent<MinionMoveControl>();
+		if(!isStatic)
+			mmc = GetComponent<MinionMoveControl>();
 	}
 	
 	// Use this for initialization
@@ -24,7 +26,8 @@ public class Unit : MonoBehaviour {
 		layer = gameObject.layer;
 		manager.addUnit(this);
 		print ("Unit "+gameObject.name+" added.");
-		StartCoroutine("CoStart");
+		if(!isStatic)
+			StartCoroutine("CoStart");
 	}
 	
 	IEnumerator CoStart() {
@@ -56,7 +59,7 @@ public class Unit : MonoBehaviour {
 				}
 			}
 			foreach(Unit u in manager.getTheirUnits()) {
-				if(u.mmc.target == gameObject.transform) {
+				if(u.mmc && u.mmc.target == gameObject.transform) {
 					newTarget = u;
 					break;
 				}
@@ -73,7 +76,7 @@ public class Unit : MonoBehaviour {
 				}
 			}
 			foreach(Unit u in manager.getYourUnits()) {
-				if(u.mmc.target == gameObject.transform) {
+				if(u.mmc && u.mmc.target == gameObject.transform) {
 					newTarget = u;
 					break;
 				}
