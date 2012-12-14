@@ -9,6 +9,7 @@ public class faithHud : MonoBehaviour {
 	private float resourceGatherRate = .6f;
 	
 	private static faithHud instance;
+	public Texture2D helpBoxBG;
 	
 	public static faithHud getInstance() {
 		if(instance == null) 
@@ -35,6 +36,19 @@ public class faithHud : MonoBehaviour {
 	
 	void OnGUI() {
 		displayResource();
+		displayHelp();
+	}
+	
+	void displayHelp(){
+        Rect HelpBox = new Rect(0, Screen.height*5/8, Screen.width,Screen.height*3/8);
+        GUI.DrawTexture(HelpBox, helpBoxBG, ScaleMode.StretchToFill, true, 10f);
+		string helpText = "Help:" +
+						  "\nQ = Upgrade Shrine(80,120,150)" +
+						  "\nA = Summon Archer (35)" +
+						  "\nS = Summon Swordsman (20)" +
+						  "\nD = Summon Mage(50)";
+        GUI.Label(new Rect(10, (Screen.height*5/8)+10, Screen.width-10,(Screen.height*3/8)-10), helpText);
+
 	}
 	
 	IEnumerator resourceIncrement(){
