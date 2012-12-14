@@ -7,8 +7,11 @@ public class MinionMoveControl : SpriteControl {
 	public float range;
 	public int unitTypeNumber;
 	public bool newType = false;
+	public Transform projectile, arrow;
 	private bool isAttacking = false, playAnimation = false;
 	private Unit unit, targetUnit;
+	
+	int frames = 0;
 	
 	public bool canSearch(){
 		if(!target){
@@ -57,13 +60,28 @@ public class MinionMoveControl : SpriteControl {
 	
 	// Update is called once per frame
 	void Update () {
+//		frames++;
+		//kill v2's
+		if( newType && Input.GetKeyUp(KeyCode.K) ) {
+			DestroyObject(gameObject);
+		}
+		
 		if  (isCastle){
 			playAnimation = true;
 		}
 		//if at last frame of attack animation for archer, stop playing and deal damage
 		else if(isArcher && isAttacking && sprite.CurrentFrame().index  == 13) {
-			targetUnit.HP -= unit.damage/5;
-
+			//targetUnit.HP -= unit.damage/5;
+			frames++;
+			if(frames == 5) {
+				arrow = (Transform)Instantiate(projectile, new Vector3(transform.position.x + 32, transform.position.y + 64, transform.position.z), transform.rotation);
+				if(arrow && target) {
+					arrow.GetComponent<Projectile>().targetVector = new Vector3(target.position.x + 32, target.position.y + 64, target.position.z);
+					arrow.gameObject.layer = unit.getLayer();
+				}
+				
+				frames = 0;
+			}
 			isAttacking = false;
 			playAnimation = false;
 		}
