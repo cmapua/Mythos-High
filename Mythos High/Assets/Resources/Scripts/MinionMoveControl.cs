@@ -131,7 +131,7 @@ public class MinionMoveControl : SpriteControl {
 			}
 			// if it has a target, either start playing attack animation (if close enough) or move closer
 			else {
-				if(Vector3.Distance(target.position, transform.position) < range) { //within range
+				if(Mathf.Abs(target.position.x- transform.position.x) <= range) { //within range
 					//attack
 					playAnimation = true;
 				}

@@ -51,11 +51,12 @@ public class Unit : MonoBehaviour {
 			float dist = Mathf.Infinity;
 			
 			foreach(Unit u in manager.getTheirUnits()) {
-				float newDist = Vector3.Distance(u.unitTransform.position, unitTransform.position);
-				
-				if(newDist < dist) {
-					dist = newDist;
-					newTarget = u;
+				float newDist = u.unitTransform.position.x-unitTransform.position.x;
+				if(newDist<=(mmc.range+200)&& newDist >=0){
+					if(newDist < dist) {
+						dist = newDist;
+						newTarget = u;
+					}
 				}
 			}
 			foreach(Unit u in manager.getTheirUnits()) {
@@ -69,10 +70,12 @@ public class Unit : MonoBehaviour {
 			float dist = Mathf.Infinity;
 			
 			foreach(Unit u in manager.getYourUnits()) {
-				float newDist = Vector3.Distance(u.unitTransform.position, unitTransform.position);
-				if(newDist < dist) {
-					dist = newDist;
-					newTarget = u;
+				float newDist = -(u.unitTransform.position.x-unitTransform.position.x);
+				if(newDist<=(mmc.range+200)&& newDist >=0){
+					if(newDist < dist) {
+						dist = newDist;
+						newTarget = u;
+					}
 				}
 			}
 			foreach(Unit u in manager.getYourUnits()) {
@@ -87,7 +90,7 @@ public class Unit : MonoBehaviour {
 			mmc.setTargetUnit(newTarget);
 			print (gameObject.name + " found a target.");
 		}
-		yield return new WaitForSeconds(1);
+		yield return new WaitForSeconds(0.1f);
 	}
 	
 	// Update is called once per frame
