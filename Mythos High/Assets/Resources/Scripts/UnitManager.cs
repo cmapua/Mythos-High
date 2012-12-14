@@ -35,8 +35,6 @@ public class UnitManager : MonoBehaviour {
 				print("illegal unit");
 				break;
 		}
-		print (getYourUnits());
-		print (getTheirUnits());
 	}
 
 	public void removeUnit(Unit u) {

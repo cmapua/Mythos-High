@@ -84,7 +84,7 @@ public class Unit : MonoBehaviour {
 			mmc.setTargetUnit(newTarget);
 			print (gameObject.name + " found a target.");
 		}
-		yield return new WaitForEndOfFrame();
+		yield return new WaitForSeconds(1);
 	}
 	
 	// Update is called once per frame

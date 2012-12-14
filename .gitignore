@@ -16,6 +16,9 @@ Library/metadata/*
 Library/previews/*
 Library/ScriptAssemblies/*
 
+Thumbs.db
+Thumbs.db.meta
+
 AnnotationManager
 assetDatabase3
 AssetImportState
