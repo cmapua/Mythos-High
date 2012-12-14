@@ -7,13 +7,16 @@ public class SpriteControl : MonoBehaviour {
 	
 	protected OTAnimation anim;
 	protected OTAnimatingSprite sprite;
+	protected bool isArcher = false, isMage = false, isSwordsman = false;
 	protected bool wait = false;
-	private DamageControl dc;	
+	protected string unitType;
+	private DamageControl dc;
 	
 	// Use this for initialization
 	protected void Awake () {
 		anim = GetComponent<OTAnimation>();
 		sprite = GetComponent<OTAnimatingSprite>();
+		print (	sprite.animationFrameset);
 	}
 	
 	void Start() {
@@ -33,17 +36,22 @@ public class SpriteControl : MonoBehaviour {
 			}
 		}
 		else {
+			unitType = "hero";
 			if(Input.GetKey(KeyCode.LeftArrow)) {
-				move(-Vector3.right);
+				if(sprite.transform.position.x>-600)
+				move(-Vector3.right, unitType);
 			}
 			else if(Input.GetKey(KeyCode.RightArrow)) {
-				move(Vector3.right);
+				if(sprite.transform.position.x<600)
+				move(Vector3.right, unitType);
 			}
 			else if(Input.GetKey(KeyCode.UpArrow)) {
-				move (Vector3.forward);
+				if(sprite.transform.position.z<90)
+				move (Vector3.forward, unitType);
 			}
 			else if(Input.GetKey(KeyCode.DownArrow)) {
-				move (-Vector3.forward);
+				if(sprite.transform.position.z>-90)
+				move (-Vector3.forward, unitType);
 			}
 			else {
 				sprite.PlayLoop ("Idle");
@@ -51,12 +59,20 @@ public class SpriteControl : MonoBehaviour {
 		}
 	}
 	
-	protected void move(Vector3 dir) {
+	protected void move(Vector3 dir, string unitType) {
 		transform.Translate(dir * moveSpeed * Time.deltaTime);
 		if(dir.x < 0 && !sprite._flipHorizontal)
 			sprite.flipHorizontal = true;
 		if(dir.x >= 0 && sprite._flipHorizontal)
 			sprite.flipHorizontal = false;
-		sprite.PlayLoop ("Run");
+		if(unitType == "hero")
+			sprite.PlayLoop ("Run");
+		if(unitType == "archer")
+			sprite.PlayLoop ("archer-run");
+		if(unitType == "swordsman")
+			sprite.PlayLoop ("swordie-run");
+		if(unitType == "mage")
+			sprite.PlayLoop ("mage-run");
+			
 	}
 }

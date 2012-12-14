@@ -1,12 +1,9 @@
 using UnityEngine;
 using System.Collections;
 
-public class SpritePlayer : SpriteControl {
+public class SpritePlayer : MonoBehaviour {
 	
-	private string minion = "archer";
-	private string frameset = "run";
-	
-	void Awake() { base.Awake(); }
+	public GameObject Archer, Swordsman, Mage;
 	
 	// Use this for initialization
 	void Start () {
@@ -18,21 +15,13 @@ public class SpritePlayer : SpriteControl {
 		//a = archer, s = swordie, d = mage
 		//1 = run, 2 = attack
 		if(Input.GetKeyUp(KeyCode.A)) {
-			minion = "archer";
+			Instantiate(Archer, new Vector3(-500, 0, Random.Range(-100, 100)), Quaternion.identity);
 		}
 		else if(Input.GetKeyUp(KeyCode.S)) {
-			minion = "swordie";
+			Instantiate(Swordsman, new Vector3(-500, 0, Random.Range(-100, 100)), Quaternion.identity);
 		}
 		else if(Input.GetKeyUp(KeyCode.D)) {
-			minion = "mage";
+			Instantiate(Mage, new Vector3(-500, 0, Random.Range(-100, 100)), Quaternion.identity);
 		}
-		if(Input.GetKeyUp(KeyCode.Alpha1)) {
-			frameset = "run";
-		}
-		else if(Input.GetKeyUp(KeyCode.Alpha2)) {
-			frameset = "attack";
-		}
-		
-		sprite.PlayLoop(minion+"-"+frameset);
 	}
 }
