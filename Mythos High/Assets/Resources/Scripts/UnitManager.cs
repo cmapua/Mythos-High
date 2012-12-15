@@ -62,13 +62,13 @@ public class UnitManager : MonoBehaviour {
 	public Unit SearchForUnit(OTObject o, int searchLayer) {
 		if(searchLayer == 8) { //looking for player sprite
 			foreach(Unit u in yourUnits) {
-				if(u.mmc.sprite.name == o.name)
+				if(u.sc.sprite.name == o.name)
 					return u;
 			}
 		}
 		if(searchLayer == 9) { //looking for player sprite
 			foreach(Unit u in theirUnits) {
-				if(u.mmc.sprite.name == o.name)
+				if(u.sc.sprite.name == o.name)
 					return u;
 			}
 		}

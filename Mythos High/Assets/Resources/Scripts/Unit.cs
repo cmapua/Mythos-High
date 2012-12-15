@@ -7,45 +7,46 @@ public class Unit : MonoBehaviour {
 	//
 	private int layer;
 	private Transform unitTransform;
-	public MinionMoveControl mmc;
-	public bool isStatic = false;
+	public SpriteControl sc;
+	public bool isStatic = false, isHero = false;
 	public string name;
 
 	//put stats whatevs here
 	public float HP, maxHP;
 	public float damage;
 	
-	void Awake() {
+	protected void Awake() {
 		manager = UnitManager.getInstance();
 		unitTransform = transform;
-		mmc = GetComponent<MinionMoveControl>();
+		sc = GetComponent<SpriteControl>();
 	}
 	
 	// Use this for initialization
-	void Start () {
+	protected void Start () {
 		name = gameObject.name;
 		layer = gameObject.layer;
 		manager.addUnit(this);
 		print ("Unit "+gameObject.name+" added.");
-		if(!isStatic)
+		if(!isStatic || !isHero) {
 			StartCoroutine("CoStart");
+		}
 	}
 	
-	IEnumerator CoStart() {
-		print ("CoStart() called.");
+	protected virtual IEnumerator CoStart() {
+		print (gameObject.name + "'s CoStart() called.");
 		while(true) {
 			yield return StartCoroutine(CoUpdate());
 		}
 	}
 	
-	IEnumerator CoUpdate() {
+	protected virtual IEnumerator CoUpdate() {
 		//print ("CoUpdate() called.");
-		if(mmc.canSearch())
+		if(sc.canSearch() && (!isStatic || !isHero))
 			yield return StartCoroutine(SearchForTarget());
 	}
 	
 	//search for closest enemy
-	IEnumerator SearchForTarget() {
+	protected IEnumerator SearchForTarget() {
 		print (gameObject.name + " is searching for enemies...");
 		Unit newTarget = null;
 		if(layer == 8) {
@@ -53,7 +54,7 @@ public class Unit : MonoBehaviour {
 			
 			foreach(Unit u in manager.getTheirUnits()) {
 				float newDist = u.unitTransform.position.x-unitTransform.position.x;
-				if(newDist<=(mmc.range+200)&& newDist >=0){
+				if(newDist<=(sc.range+200)&& newDist >=0){
 					if(newDist < dist) {
 						dist = newDist;
 						newTarget = u;
@@ -61,7 +62,7 @@ public class Unit : MonoBehaviour {
 				}
 			}
 			foreach(Unit u in manager.getTheirUnits()) {
-				if(u.mmc && u.mmc.target == gameObject.transform) {
+				if(u.sc && u.sc.target == gameObject.transform) {
 					newTarget = u;
 					break;
 				}
@@ -72,7 +73,7 @@ public class Unit : MonoBehaviour {
 			
 			foreach(Unit u in manager.getYourUnits()) {
 				float newDist = -(u.unitTransform.position.x-unitTransform.position.x);
-				if(newDist<=(mmc.range+200)&& newDist >=0){
+				if(newDist<=(sc.range+200)&& newDist >=0){
 					if(newDist < dist) {
 						dist = newDist;
 						newTarget = u;
@@ -80,15 +81,15 @@ public class Unit : MonoBehaviour {
 				}
 			}
 			foreach(Unit u in manager.getYourUnits()) {
-				if(u.mmc && u.mmc.target == gameObject.transform) {
+				if(u.sc && u.sc.target == gameObject.transform) {
 					newTarget = u;
 					break;
 				}
 			}
 		}
 		if(newTarget) {
-			mmc.target = newTarget.transform;
-			mmc.setTargetUnit(newTarget);
+			sc.target = newTarget.transform;
+			sc.setTargetUnit(newTarget);
 			print (gameObject.name + " found a target. --> " + newTarget.name);
 		}
 		yield return new WaitForSeconds(0.1f);
@@ -99,7 +100,7 @@ public class Unit : MonoBehaviour {
 	
 	}
 	
-	void LateUpdate() {
+	protected void LateUpdate() {
 		if(HP < 0) {
 			DestroyObject(gameObject);
 		}
@@ -111,5 +112,6 @@ public class Unit : MonoBehaviour {
 	}
 	
 	public int getLayer() { return layer; }
-	public MinionMoveControl getMinionMoveControl() { return mmc; }
+	public SpriteControl getSpriteControl() { return sc; }
+	public UnitManager getUnitManager() { return manager; }
 }

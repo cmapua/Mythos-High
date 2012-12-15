@@ -21,7 +21,7 @@ public class Projectile : MonoBehaviour {
 		projectileSprite = GetComponent<OTSprite>();
 		projectileSprite.onCollision = OnCollision;
 		if(target != null)
-			trajectory = (target.mmc.hitVector.position - myTransform.position).normalized;
+			trajectory = (target.sc.hitVector.position - myTransform.position).normalized;
 		else {
 			if(gameObject.layer == 8)
 				trajectory = Vector3.right;

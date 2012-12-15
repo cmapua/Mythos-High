@@ -2,20 +2,13 @@ using UnityEngine;
 using System.Collections;
 
 public class MinionMoveControl : SpriteControl {
-	public Transform target;
-	
-	public float range;
 	public int unitTypeNumber;
 	public bool newType = false;
-	//public Transform projectile, arrow;
-	public Transform arrowPoint, hitVector;
 	public OTObject projectile;
 	private bool isAttacking = false, playAnimation = false;
-	private Unit unit, targetUnit;
+	//private Unit targetUnit;
 	
-	int frames = 0;
-	
-	public bool canSearch(){
+	public override bool canSearch(){
 		if(!target){
 			if (!isAttacking)
 			return true;
@@ -23,12 +16,10 @@ public class MinionMoveControl : SpriteControl {
 		return false;
 	}
 	
-	
 	void Awake() { 
 		if(!newType)
 			base.Awake();
 		
-		unit = GetComponent<Unit>();
 		if(unitTypeNumber == 1){
 			isMage = true;
 			unitType = "mage";
@@ -159,5 +150,5 @@ public class MinionMoveControl : SpriteControl {
 		}
 	}
 	
-	public void setTargetUnit(Unit u) { targetUnit = u; }
+	
 }
