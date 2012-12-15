@@ -28,6 +28,6 @@ public class gameGUI : MonoBehaviour {
         GUI.DrawTexture(HPLoc, hpBackIcon, ScaleMode.StretchToFill, true, 10f);
         float newWidth = HPLoc.width * (u.HP / u.maxHP);
         GUI.DrawTexture(new Rect(HPLoc.xMin, HPLoc.yMin, newWidth, HPLoc.height), hpIcon, ScaleMode.StretchToFill, true, 10f);
-        GUI.Label(new Rect(HPLoc.xMin, HPLoc.yMin, HPLoc.width + 5, 50), u.HP + "/" + u.maxHP);
+        //GUI.Label(new Rect(HPLoc.xMin, HPLoc.yMin, HPLoc.width + 5, 50), u.HP + "/" + u.maxHP);
 	}
 }

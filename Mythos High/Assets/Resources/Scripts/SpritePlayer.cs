@@ -19,21 +19,22 @@ public class SpritePlayer : MonoBehaviour {
 		//1 = run, 2 = attack
 		if(Input.GetKeyUp(KeyCode.A)) {
 			if(faith.currentFaith>=archerCost){
-				//Instantiate(Archer, new Vector3(-500, 0, Random.Range(-100, 100)), Quaternion.identity);
 				OTObject nArcher = OT.CreateSprite("minion-Archer");
-				nArcher.gameObject.transform.position = new Vector3(-500, 0, Random.Range(-100, 100));
+				nArcher.gameObject.transform.position = new Vector3(-900, 0, Random.Range(-100, 100));
 				faith.currentFaith -= archerCost;
 			}
 		}
 		else if(Input.GetKeyUp(KeyCode.S)) {
 			if(faith.currentFaith>=swordCost){
-				Instantiate(Swordsman, new Vector3(-500, 0, Random.Range(-100, 100)), Quaternion.identity);
+				OTObject nSwordsman = OT.CreateSprite("minion-Swordsman");
+				nSwordsman.gameObject.transform.position = new Vector3(-900, 0, Random.Range(-100, 100));
 				faith.currentFaith -= swordCost;
 			}
 		}
 		else if(Input.GetKeyUp(KeyCode.D)) {
 			if(faith.currentFaith>=mageCost){
-				Instantiate(Mage, new Vector3(-500, 0, Random.Range(-100, 100)), Quaternion.identity);
+				OTObject nMage = OT.CreateSprite("minion-Mage");
+				nMage.gameObject.transform.position = new Vector3(-900, 0, Random.Range(-100, 100));
 				faith.currentFaith -= mageCost;
 			}
 		}

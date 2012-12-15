@@ -17,8 +17,21 @@ public class MinionSpawner : MonoBehaviour {
 		if(Time.frameCount % frequency == 0) {
 			//float randZ = Random.Range(-100, 100);
 			//Instantiate(enemyMinion, new Vector3(500, 0, Random.Range(-100, 100)), Quaternion.identity);
-			OTObject enemy = OT.CreateSprite("enemy-swordsman");
-			enemy.gameObject.transform.position = new Vector3(500, 0, Random.Range(-100, 100));
+			OTObject enemy;
+			switch (Random.Range (0,2)){
+				case 0:
+					enemy = OT.CreateSprite("enemy-Swordsman");
+					enemy.gameObject.transform.position = new Vector3(900, 0, Random.Range(-100, 100));
+					break;				
+				case 1:
+					enemy = OT.CreateSprite("enemy-Mage");
+					enemy.gameObject.transform.position = new Vector3(900, 0, Random.Range(-100, 100));
+					break;				
+				case 2:
+					enemy = OT.CreateSprite("enemy-Archer");
+					enemy.gameObject.transform.position = new Vector3(900, 0, Random.Range(-100, 100));
+					break;				
+			}
 		}
 	}
 }
