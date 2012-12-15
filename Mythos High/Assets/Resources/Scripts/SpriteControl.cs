@@ -3,11 +3,10 @@ using System.Collections;
 
 //[RequireComponent(typeof(OTAnimatingSprite))]
 public class SpriteControl : MonoBehaviour {
-	public float moveSpeed, range = 70; //temporary value for effective weapon range (varies with hero)
+	public float moveSpeed, range = 70, hpRegenRate = 0.05f; //temporary value for effective weapon range (varies with hero)
 	public OTAnimation anim;
 	public OTAnimatingSprite sprite;
-	protected bool isArcher = false, isMage = false, isSwordsman = false, isCastle = false;
-	protected bool wait = false;
+	protected bool isArcher = false, isMage = false, isSwordsman = false, isCastle = false, wait = false;
 	protected string unitType;
 	protected Unit unit, targetUnit;
 	protected int frames = 0, lastFrame = 22; //default last frame for hero
@@ -27,11 +26,19 @@ public class SpriteControl : MonoBehaviour {
 		unit = GetComponent<Unit>();
 	}
 	
+	void regenHP(){
+		unit.HP += hpRegenRate;
+	}
+	
 	void Start() {
 	}
 	
 	// Update is called once per frame
 	void Update () {
+		if(unit.HP < unit.maxHP && unitType == "hero"){
+			regenHP();
+		}
+		
 		if(wait) {
 			if(sprite.CurrentFrame().index  == lastFrame) {
 				//frames++;
@@ -74,11 +81,11 @@ public class SpriteControl : MonoBehaviour {
 			}
 			
 			else if(Input.GetKey(KeyCode.LeftArrow)) {
-				if(sprite.transform.position.x>-600)
+				if(sprite.transform.position.x>-800)
 				move(-Vector3.right, unitType);
 			}
 			else if(Input.GetKey(KeyCode.RightArrow)) {
-				if(sprite.transform.position.x<600)
+				if(sprite.transform.position.x<800)
 				move(Vector3.right, unitType);
 			}
 			else if(Input.GetKey(KeyCode.UpArrow)) {

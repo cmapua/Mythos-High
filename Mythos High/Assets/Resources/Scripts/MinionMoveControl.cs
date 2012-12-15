@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections;
 
 public class MinionMoveControl : SpriteControl {
-	public int unitTypeNumber;
+	public int unitTypeNumber, maxDistance=800;
 	public bool newType = false;
 	public OTObject projectile;
 	private bool isAttacking = false, playAnimation = false;
@@ -136,11 +136,11 @@ public class MinionMoveControl : SpriteControl {
 			// if it has no target, move forward
 			if(!target) {
 				if(unit.getLayer() == 8) {
-					if(sprite.transform.position.x<400)
+					if(sprite.transform.position.x<maxDistance)
 						move(Vector3.right, unitType);
 				}
 				else {
-					if(sprite.transform.position.x>-400)
+					if(sprite.transform.position.x>-(maxDistance))
 						move (-Vector3.right, unitType);
 				}
 			}
@@ -152,11 +152,11 @@ public class MinionMoveControl : SpriteControl {
 				}
 				else {
 					if(unit.getLayer() == 8) {
-						if(sprite.transform.position.x<400)
+						if(sprite.transform.position.x<maxDistance)
 							move((target.position - transform.position).normalized, unitType); //move closer
 					}
 					else {
-						if(sprite.transform.position.x>-400)
+						if(sprite.transform.position.x>-(maxDistance))
 							move((target.position - transform.position).normalized, unitType); //move closer
 					}
 	
