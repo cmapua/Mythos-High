@@ -12,14 +12,14 @@ Minions:
 [x] Minion Swordsman - atk
 
 Aphrodite Heroes:
-[] Champion M - run
-[] Champion M - atk
-[] Champion M - projectile
-[] Champion - skill activate
-[] Laila - run
-[] Laila - atk
-[] Laila - projectile
-[] Laila - skill activate
+[x] Champion M - run
+[x] Champion M - atk
+[x] Champion M - projectile
+[x] Champion - skill activate
+[x] Laila - run
+[x] Laila - atk
+[x] Laila - projectile
+[x] Laila - skill activate
 [] Skill - Heal - aura
 
 Aphrodite Shrine:
@@ -50,12 +50,12 @@ Backgrounds: (Sketches)
 [] Classroom
 [] Armory
 [] Hallway
-[] Sunburst Effect
+[o] Sunburst Effect
 [] Battle Hall
 
 Items:
 [] Aphrodite's Bangle
-[] Aphrodite's Sigil (Tattoo)
+[o] Aphrodite's Sigil (Tattoo)
 [] Agimat
 
 ---------------------------------
