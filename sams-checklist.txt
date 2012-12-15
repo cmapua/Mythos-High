@@ -1,0 +1,64 @@
+Game Sprites:
+
+Minions:
+[x] Minion Archer - run
+[x] Minion Archer - atk
+[x] Minion Archer - atk projectile
+[x] Minion Mage - run
+[x] Minion Mage - atk
+[] Minion Mage - atk projectile
+[] Minion Mage - atk aura
+[x] Minion Swordsman - run
+[x] Minion Swordsman - atk
+
+Aphrodite Heroes:
+[] Champion M - run
+[] Champion M - atk
+[] Champion M - projectile
+[] Champion - skill activate
+[] Laila - run
+[] Laila - atk
+[] Laila - projectile
+[] Laila - skill activate
+[] Skill - Heal - aura
+
+Aphrodite Shrine:
+[x] Shrine 
+[x] Shrine upgrades
+[x] Sigil
+
+Icons:
+[] Minion Archer summon
+[] Minion Mage summon
+[] Minion Swordsman summon
+[] Skill Heal
+[] Shrine Upgrade
+
+---------------------------------
+Dialogue:
+
+Characters:
+[] Classmate
+[] Aphrodite
+[] Osiris
+[x] Champion (Male)
+[] Laila 
+[] Seth
+
+Backgrounds: (Sketches)
+[] Hall of Pantheons
+[] Classroom
+[] Armory
+[] Hallway
+[] Sunburst Effect
+[] Battle Hall
+
+Items:
+[] Aphrodite's Bangle
+[] Aphrodite's Sigil (Tattoo)
+[] Agimat
+
+---------------------------------
+Overall:
+[x] Mythos Logo
+[x] Splash Screen / Loading Screen
