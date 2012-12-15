@@ -2,12 +2,10 @@ using UnityEngine;
 using System.Collections;
 
 public class MinionMoveControl : SpriteControl {
-	public int unitTypeNumber;
+	//public int unitTypeNumber;
 	public bool newType = false;
 	public OTObject projectile;
-	private bool isAttacking = false, playAnimation = false;
-	//private Unit targetUnit;
-	
+
 	public override bool canSearch(){
 		if(!target){
 			if (!isAttacking)
@@ -15,33 +13,7 @@ public class MinionMoveControl : SpriteControl {
 		}
 		return false;
 	}
-	
-	void Awake() { 
-		anim = GetComponent<OTAnimation>();
-		sprite = GetComponent<OTAnimatingSprite>();
-		unit = GetComponent<Unit>();
-		
-		if(unitTypeNumber == 1){
-			isMage = true;
-			unitType = "mage";
-		}
-		else if(unitTypeNumber == 2){
-			isArcher = true;
-			unitType = "archer";
-		}
-		else if(unitTypeNumber == 3){
-			isSwordsman = true;
-			unitType = "swordsman";
-		}
-		else if(unitTypeNumber == 0){
-			isCastle = true;
-			unitType = "castle";
-		}
-		else{
-			unitType = "hero";
-		}
-	}
-	
+
 	void Start() {
 		if(!hitVector) hitVector = transform;
 		if(newType) {

@@ -6,8 +6,9 @@ public class SpriteControl : MonoBehaviour {
 	public float moveSpeed, range = 70; //temporary value for effective weapon range (varies with hero)
 	public OTAnimation anim;
 	public OTAnimatingSprite sprite;
+	public int unitTypeNumber;
 	protected bool isArcher = false, isMage = false, isSwordsman = false, isCastle = false;
-	protected bool wait = false;
+	protected bool wait = false, isAttacking = false, playAnimation = false;
 	protected string unitType;
 	protected Unit unit, targetUnit;
 	protected int frames = 0, lastFrame = 22; //default last frame for hero
@@ -16,7 +17,11 @@ public class SpriteControl : MonoBehaviour {
 		attacking,
 		castingSpell1,
 		castingSpell2,
-		castingSpell3
+		castingSpell3,
+		//enemyAI states
+		standby,
+		chasing,
+		fallingBack
 	}
 	
 	protected heroState currentState = heroState.attacking; //default state
@@ -25,6 +30,29 @@ public class SpriteControl : MonoBehaviour {
 		anim = GetComponent<OTAnimation>();
 		sprite = GetComponent<OTAnimatingSprite>();
 		unit = GetComponent<Unit>();
+		
+		if(unitTypeNumber == 1){
+			isMage = true;
+			unitType = "mage";
+		}
+		else if(unitTypeNumber == 2){
+			isArcher = true;
+			unitType = "archer";
+		}
+		else if(unitTypeNumber == 3){
+			isSwordsman = true;
+			unitType = "swordsman";
+		}
+		else if(unitTypeNumber == 0){
+			isCastle = true;
+			unitType = "castle";
+		}
+		else if(unitTypeNumber == 4){
+			unitType = "enemyHero";
+		}
+		else{
+			unitType = "hero";
+		}
 	}
 	
 	void Start() {
@@ -111,7 +139,7 @@ public class SpriteControl : MonoBehaviour {
 	
 	void attack() {
 		foreach(Unit u in unit.getUnitManager().getTheirUnits()) {
-			float dist = Vector3.Distance(u.transform.position, transform.position);
+			float dist = Mathf.Abs(u.transform.position.x - transform.position.x);
 			if(dist < range) {
 				u.HP -= unit.damage;
 			}
@@ -132,6 +160,8 @@ public class SpriteControl : MonoBehaviour {
 			sprite.PlayLoop ("swordie-run");
 		if(unitType == "mage")
 			sprite.PlayLoop ("mage-run");
+		if(unitType == "enemyHero")
+			sprite.PlayLoop("hero-run");
 	}
 	
 	protected Unit searchNearestTarget() {
@@ -180,4 +210,5 @@ public class SpriteControl : MonoBehaviour {
 	
 	public virtual bool canSearch() { return true; }
 	public void setTargetUnit(Unit u) { targetUnit = u; }
+	public Unit getTargetUnit() { return targetUnit; }
 }

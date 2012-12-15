@@ -75,6 +75,20 @@ public class UnitManager : MonoBehaviour {
 		return null;
 	}
 	
+	public Unit getHero(int side) {
+		if(side == 8) {
+			foreach(Unit u in yourUnits) {
+				if(u.isHero) return u;
+			}
+		}
+		if(side == 9) {
+			foreach(Unit u in theirUnits) {
+				if(u.isHero) return u;
+			}
+		}
+		return null;
+	}
+	
 	// Update is called once per frame
 	void Update () {
 	
