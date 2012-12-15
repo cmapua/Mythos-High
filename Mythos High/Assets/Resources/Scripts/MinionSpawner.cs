@@ -4,34 +4,95 @@ using System.Collections;
 
 public class MinionSpawner : MonoBehaviour {
 	//public Transform yourSpawn, theirSpawn;
-	public float frequency;
-	public GameObject enemyMinion;
+	public int level=1;
+	private int spawnCycle=0;
 	
-	// Use this for initialization
-	void Start () {
+	private static MinionSpawner instance;
 	
+		
+	public static MinionSpawner getInstance() {
+		if(instance == null) 
+			instance = (MinionSpawner)FindObjectOfType(typeof(MinionSpawner));
+		return instance;
 	}
 	
-	// Update is called once per frame
-	void Update () {
-		if(Time.frameCount % frequency == 0) {
-			//float randZ = Random.Range(-100, 100);
-			//Instantiate(enemyMinion, new Vector3(500, 0, Random.Range(-100, 100)), Quaternion.identity);
-			OTObject enemy;
-			switch (Random.Range (0,2)){
+	// Use this for initialization
+	void Start(){
+		StartCoroutine("CoStart");
+	}
+	IEnumerator CoStart() {
+		print ("CoStart() called.");
+		while(true) {
+			yield return StartCoroutine(CoUpdate());
+		}
+	}
+	
+	IEnumerator CoUpdate() {
+		//print ("CoUpdate() called.");
+		yield return StartCoroutine(spawnUnitBehaviour (spawnCycle));
+	}	
+	
+	void createUnit(int enemyType){
+		OTObject enemy;
+		switch (enemyType){
+			case 0:
+				enemy = OT.CreateSprite("enemy-Swordsman");
+				enemy.gameObject.transform.position = new Vector3(900, 0, Random.Range(-100, 100));
+				break;				
+			case 1:
+				enemy = OT.CreateSprite("enemy-Mage");
+				enemy.gameObject.transform.position = new Vector3(900, 0, Random.Range(-100, 100));
+				break;				
+			case 2:
+				enemy = OT.CreateSprite("enemy-Archer");
+				enemy.gameObject.transform.position = new Vector3(900, 0, Random.Range(-100, 100));
+				break;				
+		}		
+	}
+	
+	IEnumerator spawnUnitBehaviour(int cycle){
+		float spawnCountdown=1;
+		if (level==1){
+			switch(cycle){
 				case 0:
-					enemy = OT.CreateSprite("enemy-Swordsman");
-					enemy.gameObject.transform.position = new Vector3(900, 0, Random.Range(-100, 100));
-					break;				
+					spawnCountdown = 4.4f;
+					createUnit(0);
+					spawnCycle++;
+					break;
 				case 1:
-					enemy = OT.CreateSprite("enemy-Mage");
-					enemy.gameObject.transform.position = new Vector3(900, 0, Random.Range(-100, 100));
-					break;				
+					spawnCountdown = 4.4f;
+					createUnit(0);
+					spawnCycle++;
+					break;
 				case 2:
-					enemy = OT.CreateSprite("enemy-Archer");
-					enemy.gameObject.transform.position = new Vector3(900, 0, Random.Range(-100, 100));
-					break;				
+					spawnCountdown = 7f;
+					createUnit(2);
+					spawnCycle++;
+					break;
+				case 3:
+					spawnCountdown = 4.4f;
+					createUnit(0);
+					spawnCycle++;
+					break;
+				case 4:
+					spawnCountdown = 9.4f;
+					createUnit(1);
+					spawnCycle++;
+					break;
+				case 5:
+					spawnCountdown = 4.4f;
+					createUnit(0);
+					spawnCycle++;
+					break;
+				case 6:
+					spawnCountdown = 12f;
+					createUnit(0);
+					createUnit(2);
+					spawnCycle=0;
+					break;
 			}
 		}
+		
+		yield return new WaitForSeconds(spawnCountdown);
 	}
 }

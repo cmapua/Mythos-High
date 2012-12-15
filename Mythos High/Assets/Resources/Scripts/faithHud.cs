@@ -6,7 +6,7 @@ public class faithHud : MonoBehaviour {
 	private int maxFaith = 150;
 	public int shrineLevel = 1;
 	public float currentFaith = 0;
-	private float resourceGatherRate = .6f;
+	private float resourceGatherRate = .55f;
 	
 	private static faithHud instance;
 	public Texture2D helpBoxBG;
@@ -65,7 +65,7 @@ public class faithHud : MonoBehaviour {
 	public void levelShrine(){
 		shrineLevel++;
 		if(shrineLevel==2){
-			resourceGatherRate = .4f;
+			resourceGatherRate = .45f;
 			maxFaith = 200;
 			currentFaith -=80;
 		}
@@ -75,7 +75,7 @@ public class faithHud : MonoBehaviour {
 			currentFaith -=120;
 		}
 		if(shrineLevel==4){
-			resourceGatherRate = .1f;
+			resourceGatherRate = .15f;
 			maxFaith = 300;
 			currentFaith -=150;
 		}

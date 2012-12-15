@@ -128,9 +128,11 @@ public class HeroControl : SpriteControl {
 		switch(currentState) {
 		case heroState.attacking:
 			if(isAttacking) {
-				targetUnit.HP -= unit.damage/10;
-				isAttacking = false;
-				playAnimation = false;
+				if (sprite.CurrentFrame().index  == 4){
+					targetUnit.HP -= unit.damage/10;
+					isAttacking = false;
+					playAnimation = false;
+				}
 			}
 			if(playAnimation) {
 				sprite.PlayLoop("hero-attack");

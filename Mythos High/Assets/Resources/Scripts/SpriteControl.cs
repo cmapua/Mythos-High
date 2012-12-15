@@ -3,7 +3,7 @@ using System.Collections;
 
 //[RequireComponent(typeof(OTAnimatingSprite))]
 public class SpriteControl : MonoBehaviour {
-	public float moveSpeed, range = 70; //temporary value for effective weapon range (varies with hero)
+	public float moveSpeed, range = 70, hpRegenRate = 0.05f; //temporary value for effective weapon range (varies with hero)
 	public OTAnimation anim;
 	public OTAnimatingSprite sprite;
 	public int unitTypeNumber;
@@ -23,6 +23,8 @@ public class SpriteControl : MonoBehaviour {
 		chasing,
 		fallingBack
 	}
+	
+	
 	
 	protected heroState currentState = heroState.attacking; //default state
 	
@@ -58,8 +60,18 @@ public class SpriteControl : MonoBehaviour {
 	void Start() {
 	}
 	
+	void hpRegen(){
+		unit.HP += hpRegenRate;
+		if (unit.HP>unit.maxHP){
+			unit.HP = unit.maxHP;
+		}
+	}
+	
 	// Update is called once per frame
 	void Update () {
+		if(unit.HP<unit.maxHP){
+			hpRegen();
+		}
 		if(wait) {
 			if(sprite.CurrentFrame().index  == lastFrame) {
 				//frames++;
