@@ -16,7 +16,9 @@ public class MinionSpawner : MonoBehaviour {
 	void Update () {
 		if(Time.frameCount % frequency == 0) {
 			//float randZ = Random.Range(-100, 100);
-			Instantiate(enemyMinion, new Vector3(500, 0, Random.Range(-100, 100)), Quaternion.identity);
+			//Instantiate(enemyMinion, new Vector3(500, 0, Random.Range(-100, 100)), Quaternion.identity);
+			OTObject enemy = OT.CreateSprite("enemy-swordsman");
+			enemy.gameObject.transform.position = new Vector3(500, 0, Random.Range(-100, 100));
 		}
 	}
 }

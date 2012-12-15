@@ -7,7 +7,9 @@ public class MinionMoveControl : SpriteControl {
 	public float range;
 	public int unitTypeNumber;
 	public bool newType = false;
-	public Transform projectile, arrow;
+	//public Transform projectile, arrow;
+	public Transform arrowPoint, hitVector;
+	public OTObject projectile;
 	private bool isAttacking = false, playAnimation = false;
 	private Unit unit, targetUnit;
 	
@@ -49,6 +51,7 @@ public class MinionMoveControl : SpriteControl {
 	}
 	
 	void Start() {
+		if(!hitVector) hitVector = transform;
 		if(newType) {
 			anim = gameObject.GetComponentInChildren<OTAnimation>(); //transform.Find("animSprite").GetComponent<OTAnimation>();
 			sprite = gameObject.GetComponentInChildren<OTAnimatingSprite>(); //transform.Find("animSprite").GetComponent<OTAnimatingSprite>();
@@ -74,9 +77,15 @@ public class MinionMoveControl : SpriteControl {
 			//targetUnit.HP -= unit.damage/5;
 			frames++;
 			if(frames == 5) {
-				arrow = (Transform)Instantiate(projectile, new Vector3(transform.position.x + 32, transform.position.y + 64, transform.position.z), transform.rotation);
-				if(arrow && target) {
-					arrow.GetComponent<Projectile>().targetVector = new Vector3(target.position.x + 32, target.position.y + 64, target.position.z);
+//				arrow = (Transform)Instantiate(projectile, new Vector3(transform.position.x + 32, transform.position.y + 64, transform.position.z), transform.rotation);
+//				if(arrow && target) {
+//					arrow.GetComponent<Projectile>().targetVector = new Vector3(target.position.x + 32, target.position.y + 64, target.position.z); //target.Find ("hitVector").position;
+//					arrow.gameObject.layer = unit.getLayer();
+//				}
+				GameObject arrow = OT.CreateObject("projectile");
+				if(target) {
+					arrow.transform.position = arrowPoint.position; //new Vector3(transform.position.x + 70, transform.position.y + 64, transform.position.z);
+					arrow.GetComponent<Projectile>().target = targetUnit; //.targetVector = targetUnit.mmc.hitVector.position; //new Vector3(target.position.x + 32, target.position.y + 64, target.position.z); //target.Find ("hitVector").position;
 					arrow.gameObject.layer = unit.getLayer();
 				}
 				

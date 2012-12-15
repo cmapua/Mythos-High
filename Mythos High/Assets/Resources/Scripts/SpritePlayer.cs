@@ -19,7 +19,9 @@ public class SpritePlayer : MonoBehaviour {
 		//1 = run, 2 = attack
 		if(Input.GetKeyUp(KeyCode.A)) {
 			if(faith.currentFaith>=archerCost){
-				Instantiate(Archer, new Vector3(-500, 0, Random.Range(-100, 100)), Quaternion.identity);
+				//Instantiate(Archer, new Vector3(-500, 0, Random.Range(-100, 100)), Quaternion.identity);
+				OTObject nArcher = OT.CreateSprite("minion-Archer");
+				nArcher.gameObject.transform.position = new Vector3(-500, 0, Random.Range(-100, 100));
 				faith.currentFaith -= archerCost;
 			}
 		}

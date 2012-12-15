@@ -9,6 +9,7 @@ public class Unit : MonoBehaviour {
 	private Transform unitTransform;
 	public MinionMoveControl mmc;
 	public bool isStatic = false;
+	public string name;
 
 	//put stats whatevs here
 	public float HP, maxHP;
@@ -23,6 +24,7 @@ public class Unit : MonoBehaviour {
 	
 	// Use this for initialization
 	void Start () {
+		name = gameObject.name;
 		layer = gameObject.layer;
 		manager.addUnit(this);
 		print ("Unit "+gameObject.name+" added.");
@@ -88,7 +90,7 @@ public class Unit : MonoBehaviour {
 		if(newTarget) {
 			mmc.target = newTarget.transform;
 			mmc.setTargetUnit(newTarget);
-			print (gameObject.name + " found a target.");
+			print (gameObject.name + " found a target. --> " + newTarget.name);
 		}
 		yield return new WaitForSeconds(0.1f);
 	}

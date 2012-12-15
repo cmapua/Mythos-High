@@ -16,7 +16,7 @@ public class SpriteControl : MonoBehaviour {
 	protected void Awake () {
 		anim = GetComponent<OTAnimation>();
 		sprite = GetComponent<OTAnimatingSprite>();
-		print (	sprite.animationFrameset);
+		//print (	sprite.animationFrameset);
 	}
 	
 	void Start() {

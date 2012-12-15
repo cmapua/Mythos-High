@@ -59,6 +59,22 @@ public class UnitManager : MonoBehaviour {
 		return theirUnits;
 	}
 	
+	public Unit SearchForUnit(OTObject o, int searchLayer) {
+		if(searchLayer == 8) { //looking for player sprite
+			foreach(Unit u in yourUnits) {
+				if(u.mmc.sprite.name == o.name)
+					return u;
+			}
+		}
+		if(searchLayer == 9) { //looking for player sprite
+			foreach(Unit u in theirUnits) {
+				if(u.mmc.sprite.name == o.name)
+					return u;
+			}
+		}
+		return null;
+	}
+	
 	// Update is called once per frame
 	void Update () {
 	
