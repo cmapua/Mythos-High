@@ -1,0 +1,31 @@
+hero AI (laila):
+define unitCountDiff as (enemyUnitCount - unitCount) { 
+	if > 0, more allies than enemies; 
+	if < 0, more enemies than allies;
+	if = 0, equal allies and enemies;
+}
+if 75-100% HP {
+	activate 'super bass';
+	if (unitCountDiff >= 0) charge enemy hero; //at least equal or more allies
+	else if (0 > unitCountDiff >= -2) charge enemy unit; //charge even if less than 2 allies
+	else if (a unit below 10% HP && within territory) cast 'heal' on unit;
+	else fall back; //fall back if -3 or less allies
+}
+if 50-75% HP {
+	if (unitCountDiff >= 2) charge enemy hero; //at least 2 more allies
+	else if (2 > unitCountDiff >= 0) charge nearest enemy unit; //at least equal count
+	else if (a unit below 33% HP && within territory) cast 'heal' on unit;
+	else fall back;
+}
+if 25-50% HP {
+	if (unitCountDiff >= 3) charge enemy hero; //at least 3 or more allies
+	else if (3 > unitCountDiff >= 1) charge nearest enemy unit; //at least 1 more ally
+	else if (a unit below 50% HP && within territory) cast 'heal' on unit;
+	else fall back;
+}
+if <25% HP {
+	cast 'total eclipse of the heart';
+	if (a unit below 66% HP && within territory) cast 'heal' on unit;
+	else if(attacked) charge attacker;
+	else fall back;
+}

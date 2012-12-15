@@ -9,36 +9,29 @@ public class SpriteControl : MonoBehaviour {
 	protected bool isArcher = false, isMage = false, isSwordsman = false, isCastle = false;
 	protected bool wait = false;
 	protected string unitType;
-	private DamageControl dc;
-	protected Unit unit, targetUnit; //this unit
+	protected Unit unit, targetUnit;
 	protected int frames = 0, lastFrame = 22; //default last frame for hero
 	public Transform target, arrowPoint, hitVector; //various places to do certain things
-	private enum heroState {
+	protected enum heroState {
 		attacking,
 		castingSpell1,
 		castingSpell2,
 		castingSpell3
 	}
 	
-	private heroState currentState = heroState.attacking; //default state
+	protected heroState currentState = heroState.attacking; //default state
 	
-	// Use this for initialization
-	protected void Awake () {
+	void Awake () {
 		anim = GetComponent<OTAnimation>();
 		sprite = GetComponent<OTAnimatingSprite>();
 		unit = GetComponent<Unit>();
-		//print (	sprite.animationFrameset);
 	}
 	
 	void Start() {
-		dc = transform.Find("AttackCollision").GetComponent<DamageControl>();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		
-		
-		//
 		if(wait) {
 			if(sprite.CurrentFrame().index  == lastFrame) {
 				//frames++;
@@ -139,6 +132,50 @@ public class SpriteControl : MonoBehaviour {
 			sprite.PlayLoop ("swordie-run");
 		if(unitType == "mage")
 			sprite.PlayLoop ("mage-run");
+	}
+	
+	protected Unit searchNearestTarget() {
+		print (gameObject.name + " is searching for enemies...");
+		Unit newTarget = null;
+		if(unit.getLayer() == 8) {
+			float dist = Mathf.Infinity;
+			
+			foreach(Unit u in unit.getUnitManager().getTheirUnits()) {
+				float newDist = u.getUnitTransform().position.x - unit.getUnitTransform().position.x;
+				if(newDist<=(range+200)&& newDist >=0){
+					if(newDist < dist) {
+						dist = newDist;
+						newTarget = u;
+					}
+				}
+			}
+			foreach(Unit u in unit.getUnitManager().getTheirUnits()) {
+				if(u.sc && u.sc.target == gameObject.transform) {
+					newTarget = u;
+					break;
+				}
+			}
+		}
+		if(unit.getLayer() == 9) {
+			float dist = Mathf.Infinity;
+			
+			foreach(Unit u in unit.getUnitManager().getYourUnits()) {
+				float newDist = -(u.getUnitTransform().position.x - unit.getUnitTransform().position.x);
+				if(newDist<=(range+200)&& newDist >=0){
+					if(newDist < dist) {
+						dist = newDist;
+						newTarget = u;
+					}
+				}
+			}
+			foreach(Unit u in unit.getUnitManager().getYourUnits()) {
+				if(u.sc && u.sc.target == gameObject.transform) {
+					newTarget = u;
+					break;
+				}
+			}
+		}
+		return newTarget;
 	}
 	
 	public virtual bool canSearch() { return true; }

@@ -11,14 +11,15 @@ public class MinionMoveControl : SpriteControl {
 	public override bool canSearch(){
 		if(!target){
 			if (!isAttacking)
-			return true;
+				return true;
 		}
 		return false;
 	}
 	
 	void Awake() { 
-		if(!newType)
-			base.Awake();
+		anim = GetComponent<OTAnimation>();
+		sprite = GetComponent<OTAnimatingSprite>();
+		unit = GetComponent<Unit>();
 		
 		if(unitTypeNumber == 1){
 			isMage = true;
@@ -50,29 +51,43 @@ public class MinionMoveControl : SpriteControl {
 
 		if(target)
 			targetUnit = target.gameObject.GetComponent<Unit>();
+		
+		StartCoroutine("CoStart");
+	}
+	
+	protected virtual IEnumerator CoStart() {
+		print (gameObject.name + "'s CoStart() called.");
+		while(true) {
+			yield return StartCoroutine(CoUpdate());
+		}
+	}
+	
+	protected virtual IEnumerator CoUpdate() {
+		if(canSearch()) {
+			Unit newTarget = searchNearestTarget();
+			if(newTarget) {
+				target = newTarget.transform;
+				targetUnit = newTarget;
+				print (gameObject.name + " found a target. --> " + newTarget.name);
+			}
+		}
+		yield return new WaitForSeconds(0.2f);
 	}
 	
 	// Update is called once per frame
 	void Update () {
-//		frames++;
 		//kill v2's
 		if( newType && Input.GetKeyUp(KeyCode.K) ) {
 			DestroyObject(gameObject);
 		}
 		
-		if  (isCastle){
+		if (isCastle) {
 			playAnimation = true;
 		}
 		//if at last frame of attack animation for archer, stop playing and deal damage
 		else if(isArcher && isAttacking && sprite.CurrentFrame().index  == 13) {
-			//targetUnit.HP -= unit.damage/5;
 			frames++;
 			if(frames == 5) {
-//				arrow = (Transform)Instantiate(projectile, new Vector3(transform.position.x + 32, transform.position.y + 64, transform.position.z), transform.rotation);
-//				if(arrow && target) {
-//					arrow.GetComponent<Projectile>().targetVector = new Vector3(target.position.x + 32, target.position.y + 64, target.position.z); //target.Find ("hitVector").position;
-//					arrow.gameObject.layer = unit.getLayer();
-//				}
 				GameObject arrow = OT.CreateObject("projectile");
 				if(target) {
 					arrow.transform.position = arrowPoint.position; //new Vector3(transform.position.x + 70, transform.position.y + 64, transform.position.z);
@@ -149,6 +164,4 @@ public class MinionMoveControl : SpriteControl {
 			}
 		}
 	}
-	
-	
 }
