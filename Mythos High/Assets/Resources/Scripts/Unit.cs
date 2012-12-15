@@ -18,8 +18,7 @@ public class Unit : MonoBehaviour {
 	void Awake() {
 		manager = UnitManager.getInstance();
 		unitTransform = transform;
-		if(!isStatic)
-			mmc = GetComponent<MinionMoveControl>();
+		mmc = GetComponent<MinionMoveControl>();
 	}
 	
 	// Use this for initialization
