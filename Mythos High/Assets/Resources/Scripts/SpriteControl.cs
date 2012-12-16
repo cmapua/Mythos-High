@@ -110,11 +110,11 @@ public class SpriteControl : MonoBehaviour {
 			}
 			
 			else if(Input.GetKey(KeyCode.LeftArrow)) {
-				if(sprite.transform.position.x>-600)
+				if(sprite.transform.position.x>-1050)
 				move(-Vector3.right, unitType);
 			}
 			else if(Input.GetKey(KeyCode.RightArrow)) {
-				if(sprite.transform.position.x<600)
+				if(sprite.transform.position.x<1050)
 				move(Vector3.right, unitType);
 			}
 			else if(Input.GetKey(KeyCode.UpArrow)) {
@@ -186,7 +186,6 @@ public class SpriteControl : MonoBehaviour {
 	}
 	
 	protected Unit searchNearestTarget() {
-		print (gameObject.name + " is searching for enemies...");
 		Unit newTarget = null;
 		if(unit.getLayer() == 8) {
 			float dist = Mathf.Infinity;

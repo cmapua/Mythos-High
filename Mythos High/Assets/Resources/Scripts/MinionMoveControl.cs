@@ -3,7 +3,7 @@ using System.Collections;
 
 public class MinionMoveControl : SpriteControl {
 	//public int unitTypeNumber;
-	public int maxDistance=800;
+	public int maxDistance=1050;
 	public bool newType = false;
 	public OTObject projectile;
 
@@ -98,9 +98,6 @@ public class MinionMoveControl : SpriteControl {
 			}
 			else if(isArcher) {
 				sprite.PlayLoop("archer-attack");
-			}
-			else if (isCastle) {
-				sprite.Stop();
 			}
 			isAttacking = true;
 		}

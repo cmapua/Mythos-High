@@ -9,7 +9,6 @@ public class HeroControl : SpriteControl {
 	void Start () {
 		currentState = heroState.fallingBack;
 		fallbackPoint = GameObject.Find("AIFallbackPoint").transform;
-		InvokeRepeating("AIBehaviour", 50f, 2f); //run AIBehaviour every half a second
 	}
 	
 	void AIBehaviour () {
@@ -61,8 +60,12 @@ public class HeroControl : SpriteControl {
 		else if((unit.maxHP * 0.25) > unit.HP && unit.HP > 0) {
 			//cast 'total eclipse of the heart'
 			if(beingAttacked()) {
-				if(currentState != heroState.attacking)
-					currentState = heroState.attacking;
+				if(currentState != heroState.attacking || currentState != heroState.chasing){
+					if(currentState == heroState.chasing)
+						currentState = SpriteControl.heroState.chasing;
+					else 
+						currentState = heroState.attacking;
+				}
 			} else {
 				target = null;
 				targetUnit = null;
@@ -75,9 +78,14 @@ public class HeroControl : SpriteControl {
 	void chargeAt(Unit u) {
 		targetUnit = u;
 		target = targetUnit.transform;
+		print (targetUnit.name);
 		if(u != null) {
-			if(currentState != heroState.attacking)
-				currentState = heroState.attacking;
+			if(currentState != heroState.attacking || currentState != heroState.chasing){
+				if(currentState == heroState.chasing)
+					currentState = SpriteControl.heroState.chasing;
+				else 
+					currentState = heroState.attacking;
+			}
 		}
 		else {
 			if(currentState != heroState.fallingBack)
@@ -99,6 +107,7 @@ public class HeroControl : SpriteControl {
 	}
 	
 	void Update() {
+		AIBehaviour ();
 		switch(currentState) {
 		case heroState.attacking:
 			if(isAttacking) {
@@ -108,19 +117,25 @@ public class HeroControl : SpriteControl {
 					playAnimation = false;
 				}
 			}
+			if(Mathf.Abs(target.position.x- transform.position.x) <= range) {
+				playAnimation = true;
+			} else {
+				playAnimation = false;
+				isAttacking = false;
+				currentState = heroState.chasing;
+			}
 			if(playAnimation) {
 				sprite.PlayLoop("hero-attack");
 				isAttacking = true;
 			}
-			if(Mathf.Abs(target.position.x- transform.position.x) <= range) {
-				playAnimation = true;
-			} else currentState = heroState.chasing;
 			break;
 			
 		case heroState.chasing:
 			move((target.position - transform.position).normalized, unitType);
 			if(Mathf.Abs(target.position.x- transform.position.x) <= range) {
 				currentState = heroState.attacking;
+			} else {
+				sprite.PlayLoop ("hero-run");
 			}
 			break;
 			
