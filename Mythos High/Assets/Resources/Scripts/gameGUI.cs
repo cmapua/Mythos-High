@@ -3,7 +3,7 @@ using System.Collections;
 
 public class gameGUI : MonoBehaviour {
 	private UnitManager manager;
-	public Texture2D hpBackIcon, hpIcon;
+	public Texture2D hpBackIcon, hpIcon, hpEnemyIcon;
 	public float hp_w = 60; 
 	public float hp_h = 10;
 	public float hp_yOffset = 120;
@@ -27,7 +27,10 @@ public class gameGUI : MonoBehaviour {
         Rect HPLoc = new Rect(center.x - hp_w/2, Screen.height - center.y - hp_yOffset, hp_w, hp_h);
         GUI.DrawTexture(HPLoc, hpBackIcon, ScaleMode.StretchToFill, true, 10f);
         float newWidth = HPLoc.width * (u.HP / u.maxHP);
-        GUI.DrawTexture(new Rect(HPLoc.xMin, HPLoc.yMin, newWidth, HPLoc.height), hpIcon, ScaleMode.StretchToFill, true, 10f);
+		if(u.getLayer() == 8)
+        	GUI.DrawTexture(new Rect(HPLoc.xMin, HPLoc.yMin, newWidth, HPLoc.height), hpIcon, ScaleMode.StretchToFill, true, 10f);
+		if(u.getLayer() == 9)
+			GUI.DrawTexture(new Rect(HPLoc.xMin, HPLoc.yMin, newWidth, HPLoc.height), hpEnemyIcon, ScaleMode.StretchToFill, true, 10f);
         //GUI.Label(new Rect(HPLoc.xMin, HPLoc.yMin, HPLoc.width + 5, 50), u.HP + "/" + u.maxHP);
 	}
 }

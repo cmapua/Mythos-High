@@ -7,9 +7,9 @@ public class SpriteControl : MonoBehaviour {
 	public OTAnimation anim;
 	public OTAnimatingSprite sprite;
 	public int unitTypeNumber;
-	protected bool isArcher = false, isMage = false, isSwordsman = false, isCastle = false;
-	protected bool wait = false, isAttacking = false, playAnimation = false;
 	protected string unitType;
+	protected bool isArcher = false, isMage = false, isSwordsman = false, isCastle = false;
+	protected bool wait = false, isAttacking = false, isCasting = false, playAnimation = false;
 	protected Unit unit, targetUnit;
 	protected int frames = 0, lastFrame = 22; //default last frame for hero
 	public Transform target, arrowPoint, hitVector; //various places to do certain things
@@ -52,7 +52,7 @@ public class SpriteControl : MonoBehaviour {
 		else if(unitTypeNumber == 4){
 			unitType = "enemyHero";
 		}
-		else{
+		else if(unitTypeNumber == 5){
 			unitType = "hero";
 		}
 	}
@@ -74,13 +74,8 @@ public class SpriteControl : MonoBehaviour {
 		}
 		if(wait) {
 			if(sprite.CurrentFrame().index  == lastFrame) {
-				//frames++;
-				//if(frames == 1) { //this ensures that the action won't be repeated so many times (I hope)
-					actionChooser(currentState);
-					//frames = 0;
-				//}
+				actionChooser(currentState);
 				wait = false;
-				//dc.activate = true;
 			}
 		}
 		//handle movement
@@ -89,28 +84,29 @@ public class SpriteControl : MonoBehaviour {
 			
 			//handle attack
 			if(Input.GetKeyDown(KeyCode.Z)) {
-				sprite.PlayOnce("Attack");
+				sprite.PlayOnce("hero-attack");
+				lastFrame = 5;
 				wait = true;
 				currentState = heroState.attacking;
 			}
 			//handle skills (they all play attack animation since no cast animation is available
 			else if(Input.GetKeyDown(KeyCode.X)) {
-				sprite.PlayOnce("Attack");
+				sprite.PlayOnce("hero-cast");
+				lastFrame = 22;
 				wait = true;
 				currentState = heroState.castingSpell1;
-				//set lastFrame to whatever the last frame of the animation is here
 			}
 			else if(Input.GetKeyDown(KeyCode.C)) {
-				sprite.PlayOnce("Attack");
+				sprite.PlayOnce("hero-cast");
+				lastFrame = 22;
 				wait = true;
 				currentState = heroState.castingSpell2;
-				//set lastFrame to whatever the last frame of the animation is here
 			}
 			else if(Input.GetKeyDown(KeyCode.V)) {
-				sprite.PlayOnce("Attack");
+				sprite.PlayOnce("hero-cast");
+				lastFrame = 22;
 				wait = true;
 				currentState = heroState.castingSpell3;
-				//set lastFrame to whatever the last frame of the animation is here
 			}
 			
 			else if(Input.GetKey(KeyCode.LeftArrow)) {
@@ -130,7 +126,7 @@ public class SpriteControl : MonoBehaviour {
 				move (-Vector3.forward, unitType);
 			}
 			else {
-				sprite.PlayLoop ("Idle");
+				sprite.PlayLoop ("hero-idle");
 			}
 		}
 	}
@@ -141,15 +137,24 @@ public class SpriteControl : MonoBehaviour {
 			attack();
 			break;
 		case heroState.castingSpell1:
+			//cast spell 1
 			break;
 		case heroState.castingSpell2:
+			//cast spell 2
 			break;
 		case heroState.castingSpell3:
+			//cast spell 3
 			break;
 		}
 	}
 	
 	void attack() {
+
+		GameObject arrow = OT.CreateObject("note-projectile");
+		arrow.transform.position = arrowPoint.position; //new Vector3(transform.position.x + 70, transform.position.y + 64, transform.position.z);
+		//arrow.GetComponent<Projectile>().target = targetUnit; //.targetVector = targetUnit.mmc.hitVector.position; //new Vector3(target.position.x + 32, target.position.y + 64, target.position.z); //target.Find ("hitVector").position;
+		arrow.gameObject.layer = unit.getLayer();
+	
 		foreach(Unit u in unit.getUnitManager().getTheirUnits()) {
 			float dist = Mathf.Abs(u.transform.position.x - transform.position.x);
 			if(dist < range) {
@@ -160,12 +165,16 @@ public class SpriteControl : MonoBehaviour {
 	
 	protected void move(Vector3 dir, string unitType) {
 		transform.Translate(dir * moveSpeed * Time.deltaTime);
-		if(dir.x < 0 && !sprite._flipHorizontal)
+		if(dir.x < 0 && !sprite._flipHorizontal) {
 			sprite.flipHorizontal = true;
-		if(dir.x >= 0 && sprite._flipHorizontal)
+			//arrowPoint.position.x = -1 * arrowPoint.position.x;
+		}
+		if(dir.x >= 0 && sprite._flipHorizontal) {
 			sprite.flipHorizontal = false;
+			//arrowPoint.position.x = -1 * arrowPoint.position.x;
+		}
 		if(unitType == "hero")
-			sprite.PlayLoop ("Run");
+			sprite.PlayLoop ("hero-run");
 		if(unitType == "archer")
 			sprite.PlayLoop ("archer-run");
 		if(unitType == "swordsman") 
