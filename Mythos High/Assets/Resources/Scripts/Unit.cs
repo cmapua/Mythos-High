@@ -35,7 +35,10 @@ public class Unit : MonoBehaviour {
 	}
 	
 	protected void LateUpdate() {
-		if(HP < 0) {
+		if(name == "enemyShrine" || name == "playerShrine"){
+			
+		}
+		else if(HP < 0) {
 			DestroyObject(gameObject);
 		}
 	}
