@@ -19,17 +19,17 @@ public class minionHUD : MonoBehaviour {
 		archerOffset = Screen.height*5/6+currentOffset+Screen.height/6*mCool.archerCooldownTime();
 		mageOffset = Screen.height*5/6+currentOffset+Screen.height/6*mCool.mageCooldownTime();
 		
-		if(GUI.Button(new Rect(0 , swordOffset, Screen.width/8,Screen.height/6),"Swordsman\n20")){
+		if(GUI.Button(new Rect(0 , swordOffset, Screen.width/5,Screen.height/6),"Swordsman\n20")){
 			if(faith.currentFaith>=swordCost && mCool.swordsmanCanSpawn){
 				mCool.startCooldown("swordsman");
 			}
 		}
-		else if(GUI.Button(new Rect(Screen.width/8 , archerOffset , Screen.width/8,Screen.height/6),"Archer\n35")){
+		else if(GUI.Button(new Rect(Screen.width/5 , archerOffset , Screen.width/5,Screen.height/6),"Archer\n35")){
 			if(faith.currentFaith>=archerCost && mCool.archerCanSpawn){
 				mCool.startCooldown("archer");
 			}
 		}
-		else if(GUI.Button(new Rect(Screen.width/4 , mageOffset, Screen.width/8,Screen.height/6),"Mage\n50")){
+		else if(GUI.Button(new Rect(Screen.width*2/5 , mageOffset, Screen.width/5,Screen.height/6),"Mage\n50")){
 			if(faith.currentFaith>=mageCost && mCool.mageCanSpawn){
 				mCool.startCooldown("mage");
 			}

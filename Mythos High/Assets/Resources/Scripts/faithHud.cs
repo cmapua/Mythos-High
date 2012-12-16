@@ -114,10 +114,10 @@ public class faithHud : MonoBehaviour {
         Rect HelpBox = new Rect(0 + xOffset, Screen.height*5/8 + yOffset, Screen.width,Screen.height*3/8);
         GUI.DrawTexture(HelpBox, helpBoxBG, ScaleMode.StretchToFill, true, 10f);
 		string helpText = "Help:" +
-						  "\nQ = Upgrade Shrine(80,120,150)" +
-						  "\nA = Summon Archer (35)" +
-						  "\nS = Summon Swordsman (20)" +
-						  "\nD = Summon Mage(50)";
+						  "\nR = Upgrade Shrine(80,120,150)" +
+						  "\nQ = Summon Swordsman (20)" +
+						  "\nW = Summon Archer (35)" +
+						  "\nE = Summon Mage(50)";
         GUI.Label(new Rect(10, (Screen.height*5/8)+10+ yOffset, Screen.width-10,(Screen.height*3/8)-10), helpText);
 	}
 
