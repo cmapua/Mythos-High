@@ -34,17 +34,19 @@ public class Projectile : MonoBehaviour {
 		Unit collisionTarget = owner.collisionObject.gameObject.GetComponent<Unit>();
 		
 		if(collisionTarget != null) {
-			if((gameObject.layer == 8 && collisionTarget.getLayer() == 9) || (gameObject.layer == 9 && collisionTarget.getLayer() == 8))
-			//if(collisionTarget.name == target.name)
+			if((gameObject.layer == 8 && collisionTarget.getLayer() == 9) || (gameObject.layer == 9 && collisionTarget.getLayer() == 8)) {
 				collisionTarget.HP -= damage;
+				if(gameObject != null)
+					DestroyObject(gameObject);
+			}
 		}
-		if(gameObject != null)
-			DestroyObject(gameObject);
 	}
 	
 	// Update is called once per frame
 	void Update () {
-
+		//gah trigonometry again, screw it
+		//Vector3 wavyTrajectory = new Vector3(trajectory.x, Mathf.Sin(trajectory.x) * transform.position.y, trajectory.z);
+		
 		myTransform.Translate(trajectory * moveSpeed * Time.deltaTime);
 		
 		lifetime--;
