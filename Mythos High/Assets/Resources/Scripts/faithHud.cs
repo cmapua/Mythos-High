@@ -7,6 +7,8 @@ public class faithHud : MonoBehaviour {
 	public int shrineLevel = 1;
 	public float currentFaith = 0;
 	private float resourceGatherRate = .55f;
+	private int xOffset = 0, yOffset = 0;
+	private bool hideHelp = false;
 	
 	private static faithHud instance;
 	public Texture2D helpBoxBG;
@@ -39,8 +41,18 @@ public class faithHud : MonoBehaviour {
 		displayHelp();
 	}
 	
+	void Update() {
+		if(Input.GetKeyUp(KeyCode.H)) {
+			hideHelp = true;
+		}
+		if(hideHelp) {
+			if(yOffset <= 300)
+				yOffset++;
+		}
+	}
+	
 	void displayHelp(){
-        Rect HelpBox = new Rect(0, Screen.height*5/8, Screen.width,Screen.height*3/8);
+        Rect HelpBox = new Rect(0 + xOffset, Screen.height*5/8 + yOffset, Screen.width,Screen.height*3/8);
         GUI.DrawTexture(HelpBox, helpBoxBG, ScaleMode.StretchToFill, true, 10f);
 		string helpText = "Help:" +
 						  "\nQ = Upgrade Shrine(80,120,150)" +
