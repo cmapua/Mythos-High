@@ -110,11 +110,11 @@ public class SpriteControl : MonoBehaviour {
 			}
 			
 			else if(Input.GetKey(KeyCode.LeftArrow)) {
-				if(sprite.transform.position.x>-600)
+				if(sprite.transform.position.x>-1050)
 				move(-Vector3.right, unitType);
 			}
 			else if(Input.GetKey(KeyCode.RightArrow)) {
-				if(sprite.transform.position.x<600)
+				if(sprite.transform.position.x<1050)
 				move(Vector3.right, unitType);
 			}
 			else if(Input.GetKey(KeyCode.UpArrow)) {
