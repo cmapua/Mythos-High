@@ -7,6 +7,8 @@ public class Interface : MonoBehaviour {
 	
 	void OnGUI () {
 		if (GUI.Button (new Rect ((Screen.width/2)-75,(Screen.height/2),150,100), "Start Game")) {
+			 
+
 			Application.LoadLevel ("dialogue");
 		}
 		if (GUI.Button (new Rect ((Screen.width/2)-75,(Screen.height/2)+100,150,100), "Options")) {
