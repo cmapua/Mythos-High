@@ -7,7 +7,16 @@ public class SpritePlayer : MonoBehaviour {
 	private int archerCost=35, swordCost=20, mageCost=50;
 	private faithHud faith;
 	private minionCooldown cool;
-	// Use this for initialization
+	private static SpritePlayer spriteP;
+
+
+	public static SpritePlayer getInstance() {
+		if(spriteP == null) 
+			spriteP = (SpritePlayer)FindObjectOfType(typeof(SpritePlayer));
+		return spriteP;
+	}
+
+	
 	void Start () {
 	
 	}
@@ -21,24 +30,16 @@ public class SpritePlayer : MonoBehaviour {
 		//1 = run, 2 = attack
 		if(Input.GetKeyUp(KeyCode.A)) {
 			if(faith.currentFaith>=archerCost && cool.archerCanSpawn){
-				OTObject nArcher = OT.CreateSprite("minion-Archer");
-				nArcher.gameObject.transform.position = new Vector3(-900, 0, Random.Range(-100, 100));
-				faith.currentFaith -= archerCost;
 				cool.startCooldown("archer");
 			}
 		}
 		else if(Input.GetKeyUp(KeyCode.S)) {
 			if(faith.currentFaith>=swordCost && cool.swordsmanCanSpawn){
-				OTObject nSwordsman = OT.CreateSprite("minion-Swordsman");
-				nSwordsman.gameObject.transform.position = new Vector3(-900, 0, Random.Range(-100, 100));
-				faith.currentFaith -= swordCost;
-				cool.startCooldown("swordsman");			}
+				cool.startCooldown("swordsman");
+			}
 		}
 		else if(Input.GetKeyUp(KeyCode.D)) {
 			if(faith.currentFaith>=mageCost && cool.mageCanSpawn){
-				OTObject nMage = OT.CreateSprite("minion-Mage");
-				nMage.gameObject.transform.position = new Vector3(-900, 0, Random.Range(-100, 100));
-				faith.currentFaith -= mageCost;
 				cool.startCooldown("mage");
 			}
 		}

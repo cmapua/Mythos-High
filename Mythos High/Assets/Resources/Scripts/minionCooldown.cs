@@ -5,8 +5,10 @@ public class minionCooldown : MonoBehaviour {
 	
 	public float archerCooldown = 0, swordsmanCooldown = 0, mageCooldown = 0;
 	public bool archerCanSpawn = true, swordsmanCanSpawn = true, mageCanSpawn = true;
+	private int archerCost=35, swordCost=20, mageCost=50;
 	
 	private static minionCooldown instance;
+	private static faithHud faith;
 	
 	public static minionCooldown getInstance() {
 		if(instance == null) 
@@ -16,6 +18,7 @@ public class minionCooldown : MonoBehaviour {
 	
 	// Use this for initialization
 	void Start(){
+		faith = faithHud.getInstance ();
 		StartCoroutine("CoStart");
 	}
 	
@@ -53,17 +56,32 @@ public class minionCooldown : MonoBehaviour {
 	public void startCooldown(string cooldownType){
 		switch (cooldownType){
 		case "archer":
+			OTObject nArcher = OT.CreateSprite("minion-Archer");
+			nArcher.gameObject.transform.position = new Vector3(-900, 0, Random.Range(-100, 100));
+			faith.currentFaith -= archerCost;
+
 			archerCanSpawn = false;
 			archerCooldown = 4;
 			break;
 		case "swordsman":
+			OTObject nSwordsman = OT.CreateSprite("minion-Swordsman");
+			nSwordsman.gameObject.transform.position = new Vector3(-900, 0, Random.Range(-100, 100));
+			faith.currentFaith -= swordCost;
+
 			swordsmanCanSpawn = false;
 			swordsmanCooldown = 2;
 			break;
 		case "mage":
+			OTObject nMage = OT.CreateSprite("minion-Mage");
+			nMage.gameObject.transform.position = new Vector3(-900, 0, Random.Range(-100, 100));
+			faith.currentFaith -= mageCost;
+
 			mageCanSpawn = false;
 			mageCooldown = 7;
 			break;
 		}
 	}
+	public float mageCooldownTime(){return mageCooldown;}
+	public float archerCooldownTime(){return archerCooldown;}
+	public float swordsmanCooldownTime(){return swordsmanCooldown;}
 }
