@@ -39,11 +39,11 @@ Dialogue:
 
 Characters:
 [] Classmate
-[] Aphrodite
-[] Osiris
+[o] Aphrodite
+[o] Osiris
 [x] Champion (Male)
-[] Laila 
-[] Seth
+[o] Laila 
+[o] Seth
 
 Backgrounds: (Sketches)
 [] Hall of Pantheons
@@ -54,9 +54,9 @@ Backgrounds: (Sketches)
 [] Battle Hall
 
 Items:
-[] Aphrodite's Bangle
+[o] Aphrodite's Bangle
 [o] Aphrodite's Sigil (Tattoo)
-[] Agimat
+[o] Agimat
 
 ---------------------------------
 Overall:
