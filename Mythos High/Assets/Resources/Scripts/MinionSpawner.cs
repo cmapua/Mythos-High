@@ -92,7 +92,133 @@ public class MinionSpawner : MonoBehaviour {
 					break;
 			}
 		}
-		
+		else if (level==2){
+			switch(cycle){
+				case 0:
+					spawnCountdown = 1.2f;
+					createUnit(0);
+					spawnCycle++;
+					break;
+				case 1:
+					spawnCountdown = 1.3f;
+					createUnit(0);
+					spawnCycle++;
+					break;
+				case 2:
+					spawnCountdown = 1.1f;
+					createUnit(0);
+					spawnCycle++;
+					break;
+				case 3:
+					spawnCountdown = 19f;
+					createUnit(2);
+					spawnCycle++;
+					break;
+				case 4:
+					spawnCountdown = 2.1;
+					createUnit(0);
+					spawnCycle++;
+					break;
+				case 5:
+					spawnCountdown = 1f;
+					createUnit(1);
+					spawnCycle++;
+					break;
+				case 6:
+					spawnCountdown = 30f;
+					createUnit(0);
+					spawnCycle=0;
+					break;
+			}
+		}
+		else if (level==3){
+			switch(cycle){
+				case 0:
+					spawnCountdown = 16f;
+					createUnit(0);
+					createUnit(0);
+					createUnit(0);
+					createUnit(2);
+					spawnCycle++;
+					break;
+				case 1:
+					spawnCountdown = 1.3f;
+					createUnit(0);
+					spawnCycle++;
+					break;
+				case 2:
+					spawnCountdown = 1.1f;
+					createUnit(0);
+					spawnCycle++;
+					break;
+				case 3:
+					spawnCountdown = 19f;
+					createUnit(2);
+					spawnCycle++;
+					break;
+				case 4:
+					spawnCountdown = 4.1;
+					createUnit(0);
+					spawnCycle++;
+					break;
+				case 5:
+					spawnCountdown = 6f;
+					createUnit(0);
+					createUnit(1);
+					spawnCycle++;
+					break;
+				case 6:
+					spawnCountdown = 30f;
+					createUnit(0);
+					createUnit(2);
+					spawnCycle=0;
+					break;
+			}
+		}
+		else if (level==4){
+			switch(cycle){
+				case 0:
+					spawnCountdown = 1.2f;
+					createUnit(0);
+					spawnCycle++;
+					break;
+				case 1:
+					spawnCountdown = 1.3f;
+					createUnit(0);
+					spawnCycle++;
+					break;
+				case 2:
+					spawnCountdown = 1.1f;
+					createUnit(0);
+					spawnCycle++;
+					break;
+				case 3:
+					spawnCountdown = 19f;
+					createUnit(2);
+					spawnCycle++;
+					break;
+				case 4:
+					spawnCountdown = 2.1;
+					createUnit(0);
+					spawnCycle++;
+					break;
+				case 5:
+					spawnCountdown = 1f;
+					createUnit(1);
+					spawnCycle++;
+					break;
+				case 6:
+					spawnCountdown = 30f;
+					createUnit(0);
+					spawnCycle=0;
+					break;
+			}
+		}
+
+		else{
+			spawnCountdown = 5;
+			createUnit (0);
+		}
 		yield return new WaitForSeconds(spawnCountdown);
 	}
 }
