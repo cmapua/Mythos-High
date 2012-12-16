@@ -7,7 +7,7 @@ public class faithHud : MonoBehaviour {
 	public int shrineLevel = 1;
 	public float currentFaith = 0;
 	private float resourceGatherRate = .55f;
-	private int xOffset = 0, yOffset = 0;
+	protected int xOffset = 0, yOffset = 0;
 	private bool hideHelp = false;
 	private Unit playerCastle, aiCastle;
 	private static faithHud instance;
@@ -38,6 +38,24 @@ public class faithHud : MonoBehaviour {
 		}
 		else if(playerCastle.HP <= 0){
 			return 2;
+		}
+		if(aiCastle.HP<= aiCastle.maxHP*.25){
+			aiCastle.getSpriteControl().sprite.PlayLoop("quarter-health");
+		}
+		else if(aiCastle.HP<= aiCastle.maxHP*.5){
+			aiCastle.getSpriteControl().sprite.PlayLoop("half-health");
+		}
+		else if(aiCastle.HP<= aiCastle.maxHP*.75){
+			aiCastle.getSpriteControl().sprite.PlayLoop("3/4-health");
+		}
+		if(playerCastle.HP<= playerCastle.maxHP*.25){
+			playerCastle.getSpriteControl().sprite.PlayLoop("quarter-health");
+		}
+		else if(playerCastle.HP<= playerCastle.maxHP*.5){
+			playerCastle.getSpriteControl().sprite.PlayLoop("half-health");
+		}
+		else if(playerCastle.HP<= playerCastle.maxHP*.75){
+			playerCastle.getSpriteControl().sprite.PlayLoop("3/4-health");
 		}
 		return 0;
 	}
@@ -82,7 +100,6 @@ public class faithHud : MonoBehaviour {
 				break;
 		}
 	}
-	
 	void Update() {
 		if(Input.GetKeyUp(KeyCode.H)) {
 			hideHelp = true;
@@ -97,11 +114,11 @@ public class faithHud : MonoBehaviour {
         Rect HelpBox = new Rect(0 + xOffset, Screen.height*5/8 + yOffset, Screen.width,Screen.height*3/8);
         GUI.DrawTexture(HelpBox, helpBoxBG, ScaleMode.StretchToFill, true, 10f);
 		string helpText = "Help:" +
-						  "\nQ = Upgrade Shrine(80,120,150)" +
-						  "\nA = Summon Archer (35)" +
-						  "\nS = Summon Swordsman (20)" +
-						  "\nD = Summon Mage(50)";
-        GUI.Label(new Rect(10, (Screen.height*5/8)+10, Screen.width-10,(Screen.height*3/8)-10), helpText);
+						  "\nR = Upgrade Shrine(80,120,150)" +
+						  "\nQ = Summon Swordsman (20)" +
+						  "\nW = Summon Archer (35)" +
+						  "\nE = Summon Mage(50)";
+        GUI.Label(new Rect(10, (Screen.height*5/8)+10+ yOffset, Screen.width-10,(Screen.height*3/8)-10), helpText);
 	}
 
 	void displayVictory(int winner){
@@ -147,4 +164,9 @@ public class faithHud : MonoBehaviour {
 			currentFaith -=150;
 		}
 	}
+	
+	public int getYOffset(){
+		return yOffset;
+	}
+
 }
