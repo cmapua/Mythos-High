@@ -99,9 +99,6 @@ public class MinionMoveControl : SpriteControl {
 			else if(isArcher) {
 				sprite.PlayLoop("archer-attack");
 			}
-			else if (isCastle) {
-				sprite.Stop();
-			}
 			isAttacking = true;
 		}
 		

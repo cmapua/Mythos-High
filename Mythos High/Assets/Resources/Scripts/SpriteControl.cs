@@ -186,7 +186,6 @@ public class SpriteControl : MonoBehaviour {
 	}
 	
 	protected Unit searchNearestTarget() {
-		print (gameObject.name + " is searching for enemies...");
 		Unit newTarget = null;
 		if(unit.getLayer() == 8) {
 			float dist = Mathf.Infinity;
