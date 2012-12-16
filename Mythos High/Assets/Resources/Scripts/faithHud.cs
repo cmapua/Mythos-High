@@ -61,7 +61,6 @@ public class faithHud : MonoBehaviour {
 		GUI.Label(new Rect(10, 10, 100, 50), "Faith:	"+(int)currentFaith);
 	}
 	
-		
 	public void levelShrine(){
 		shrineLevel++;
 		if(shrineLevel==2){

@@ -115,7 +115,7 @@ public class MinionSpawner : MonoBehaviour {
 					spawnCycle++;
 					break;
 				case 4:
-					spawnCountdown = 2.1;
+					spawnCountdown = 2.1f;
 					createUnit(0);
 					spawnCycle++;
 					break;
@@ -157,7 +157,7 @@ public class MinionSpawner : MonoBehaviour {
 					spawnCycle++;
 					break;
 				case 4:
-					spawnCountdown = 4.1;
+					spawnCountdown = 4.1f;
 					createUnit(0);
 					spawnCycle++;
 					break;
@@ -198,7 +198,7 @@ public class MinionSpawner : MonoBehaviour {
 					spawnCycle++;
 					break;
 				case 4:
-					spawnCountdown = 2.1;
+					spawnCountdown = 2.1f;
 					createUnit(0);
 					spawnCycle++;
 					break;
