@@ -1,7 +1,5 @@
 .DS_Store
 
-obj
-Temp
 *.tmproj
 *.csproj
 *.unityproj
@@ -11,10 +9,9 @@ Temp
 *.pidb
 *.userprefs
 
-Library/cache/*
-Library/metadata/*
-Library/previews/*
-Library/ScriptAssemblies/*
+Library/
+Temp/
+obj/
 
 Thumbs.db
 Thumbs.db.meta
