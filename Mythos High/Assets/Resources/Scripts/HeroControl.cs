@@ -107,65 +107,73 @@ public class HeroControl : SpriteControl {
 	}
 	
 	void Update() {
-		AIBehaviour ();
-		switch(currentState) {
-		case heroState.attacking:
-			if(isAttacking) {
-				if (sprite.CurrentFrame().index  == 4){
-					targetUnit.HP -= unit.damage/10;
-					isAttacking = false;
-					playAnimation = false;
+		
+		if(Time.timeScale > 0) {
+			if(unit.HP<unit.maxHP){
+				hpRegen();
+			}
+			AIBehaviour ();
+			switch(currentState) {
+			case heroState.attacking:
+				if(isAttacking) {
+					print ("not yet...");
+					if (sprite.CurrentFrame().index  == 5){
+						print ("DAMAGE HIM!!!");
+						targetUnit.HP -= unit.damage/10;
+						playAnimation = false;
+						isAttacking = false;
+					}
 				}
-			}
-			if(Mathf.Abs(target.position.x- transform.position.x) <= range) {
-				playAnimation = true;
-			} else {
-				playAnimation = false;
-				isAttacking = false;
-				currentState = heroState.chasing;
-			}
-			if(playAnimation) {
-				sprite.PlayLoop("hero-attack");
-				isAttacking = true;
-			}
-			break;
-			
-		case heroState.chasing:
-			move((target.position - transform.position).normalized, unitType);
-			if(Mathf.Abs(target.position.x- transform.position.x) <= range) {
-				currentState = heroState.attacking;
-			} else {
-				sprite.PlayLoop ("hero-run");
-			}
-			break;
-			
-		case heroState.castingSpell1:
-			if(isCasting) {
-				if (sprite.CurrentFrame().index  == 4){
-					targetUnit.HP -= unit.damage/10;
-					isAttacking = false;
+				if(Mathf.Abs(target.position.x- transform.position.x) <= range) {
+					playAnimation = true;
+				} else {
 					playAnimation = false;
+					isAttacking = false;
+					currentState = heroState.chasing;
 				}
+				if(playAnimation) {
+					sprite.PlayLoop("hero-attack");
+					isAttacking = true;
+				}
+				break;
+				
+			case heroState.chasing:
+				move((target.position - transform.position).normalized, unitType);
+				if(Mathf.Abs(target.position.x- transform.position.x) <= range) {
+					currentState = heroState.attacking;
+				} else {
+					sprite.PlayLoop ("hero-run");
+				}
+				break;
+				
+			case heroState.castingSpell1:
+				if(isCasting) {
+					if (sprite.CurrentFrame().index  == 5){
+						targetUnit.HP -= unit.damage/10;
+						isAttacking = false;
+						playAnimation = false;
+					}
+				}
+				if(playAnimation) {
+					sprite.PlayLoop("hero-attack");
+					isAttacking = true;
+				}
+				if(Mathf.Abs(target.position.x- transform.position.x) <= range) {
+					playAnimation = true;
+				} else currentState = heroState.chasing;
+				break;
+				
+			case heroState.fallingBack:
+				move ((fallbackPoint.position - transform.position).normalized, unitType);
+				if(Mathf.Abs(fallbackPoint.position.x - transform.position.x) <= 0.1) {
+					currentState = heroState.standby;
+				}
+				break;
+				
+			case heroState.standby:
+				sprite.PlayLoop("hero-idle");
+				break;
 			}
-			if(playAnimation) {
-				sprite.PlayLoop("hero-attack");
-				isAttacking = true;
-			}
-			if(Mathf.Abs(target.position.x- transform.position.x) <= range) {
-				playAnimation = true;
-			} else currentState = heroState.chasing;
-			break;
-			
-		case heroState.fallingBack:
-			move ((fallbackPoint.position - transform.position).normalized, unitType);
-			if(Mathf.Abs(fallbackPoint.position.x - transform.position.x) <= 0.1) {
-				currentState = heroState.standby;
-			}
-			break;
-			
-		case heroState.standby:
-			sprite.PlayLoop("hero-idle");
-			break;
 		}
 	}
 }

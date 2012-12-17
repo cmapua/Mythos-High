@@ -9,10 +9,15 @@ public class faithHud : MonoBehaviour {
 	private float resourceGatherRate = .55f;
 	protected int xOffset = 0, yOffset = 0;
 	private bool hideHelp = false;
-	private Unit playerCastle, aiCastle;
+	private bool dialogue = true;
+	private Unit playerCastle, aiCastle, playerHero;
 	private static faithHud instance;
 	private static UnitManager manager;
 	public Texture2D helpBoxBG;
+	
+	public void dialogueOver(){
+		dialogue = false;
+	}
 	
 	protected void searchCastle() {
 		foreach(Unit u in manager.getTheirUnits()) {
@@ -25,18 +30,26 @@ public class faithHud : MonoBehaviour {
 			if(u.name=="playerShrine"){
 				playerCastle=u;
 
-				print("Player Castle Found!");			}
+				print("Player Castle Found!");
+			}
+			if(u.name=="Hero"){
+				playerHero=u;
+
+				print("Player Hero Found!");
+			}
 		}
 	}
 
 	protected int checkVictory(){
-		if(aiCastle == null || playerCastle == null){
+		if(aiCastle == null || playerCastle == null || playerHero == null){
 			searchCastle();
 		}
 		else if(aiCastle.HP <= 0){
 			return 1;
 		}
 		else if(playerCastle.HP <= 0){
+			return 2;
+		}else if (playerHero.HP <= 0){
 			return 2;
 		}
 		if(aiCastle.HP<= aiCastle.maxHP*.25){
@@ -85,19 +98,19 @@ public class faithHud : MonoBehaviour {
 	
 	
 	void OnGUI() {
+		if(!dialogue){
 		displayResource();
 		displayHelp();
 		switch(checkVictory()){
 			case 0:
 				break;
 			case 1:
-				Time.timeScale=0;
 				displayVictory (1);
 				break;
 			case 2:
-				Time.timeScale=0;
 				displayVictory (2);
 				break;
+		}
 		}
 	}
 	void Update() {
@@ -111,29 +124,48 @@ public class faithHud : MonoBehaviour {
 	}
 	
 	void displayHelp(){
-        Rect HelpBox = new Rect(0 + xOffset, Screen.height*5/8 + yOffset, Screen.width,Screen.height*3/8);
+		int hallo = Screen.height*5/8 + yOffset;
+		if(dialogue){
+			hallo = -(Screen.height*3/8);
+		}
+        Rect HelpBox = new Rect(0 + xOffset,hallo , Screen.width,Screen.height*3/8);
         GUI.DrawTexture(HelpBox, helpBoxBG, ScaleMode.StretchToFill, true, 10f);
-		string helpText = "Help:" +
-						  "\nR = Upgrade Shrine(80,120,150)" +
-						  "\nQ = Summon Swordsman (20)" +
-						  "\nW = Summon Archer (35)" +
-						  "\nE = Summon Mage(50)";
-        GUI.Label(new Rect(10, (Screen.height*5/8)+10+ yOffset, Screen.width-10,(Screen.height*3/8)-10), helpText);
+		string helpText = "Help (Press 'H' to remove)" +
+						  "\n'R' = Upgrade Shrine(80,120,150)" +
+						  "\n'Q' = Summon Swordsman (20)" +
+						  "\n'W' = Summon Archer (35)" +
+						  "\n'E' = Summon Mage(50)";
+        GUI.Label(new Rect(10, hallo + 10, Screen.width-10,(Screen.height*3/8)-10), helpText);
 	}
 
 	void displayVictory(int winner){
-		Rect victoryBox = new Rect(Screen.width*1/4, Screen.height*1/4, Screen.width*3/4,Screen.height*3/4);
-        GUI.DrawTexture(victoryBox, helpBoxBG, ScaleMode.StretchToFill, true, 10f);
+		gameGUI.getInstance().dialogue = true;
+		yOffset = -Screen.height;
+		Rect victoryBox = new Rect(Screen.width*1/4, Screen.height*1/4, Screen.width*1/2,Screen.height*1/2);
+//        GUI.DrawTexture(victoryBox, helpBoxBG, ScaleMode.StretchToFill, true, 10f);
 		string victoryText = "";
 		switch (winner){
 			case 1:
-				victoryText = "Player Won!";
+				victoryText = 	"Player Won!" +
+								"\n Click me to restart battle!" +
+								"\n Enemy Spawn behaviour will be randomized";
+			
 				break;
 			case 2:
-				victoryText = "Enemy Won! :(";
+				victoryText = "Enemy Won! :(" +
+								"\n Click me to restart battle!" +
+								"\n Enemy Spawn behaviour will be randomized";
 			break;
 		}
-        GUI.Label(new Rect(Screen.width*1/4+30, Screen.height*1/4+30, Screen.width*3/4-30,Screen.height*3/4-30), victoryText);
+		Time.timeScale=0;
+		if(GUI.Button(victoryBox, victoryText)){
+			if(MinionSpawner.getInstance().level==1)
+				Application.LoadLevel("hello4");
+			else if(MinionSpawner.getInstance().level==2)
+				Application.LoadLevel("hello5");
+
+		}
+
 	}
 	
 	IEnumerator resourceIncrement(){

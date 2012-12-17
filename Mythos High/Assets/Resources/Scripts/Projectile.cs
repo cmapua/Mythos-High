@@ -25,8 +25,10 @@ public class Projectile : MonoBehaviour {
 		else {
 			if(gameObject.layer == 8)
 				trajectory = Vector3.right;
-			if(gameObject.layer == 9)
+			if(gameObject.layer == 9) {
 				trajectory = -Vector3.right;
+				projectileSprite.flipHorizontal = true;
+			}
 		}
 	}
 	

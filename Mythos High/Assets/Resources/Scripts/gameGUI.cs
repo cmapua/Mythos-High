@@ -7,17 +7,28 @@ public class gameGUI : MonoBehaviour {
 	public float hp_w = 60; 
 	public float hp_h = 10;
 	public float hp_yOffset = 120;
+	private static gameGUI instance;
+	public bool dialogue = true;
+	
+	public static gameGUI getInstance() {
+		if(instance == null) 
+			instance = (gameGUI)FindObjectOfType(typeof(gameGUI));
+		return instance;
+	}
+	
 	
 	void Awake() {
 		manager = UnitManager.getInstance();
 	}
 
 	void OnGUI() {
-		foreach(Unit u in manager.getYourUnits()) {
-			showHP(u);
-		}
-		foreach(Unit u in manager.getTheirUnits()) {
-			showHP(u);
+		if(!dialogue) {
+			foreach(Unit u in manager.getYourUnits()) {
+				showHP(u);
+			}
+			foreach(Unit u in manager.getTheirUnits()) {
+				showHP(u);
+			}
 		}
 	}
 	

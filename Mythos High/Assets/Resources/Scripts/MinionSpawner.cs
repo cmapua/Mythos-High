@@ -4,7 +4,7 @@ using System.Collections;
 
 public class MinionSpawner : MonoBehaviour {
 	//public Transform yourSpawn, theirSpawn;
-	public int level=1;
+	public int level;
 	private int spawnCycle=0;
 	
 	private static MinionSpawner instance;

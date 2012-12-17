@@ -35,7 +35,7 @@ public class Unit : MonoBehaviour {
 	}
 	
 	protected void LateUpdate() {
-		if(name == "enemyShrine" || name == "playerShrine"){
+		if(name == "enemyShrine" || name == "playerShrine" ||name =="Hero"){
 			
 		}
 		else if(HP < 0) {

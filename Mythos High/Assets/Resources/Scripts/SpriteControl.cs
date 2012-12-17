@@ -60,7 +60,7 @@ public class SpriteControl : MonoBehaviour {
 	void Start() {
 	}
 	
-	void hpRegen(){
+	public void hpRegen(){
 		unit.HP += hpRegenRate;
 		if (unit.HP>unit.maxHP){
 			unit.HP = unit.maxHP;
@@ -69,7 +69,9 @@ public class SpriteControl : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if(unit.HP<unit.maxHP){
+		if (Time.deltaTime == 0){
+		}
+		else if(unit.HP<unit.maxHP){
 			hpRegen();
 		}
 		if(wait) {
