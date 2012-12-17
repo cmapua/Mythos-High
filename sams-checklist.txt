@@ -28,11 +28,11 @@ Aphrodite Shrine:
 [x] Sigil
 
 Icons:
-[] Minion Archer summon
-[] Minion Mage summon
-[] Minion Swordsman summon
-[] Skill Heal
-[] Shrine Upgrade
+[x] Minion Archer summon
+[x] Minion Mage summon
+[x] Minion Swordsman summon
+[x] Skill Heal
+[x] Shrine Upgrade
 
 ---------------------------------
 Dialogue:
@@ -55,7 +55,7 @@ Backgrounds: (Sketches)
 
 Items:
 [o] Aphrodite's Bangle
-[o] Aphrodite's Sigil (Tattoo)
+[x] Aphrodite's Sigil (Tattoo)
 [o] Agimat
 
 ---------------------------------
