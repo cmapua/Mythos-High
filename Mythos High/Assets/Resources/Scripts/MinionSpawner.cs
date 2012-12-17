@@ -51,6 +51,7 @@ public class MinionSpawner : MonoBehaviour {
 	}
 	
 	IEnumerator spawnUnitBehaviour(int cycle){
+		if(Time.timeScale > 0) {
 		float spawnCountdown=1;
 		if (level==1){
 			switch(cycle){
@@ -220,5 +221,6 @@ public class MinionSpawner : MonoBehaviour {
 			createUnit (0);
 		}
 		yield return new WaitForSeconds(spawnCountdown);
+		}
 	}
 }
