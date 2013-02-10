@@ -7,7 +7,7 @@ public class minionHUD : MonoBehaviour {
 	private static faithHud faith;
 	private int archerCost=35, swordCost=20, mageCost=50, shrineLevel = 1;
 	public float swordOffset, archerOffset, mageOffset, shrineOffset;
-	// Use this for initialization
+	
 	void Start(){
 		mCool = minionCooldown.getInstance();
 		faith = faithHud.getInstance();
@@ -18,22 +18,22 @@ public class minionHUD : MonoBehaviour {
 		string shrineText = "Upgrade Shrine";
 
 		float currentOffset = 300-faith.getYOffset();
-		swordOffset = Screen.height*5/6+currentOffset+Screen.height/6*mCool.swordsmanCooldownTime();
-		archerOffset = Screen.height*5/6+currentOffset+Screen.height/6*mCool.archerCooldownTime();
-		mageOffset = Screen.height*5/6+currentOffset+Screen.height/6*mCool.mageCooldownTime();
-		shrineOffset = Screen.height*5/6+currentOffset;
+		swordOffset = 	Screen.height*5/6 + currentOffset + Screen.height/6*(-1/mCool.swordsmanCooldownTime());
+		archerOffset = 	Screen.height*5/6 + currentOffset + Screen.height/6*(-1/mCool.archerCooldownTime());
+		mageOffset = 	Screen.height*5/6 + currentOffset + Screen.height/6*(-1/mCool.mageCooldownTime());
+		shrineOffset = 	Screen.height*5/6 + currentOffset;
 		
-		if(GUI.Button(new Rect(0 , swordOffset, Screen.width/5,Screen.height/6),"Swordsman\n20")){
+		if(GUI.Button(new Rect(0 , swordOffset, Screen.width/5,Screen.height/6),"Swordsman\n20\ncooldown: "+mCool.swordsmanCooldownTime())){
 			if(faith.currentFaith>=swordCost && mCool.swordsmanCanSpawn){
 				mCool.startCooldown("swordsman");
 			}
 		}
-		else if(GUI.Button(new Rect(Screen.width/5 , archerOffset , Screen.width/5,Screen.height/6),"Archer\n35")){
+		else if(GUI.Button(new Rect(Screen.width/5 , archerOffset , Screen.width/5,Screen.height/6),"Archer\n35\ncooldown: "+mCool.archerCooldownTime())){
 			if(faith.currentFaith>=archerCost && mCool.archerCanSpawn){
 				mCool.startCooldown("archer");
 			}
 		}
-		else if(GUI.Button(new Rect(Screen.width*2/5 , mageOffset, Screen.width/5,Screen.height/6),"Mage\n50")){
+		else if(GUI.Button(new Rect(Screen.width*2/5 , mageOffset, Screen.width/5,Screen.height/6),"Mage\n50\ncooldown: "+mCool.mageCooldownTime())){
 			if(faith.currentFaith>=mageCost && mCool.mageCanSpawn){
 				mCool.startCooldown("mage");
 			}
@@ -58,9 +58,5 @@ public class minionHUD : MonoBehaviour {
 			shrineOffset = Screen.height;
 		}
 	}
-	
-	void Update() {
-	}
-	
 
 }

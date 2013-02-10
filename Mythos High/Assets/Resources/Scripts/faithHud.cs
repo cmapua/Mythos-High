@@ -52,6 +52,7 @@ public class faithHud : MonoBehaviour {
 		}else if (playerHero.HP <= 0){
 			return 2;
 		}
+		//AI Shrine
 		if(aiCastle.HP<= aiCastle.maxHP*.25){
 			aiCastle.getSpriteControl().sprite.PlayLoop("quarter-health");
 		}
@@ -61,6 +62,7 @@ public class faithHud : MonoBehaviour {
 		else if(aiCastle.HP<= aiCastle.maxHP*.75){
 			aiCastle.getSpriteControl().sprite.PlayLoop("3/4-health");
 		}
+		//PLAYER Shrine
 		if(playerCastle.HP<= playerCastle.maxHP*.25){
 			playerCastle.getSpriteControl().sprite.PlayLoop("quarter-health");
 		}
@@ -79,7 +81,6 @@ public class faithHud : MonoBehaviour {
 		return instance;
 	}
 	
-	// Use this for initialization
 	void Start(){
 		manager = UnitManager.getInstance();
 		StartCoroutine("CoStart");
@@ -92,27 +93,27 @@ public class faithHud : MonoBehaviour {
 	}
 	
 	IEnumerator CoUpdate() {
-		//print ("CoUpdate() called.");
 		yield return StartCoroutine(resourceIncrement());
 	}
 	
 	
 	void OnGUI() {
 		if(!dialogue){
-		displayResource();
-		displayHelp();
-		switch(checkVictory()){
-			case 0:
-				break;
-			case 1:
-				displayVictory (1);
-				break;
-			case 2:
-				displayVictory (2);
-				break;
-		}
+			displayResource();
+			displayHelp();
+			switch(checkVictory()){
+				case 0:
+					break;
+				case 1:
+					displayVictory (1);
+					break;
+				case 2:
+					displayVictory (2);
+					break;
+			}
 		}
 	}
+	
 	void Update() {
 		if(Input.GetKeyUp(KeyCode.H)) {
 			hideHelp = true;
@@ -174,6 +175,7 @@ public class faithHud : MonoBehaviour {
 		}
 		yield return new WaitForSeconds(resourceGatherRate);
 	}
+	
 	void displayResource(){
 		GUI.Label(new Rect(10, 10, 100, 50), "Faith:	"+(int)currentFaith);
 	}
