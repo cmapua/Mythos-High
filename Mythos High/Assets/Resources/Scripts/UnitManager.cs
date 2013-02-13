@@ -5,7 +5,9 @@ using System.Collections.Generic;
 public class UnitManager : MonoBehaviour {
 	private List<Unit> yourUnits;
 	private List<Unit> theirUnits;
+	[HideInInspector]
 	public const int yourUnitLayer = 8, theirUnitLayer = 9;
+    private bool togglePause = true;
 
 	//singleton design pattern
 	private static UnitManager instance;
@@ -91,6 +93,12 @@ public class UnitManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	
+        if (Input.GetKey(KeyCode.P))
+        {
+            if (togglePause)
+                Time.timeScale = 0;
+            if(!togglePause)
+                Time.timeScale = 1;
+        }
 	}
 }

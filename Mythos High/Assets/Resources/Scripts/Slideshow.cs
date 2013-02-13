@@ -25,6 +25,7 @@ public class Slideshow : MonoBehaviour {
 				enabled = false;
 				faithHud.getInstance().dialogueOver();
 				gameGUI.getInstance().dialogue = false;
+				MinionSpawner.getInstance().dialoguePlaying = false;
 				DestroyObject(gt);
 			}
 		}

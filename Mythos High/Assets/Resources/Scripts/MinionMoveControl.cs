@@ -49,7 +49,7 @@ public class MinionMoveControl : SpriteControl {
 	
 	// Update is called once per frame
 	void Update () {
-		if(Time.deltaTime !=0){			
+		if(Time.timeScale !=0){	//deltaTime or TimeScale?
 			//kill v2's
 			if( newType && Input.GetKeyUp(KeyCode.K) ) {
 				DestroyObject(gameObject);

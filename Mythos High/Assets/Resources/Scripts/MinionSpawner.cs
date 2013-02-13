@@ -6,6 +6,7 @@ public class MinionSpawner : MonoBehaviour {
 	//public Transform yourSpawn, theirSpawn;
 	public int level;
 	private int spawnCycle=0;
+	public bool dialoguePlaying = true;
 	
 	private static MinionSpawner instance;
 	
@@ -29,7 +30,9 @@ public class MinionSpawner : MonoBehaviour {
 	
 	IEnumerator CoUpdate() {
 		//print ("CoUpdate() called.");
-		yield return StartCoroutine(spawnUnitBehaviour (spawnCycle));
+		if(!dialoguePlaying)
+			yield return StartCoroutine(spawnUnitBehaviour (spawnCycle));
+		yield return null;
 	}	
 	
 	void createUnit(int enemyType){

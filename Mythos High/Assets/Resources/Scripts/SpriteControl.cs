@@ -69,11 +69,12 @@ public class SpriteControl : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (Time.deltaTime == 0){
+		if (Time.deltaTime == 0){ //timeScale or deltaTime?
 		}
 		else if(unit.HP<unit.maxHP){
 			hpRegen();
 		}
+
 		if(wait) {
 			if(sprite.CurrentFrame().index  == lastFrame) {
 				actionChooser(currentState);
@@ -189,9 +190,11 @@ public class SpriteControl : MonoBehaviour {
 	
 	protected Unit searchNearestTarget() {
 		Unit newTarget = null;
+        //if player unit
 		if(unit.getLayer() == 8) {
 			float dist = Mathf.Infinity;
 			
+            //get nearest enemy unit
 			foreach(Unit u in unit.getUnitManager().getTheirUnits()) {
 				float newDist = u.getUnitTransform().position.x - unit.getUnitTransform().position.x;
 				if(newDist<=(range+200)&& newDist >=0){
@@ -201,6 +204,7 @@ public class SpriteControl : MonoBehaviour {
 					}
 				}
 			}
+            //
 			foreach(Unit u in unit.getUnitManager().getTheirUnits()) {
 				if(u.sc && u.sc.target == gameObject.transform) {
 					newTarget = u;
