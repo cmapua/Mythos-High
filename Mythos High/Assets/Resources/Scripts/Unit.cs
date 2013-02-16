@@ -26,7 +26,7 @@ public class Unit : MonoBehaviour {
 		//name = gameObject.name;
 		layer = gameObject.layer;
 		manager.addUnit(this);
-		print ("Unit "+gameObject.name+" added.");
+		//print ("Unit "+gameObject.name+" added.");
 	}
 	
 	// Update is called once per frame
@@ -44,7 +44,7 @@ public class Unit : MonoBehaviour {
 	}
 	
 	void OnDestroy() {
-		print (gameObject.name + " has died. :(");
+		//print (gameObject.name + " has died. :(");
 		manager.removeUnit(this);
 	}
 	

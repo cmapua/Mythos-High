@@ -29,7 +29,7 @@ public class MinionMoveControl : SpriteControl {
 	}
 	
 	protected virtual IEnumerator CoStart() {
-		print (gameObject.name + "'s CoStart() called.");
+		//print (gameObject.name + "'s CoStart() called.");
 		while(true) {
 			yield return StartCoroutine(CoUpdate());
 		}

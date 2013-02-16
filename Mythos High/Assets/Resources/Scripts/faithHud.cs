@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class faithHud : MonoBehaviour {
 	
@@ -13,12 +14,64 @@ public class faithHud : MonoBehaviour {
 	private Unit playerCastle, aiCastle, playerHero;
 	private static faithHud instance;
 	private static UnitManager manager;
-	public Texture2D helpBoxBG;
+
+    //textures for HUD
+    public Texture2D helpBoxBG, shieldIcon, 
+        lv1bar, lv2bar, lv3bar, lv4bar, 
+        lv1barBack, lv2barBack, lv3barBack, lv4barBack;
+
+    //for unit selection window
+    public float unitYOffset = 30;
+    [HideInInspector]
+    public Unit selectedUnit;
+    public CameraLookat cam;
 	
 	public void dialogueOver(){
 		dialogue = false;
 	}
-	
+
+    public bool toggleUnitSelection = false;
+    private float mover = 0;
+
+    void displayUnitSelectionWindow()
+    {
+        GUI.BeginGroup(new Rect(20, Screen.height/2, 500, 5 * unitYOffset));
+        GUI.Box(new Rect(0, 2 * unitYOffset, 200, unitYOffset), "Select target: >");
+        generateButtons(manager.getYourUnits(), 210, 0, false, mover);
+
+        GUI.EndGroup();
+    }
+
+    void generateButtons(List<Unit> units, float x, float y, bool easing, float direction)
+    {
+        //float yOffset = 20f;
+        GUI.BeginGroup(new Rect(x, y, 200, 5 * unitYOffset)); //show at most 5 units at a time
+
+        Color guiColor = GUI.color;
+
+        for (int i = 0; i < units.Count; i++)
+        {
+            float yValue = (unitYOffset * i) + direction;
+            
+            if (yValue == 0 || yValue == (4 * unitYOffset)) guiColor.a = .25f;
+            if (yValue == (1 * unitYOffset) || yValue == (3 * unitYOffset)) guiColor.a = .5f;
+            if (yValue == (2 * unitYOffset))
+            {
+                guiColor.a = 1f;
+                selectedUnit = units[i];
+            }
+            GUI.color = guiColor;
+
+            GUI.Box(new Rect(0, yValue, 200, unitYOffset), units[i].name);
+        }
+
+        //reset alpha
+        guiColor.a = 1f;
+        GUI.color = guiColor;
+
+        GUI.EndGroup();
+    }
+
 	protected void searchCastle() {
 		foreach(Unit u in manager.getTheirUnits()) {
 			if(u.name=="enemyShrine"){
@@ -80,7 +133,7 @@ public class faithHud : MonoBehaviour {
 			instance = (faithHud)FindObjectOfType(typeof(faithHud));
 		return instance;
 	}
-	
+
 	void Start(){
 		manager = UnitManager.getInstance();
 		StartCoroutine("CoStart");
@@ -99,8 +152,14 @@ public class faithHud : MonoBehaviour {
 	
 	void OnGUI() {
 		if(!dialogue){
+            if (toggleUnitSelection)
+            {
+                displayUnitSelectionWindow();
+                //print(">>>>>>>>> display selection window called");
+            }
+
 			displayResource();
-			displayHelp();
+			//displayHelp();
 			switch(checkVictory()){
 				case 0:
 					break;
@@ -122,6 +181,30 @@ public class faithHud : MonoBehaviour {
 			if(yOffset <= 300)
 				yOffset++;
 		}
+
+        if (Input.GetKeyUp(KeyCode.L))
+        {
+            if (toggleUnitSelection)
+            {
+                Time.timeScale = 1;
+                toggleUnitSelection = false;
+            }
+            else
+            {
+                Time.timeScale = 0;
+                toggleUnitSelection = true;
+            }
+        }
+        if (toggleUnitSelection)
+        {
+            if(selectedUnit)
+                cam.target = selectedUnit.sc.sprite.transform;
+            else cam.target = cam.defaultTarget;
+            if (Input.GetKeyUp(KeyCode.UpArrow)) mover += unitYOffset;
+            if (Input.GetKeyUp(KeyCode.DownArrow)) mover += -unitYOffset;
+            //else mover = 0;
+        }
+        else cam.target = cam.defaultTarget;
 	}
 	
 	void displayHelp(){
@@ -175,9 +258,50 @@ public class faithHud : MonoBehaviour {
 		}
 		yield return new WaitForSeconds(resourceGatherRate);
 	}
-	
+
+    //
+    public static Rect screenRect(float x, float y, float w, float h)
+    {
+        return new Rect(Screen.width - x, Screen.height - y, w, h);
+    }
+
+    public static void draw(Texture2D icon, float x, float y)
+    {
+        GUI.DrawTexture(new Rect(x, y, icon.width, icon.height), icon);
+    }
+
 	void displayResource(){
-		GUI.Label(new Rect(10, 10, 100, 50), "Faith:	"+(int)currentFaith);
+        GUI.BeginGroup(new Rect(10, 10, 800, 100));
+        
+        float lv1width = lv1bar.width * (currentFaith / 150f);
+        float lv2width = lv2bar.width * ((currentFaith - 150) / 200f);
+        float lv3width = lv3bar.width * ((currentFaith - 200) / 250f);
+        float lv4width = lv4bar.width * ((currentFaith - 250) / 300f);
+
+        if (shrineLevel >= 4)
+        {
+            faithHud.draw(lv4barBack, lv1barBack.width + lv2barBack.width + lv3barBack.width + 64, 10);
+            GUI.DrawTexture(new Rect(lv1barBack.width + lv2barBack.width + lv3barBack.width + 64, 10, lv4width, lv4bar.height), lv4bar);
+        }
+        if (shrineLevel >= 3)
+        {
+            faithHud.draw(lv3barBack, lv1barBack.width + lv2barBack.width + 64, 10);
+            GUI.DrawTexture(new Rect(lv1barBack.width + lv2barBack.width + 64, 10, lv3width, lv3bar.height), lv3bar);
+        }
+        if (shrineLevel >= 2)
+        {
+            faithHud.draw(lv2barBack, lv1barBack.width + 64, 10);
+            GUI.DrawTexture(new Rect(lv1barBack.width + 64, 10, lv2width, lv2bar.height), lv2bar);
+        }
+
+        faithHud.draw(lv1barBack, 64, 10);
+        GUI.DrawTexture(new Rect(64, 10, lv1width, lv1bar.height), lv1bar);
+
+		GUI.Label(new Rect(100, 10, 100, 50), "Faith:	"+(int)currentFaith);
+
+        faithHud.draw(shieldIcon, 0, 0);
+
+        GUI.EndGroup();
 	}
 	
 	public void levelShrine(){

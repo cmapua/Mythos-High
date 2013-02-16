@@ -96,9 +96,15 @@ public class UnitManager : MonoBehaviour {
         if (Input.GetKey(KeyCode.P))
         {
             if (togglePause)
+            {
                 Time.timeScale = 0;
-            if(!togglePause)
+                togglePause = false;
+            }
+            else
+            {
                 Time.timeScale = 1;
+                togglePause = true;
+            }
         }
 	}
 }

@@ -22,7 +22,7 @@ public class MinionSpawner : MonoBehaviour {
 		StartCoroutine("CoStart");
 	}
 	IEnumerator CoStart() {
-		print ("CoStart() called.");
+		//print ("CoStart() called.");
 		while(true) {
 			yield return StartCoroutine(CoUpdate());
 		}

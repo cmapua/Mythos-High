@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class gameGUI : MonoBehaviour {
 	private UnitManager manager;
@@ -9,7 +10,44 @@ public class gameGUI : MonoBehaviour {
 	public float hp_yOffset = 120;
 	private static gameGUI instance;
 	public bool dialogue = true;
-	
+
+    //moved this to faithHud
+
+    //public bool toggleUnitSelection = false;
+    //private float mover = 0;
+
+    //void displayUnitSelectionWindow()
+    //{
+    //    //Time.timeScale = 0f; //pause action
+    //    generateButtons(manager.getYourUnits(), Screen.width / 2, Screen.height / 2, false, mover);
+    //}
+
+    //void generateButtons(List<Unit> units, float x, float y, bool easing, float direction)
+    //{
+    //    float yOffset = 20f;
+    //    GUI.BeginGroup(new Rect(x, y, 60, 100)); //show at most 5 units at a time
+    //    for (int i = 0; i < units.Count; i++)
+    //    {
+    //        GUI.Box(new Rect(0, (yOffset * i) + direction, 50, 20), units[i].name);
+    //    }
+    //    GUI.EndGroup();
+    //}
+
+    //void Update()
+    //{
+    //    if (toggleUnitSelection)
+    //    {
+    //        if (Input.GetKeyUp(KeyCode.L))
+    //        {
+    //            if (toggleUnitSelection) toggleUnitSelection = false;
+    //            else toggleUnitSelection = true;
+    //        }
+    //        if (Input.GetKeyUp(KeyCode.UpArrow)) mover = 20f;
+    //        else if (Input.GetKeyUp(KeyCode.DownArrow)) mover = -20f;
+    //        else mover = 0;
+    //    }
+    //}
+
 	public static gameGUI getInstance() {
 		if(instance == null) 
 			instance = (gameGUI)FindObjectOfType(typeof(gameGUI));
@@ -31,7 +69,9 @@ public class gameGUI : MonoBehaviour {
 			}
 		}
 	}
-	
+
+
+
 	void showHP(Unit u) {
 		//Vector3 offset = new Vector3(u.transform.position.x, u.transform.position.y + 80, u.transform.position.z);
 		Vector3 center = Camera.main.WorldToScreenPoint(u.transform.position);

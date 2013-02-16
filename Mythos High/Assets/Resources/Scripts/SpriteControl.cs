@@ -69,69 +69,84 @@ public class SpriteControl : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (Time.deltaTime == 0){ //timeScale or deltaTime?
-		}
-		else if(unit.HP<unit.maxHP){
-			hpRegen();
-		}
+        if (Time.deltaTime > 0)
+        { //timeScale or deltaTime?
 
-		if(wait) {
-			if(sprite.CurrentFrame().index  == lastFrame) {
-				actionChooser(currentState);
-				wait = false;
-			}
-		}
-		//handle movement
-		else {
-			unitType = "hero";
-			
-			//handle attack
-			if(Input.GetKeyDown(KeyCode.Z)) {
-				sprite.PlayOnce("hero-attack");
-				lastFrame = 5;
-				wait = true;
-				currentState = heroState.attacking;
-			}
-			//handle skills (they all play attack animation since no cast animation is available
-			else if(Input.GetKeyDown(KeyCode.X)) {
-				sprite.PlayOnce("hero-cast");
-				lastFrame = 22;
-				wait = true;
-				currentState = heroState.castingSpell1;
-			}
-			else if(Input.GetKeyDown(KeyCode.C)) {
-				sprite.PlayOnce("hero-cast");
-				lastFrame = 22;
-				wait = true;
-				currentState = heroState.castingSpell2;
-			}
-			else if(Input.GetKeyDown(KeyCode.V)) {
-				sprite.PlayOnce("hero-cast");
-				lastFrame = 22;
-				wait = true;
-				currentState = heroState.castingSpell3;
-			}
-			
-			else if(Input.GetKey(KeyCode.LeftArrow)) {
-				if(sprite.transform.position.x>-1050)
-				move(-Vector3.right, unitType);
-			}
-			else if(Input.GetKey(KeyCode.RightArrow)) {
-				if(sprite.transform.position.x<1050)
-				move(Vector3.right, unitType);
-			}
-			else if(Input.GetKey(KeyCode.UpArrow)) {
-				if(sprite.transform.position.z<90)
-				move (Vector3.forward, unitType);
-			}
-			else if(Input.GetKey(KeyCode.DownArrow)) {
-				if(sprite.transform.position.z>-90)
-				move (-Vector3.forward, unitType);
-			}
-			else {
-				sprite.PlayLoop ("hero-idle");
-			}
-		}
+            if (unit.HP < unit.maxHP)
+            {
+                hpRegen();
+            }
+
+            if (wait)
+            {
+                if (sprite.CurrentFrame().index == lastFrame)
+                {
+                    actionChooser(currentState);
+                    wait = false;
+                }
+            }
+            //handle movement
+            else
+            {
+                unitType = "hero";
+
+                //handle attack
+                if (Input.GetKeyDown(KeyCode.Z))
+                {
+                    sprite.PlayOnce("hero-attack");
+                    lastFrame = 5;
+                    wait = true;
+                    currentState = heroState.attacking;
+                }
+                //handle skills (they all play attack animation since no cast animation is available
+                else if (Input.GetKeyDown(KeyCode.X))
+                {
+                    sprite.PlayOnce("hero-cast");
+                    lastFrame = 22;
+                    wait = true;
+                    currentState = heroState.castingSpell1;
+                }
+                else if (Input.GetKeyDown(KeyCode.C))
+                {
+                    sprite.PlayOnce("hero-cast");
+                    lastFrame = 22;
+                    wait = true;
+                    currentState = heroState.castingSpell2;
+                }
+                else if (Input.GetKeyDown(KeyCode.V))
+                {
+                    sprite.PlayOnce("hero-cast");
+                    lastFrame = 22;
+                    wait = true;
+                    currentState = heroState.castingSpell3;
+                }
+
+                else if (Input.GetKey(KeyCode.LeftArrow))
+                {
+                    if (sprite.transform.position.x > -1050)
+                        move(-Vector3.right, unitType);
+                }
+                else if (Input.GetKey(KeyCode.RightArrow))
+                {
+                    if (sprite.transform.position.x < 1050)
+                        move(Vector3.right, unitType);
+                }
+                else if (Input.GetKey(KeyCode.UpArrow))
+                {
+                    if (sprite.transform.position.z < 90)
+                        move(Vector3.forward, unitType);
+                }
+                else if (Input.GetKey(KeyCode.DownArrow))
+                {
+                    if (sprite.transform.position.z > -90)
+                        move(-Vector3.forward, unitType);
+                }
+                else
+                {
+                    sprite.PlayLoop("hero-idle");
+                }
+            }
+        }
 	}
 	
 	void actionChooser(heroState hs) {
