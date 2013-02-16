@@ -5,9 +5,9 @@ Minions:
 [x] Minion Archer - atk
 [x] Minion Archer - atk projectile
 [x] Minion Mage - run
-[x] Minion Mage - atk
+[] Minion Mage - atk
 [] Minion Mage - atk projectile
-[] Minion Mage - atk aura
+[x] Minion Mage - atk aura
 [x] Minion Swordsman - run
 [x] Minion Swordsman - atk
 
@@ -20,12 +20,33 @@ Aphrodite Heroes:
 [x] Laila - atk
 [x] Laila - projectile
 [x] Laila - skill activate
-[] Skill - Heal - aura
+[x] Skill - Heal - particle
+[] Skill - Atk Buff
+[] Skill - Shield
 
-Aphrodite Shrine:
-[x] Shrine 
-[x] Shrine upgrades
-[x] Sigil
+Osiris Heroes:
+[x] Seth - run
+[x] Seth - atk
+[x] Seth - projectile
+[x] Seth - skill activate
+[] Skill - Scary Face 
+[] Skill - Summon Mummy
+[] Skill - GhostBuster
+
+Thor Heroes:
+[x] Thor - run
+[x] Thor - atk
+[x] Thor - skill activate
+[] Skill - Mighty Hammer
+[] Skill - Lightning
+[] Skill - Atk/Def Buff
+
+Shiva Heroes:
+[x] Sun - run
+[x] Sun - atk
+[x] Sun - skill activate
+[] Skill - Meteor - aura
+[] Skill - Sword Dance
 
 Icons:
 [x] Minion Archer summon
@@ -33,29 +54,41 @@ Icons:
 [x] Minion Swordsman summon
 [x] Skill Heal
 [x] Shrine Upgrade
+[] Skill icons
 
 ---------------------------------
 Dialogue:
 
 Characters:
-[] Classmate
-[o] Aphrodite
-[o] Osiris
+[o] Classmate A
+[o] Classmate B
+[x] Aphrodite, Osiris, Thor, Shiva, Anansi, Buddha
 [x] Champion (Male)
-[o] Laila 
-[o] Seth
+[x] Champion (Female)
+[x] Laila, Seth, Hank, Sun, Danny, Prissy
 
-Backgrounds: (Sketches)
+Backgrounds: (Sketches/Photos or whatever)
 [] Hall of Pantheons
 [] Classroom
-[] Armory
+[] Armory (Thor)
 [] Hallway
+[] Infirmary (Aphrodite)
+[] Lab (Shiva)
+[] Office (Osiris)
+[] Lost & Found (Anansi)
+[] Garden (Buddha)
 [o] Sunburst Effect
 [] Battle Hall
 
 Items:
 [o] Aphrodite's Bangle
 [x] Aphrodite's Sigil (Tattoo)
+[ ] Osiris' Crook
+[ ] Osiris' Sigil 
+[ ] Thor's Hammer 
+[ ] Thor's Sigil
+[ ] Shiva's Trident
+[ ] Shiva's Sigil
 [o] Agimat
 
 ---------------------------------
