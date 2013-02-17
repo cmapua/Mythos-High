@@ -41,7 +41,7 @@ public class MinionMoveControl : SpriteControl {
 			if(newTarget) {
 				target = newTarget.transform;
 				targetUnit = newTarget;
-				print (gameObject.name + " found a target. --> " + newTarget.name);
+				//print (gameObject.name + " found a target. --> " + newTarget.name);
 			}
 		}
 		yield return new WaitForSeconds(0.2f);

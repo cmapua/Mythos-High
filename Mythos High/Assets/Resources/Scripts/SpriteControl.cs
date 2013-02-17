@@ -98,7 +98,7 @@ public class SpriteControl : MonoBehaviour {
                     wait = true;
                     currentState = heroState.attacking;
                 }
-                //handle skills (they all play attack animation since no cast animation is available
+
                 else if (Input.GetKeyDown(KeyCode.X))
                 {
                     sprite.PlayOnce("hero-cast");

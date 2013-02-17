@@ -8,7 +8,7 @@ public class Effect
 {
     public string name;
     public float intensity;
-    public int affectedLayer;
+    //public int affectedLayer;
     public int op;
 
     public float result(float prevvalue)
@@ -29,8 +29,8 @@ public class Skill : MonoBehaviour {
     public float cooldown = 5f; //default
     public float aoe = 3f; //default, in meters (?). if 0, either target only or whole battle field is affected
     public float duration = 5f; //default (in seconds)
-    public GameObject animation;
-    public bool active = false; //
+    public GameObject skillAnimation;
+    public bool isActive = false; //
 
     public Effect[] effects;
 
@@ -93,48 +93,24 @@ public class Skill : MonoBehaviour {
     //
     public void applyEffectsOn(Unit target)
     {
-        FieldInfo[] fields = target.GetType().GetFields(flags);
+        //doesn't work
+        //FieldInfo[] fields = target.GetType().GetFields(flags);
 
         foreach (Effect e in effects)
         {
-            foreach (FieldInfo f in fields)
-            {
-                if (e.name == f.Name) f.SetValue(target, e.result((float)f.GetValue(target))); //could be unstable :|
-            }
+            //if (e.name == "HP") //affect HP
+                target.HP = e.result(target.HP);
         }
     }
 
     //not very sure about this
     public void applyEffectsOn(List<Unit> affectedUnits)
     {
-        //oh shit O(n^3) :O
         foreach (Unit u in affectedUnits)
         {
-            //whoaaa reflectionnn.
-            
-            FieldInfo[] fields = u.GetType().GetFields(flags);
-
-            foreach (Effect e in effects)
-            {
-                foreach (FieldInfo f in fields)
-                {
-                    if (e.name == f.Name) f.SetValue(u, e.result((float)f.GetValue(u))); //could be unstable :|
-                }
-            }
+            applyEffectsOn(u);
         }
     }
-
-    //public float result(Effect e, float prevValue)
-    //{
-    //    switch (e.op)
-    //    {
-    //        case '+': return prevValue + e.intensity;
-    //        case '-': return prevValue - e.intensity;
-    //        case '*': return prevValue * e.intensity;
-    //        case '/': return prevValue / e.intensity;
-    //        default: return prevValue;
-    //    }
-    //}
 
     public IEnumerator waitForInput(KeyCode k) {
         while (!Input.GetKeyDown(k))
@@ -145,32 +121,37 @@ public class Skill : MonoBehaviour {
 
     public IEnumerator activate()
     {
-        if (type == skillType.target)
+        if (isActive)
         {
-            if (hud)
+            if (type == skillType.target)
             {
-                hud.toggleUnitSelection = true;
-                Time.timeScale = 0;
-                yield return StartCoroutine(waitForInput(KeyCode.Return));
-                hud.toggleUnitSelection = false;
-                Time.timeScale = 1;
-                target = hud.selectedUnit;
-                if (target)
+                if (hud)
                 {
-                    //play animation
-                    GameObject obj = Instantiate(animation, target.gameObject.transform.position, target.gameObject.transform.rotation) as GameObject;
-                    obj.transform.parent = target.gameObject.transform;
-                    applyEffectsOn(target);
+                    hud.toggleUnitSelection = true;
+                    Time.timeScale = 0;
+                    yield return StartCoroutine(waitForInput(KeyCode.Return));
+                    hud.toggleUnitSelection = false;
+                    Time.timeScale = 1;
+                    target = hud.selectedUnit;
+                    if (target)
+                    {
+                        //play animation
+                        GameObject obj = Instantiate(skillAnimation, target.transform.position, target.transform.rotation) as GameObject;
+                        obj.transform.parent = target.gameObject.transform;
+                        //obj.GetComponent<Particles>().parentPos = target.transform;
+                        applyEffectsOn(target);
+                    }
                 }
-            }
 
-            destroy();
+                isActive = false;
+                //destroy();
+            }
         }
     }
 
     void Update()
     {
-        if (active && Time.deltaTime > 0)
+        if (isActive && Time.deltaTime > 0)
         {
 
         }

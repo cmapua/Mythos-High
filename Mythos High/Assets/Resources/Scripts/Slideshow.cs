@@ -7,7 +7,7 @@ public class Slideshow : MonoBehaviour {
 	public Texture2D[] slides;
 	public int currSlide = 0;
 	public float x, y, w = 400, h = 40;
-	bool enabled = true;
+	bool isEnabled = true;
 	
 	// Use this for initialization
 	void Start () {
@@ -18,11 +18,11 @@ public class Slideshow : MonoBehaviour {
 	}
 	
 	void OnGUI() {
-		if(enabled) {
+		if(isEnabled) {
 			if(GUI.Button(new Rect(x, y, w, h), "I get it, on with the battle!")) {
 				//Application.LoadLevel("hello3");
 				Time.timeScale = 1;
-				enabled = false;
+				isEnabled = false;
 				faithHud.getInstance().dialogueOver();
 				gameGUI.getInstance().dialogue = false;
 				MinionSpawner.getInstance().dialoguePlaying = false;
@@ -33,7 +33,7 @@ public class Slideshow : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if(enabled) {
+		if(isEnabled) {
 			if(Input.GetMouseButtonUp(0) || Input.GetKeyUp(KeyCode.KeypadEnter)) {
 				if(currSlide < slides.Length-1) {
 					gt.texture = slides[currSlide+=1];

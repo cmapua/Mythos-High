@@ -76,19 +76,19 @@ public class faithHud : MonoBehaviour {
 		foreach(Unit u in manager.getTheirUnits()) {
 			if(u.name=="enemyShrine"){
 				aiCastle=u;
-				print("Enemy Castle Found!");
+				//print("Enemy Castle Found!");
 			}
 		}
 		foreach(Unit u in manager.getYourUnits()) {
 			if(u.name=="playerShrine"){
 				playerCastle=u;
 
-				print("Player Castle Found!");
+				//print("Player Castle Found!");
 			}
 			if(u.name=="Hero"){
 				playerHero=u;
 
-				print("Player Hero Found!");
+				//print("Player Hero Found!");
 			}
 		}
 	}
@@ -139,7 +139,7 @@ public class faithHud : MonoBehaviour {
 		StartCoroutine("CoStart");
 	}
 	IEnumerator CoStart() {
-		print ("CoStart() called.");
+		//print ("CoStart() called.");
 		while(true) {
 			yield return StartCoroutine(CoUpdate());
 		}

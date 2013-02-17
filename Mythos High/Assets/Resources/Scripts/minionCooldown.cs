@@ -23,7 +23,7 @@ public class minionCooldown : MonoBehaviour {
 	}
 	
 	IEnumerator CoStart() {
-		print ("CoStart() called.");
+		//print ("CoStart() called.");
 		while(true) {
 			yield return StartCoroutine(CoUpdate());
 		}

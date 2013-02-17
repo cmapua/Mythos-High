@@ -5,7 +5,7 @@ public class SkillManager : MonoBehaviour {
     //singleton design pattern
     private static SkillManager instance;
 
-    private UnitManager manager;
+    //private UnitManager manager;
 
     public Unit playerCaster, enemyCaster;
     public Skill[] playerSkills, enemySkills;
@@ -19,18 +19,20 @@ public class SkillManager : MonoBehaviour {
 
     void Awake()
     {
-        manager = UnitManager.getInstance();
+        //manager = UnitManager.getInstance();
     }
 
 	// Use this for initialization
 	void Start () {
-        foreach (Skill s in playerSkills)
+        for (int i = 0; i < playerSkills.Length; i++)
         {
-            s.caster = playerCaster;
+            playerSkills[i] = new Skill();
+            playerSkills[i].caster = playerCaster;
         }
-        foreach (Skill s in enemySkills)
+        for (int i = 0; i < enemySkills.Length; i++)
         {
-            s.caster = enemyCaster;
+            enemySkills[i] = new Skill();
+            enemySkills[i].caster = enemyCaster;
         }
 	}
 	
@@ -40,9 +42,10 @@ public class SkillManager : MonoBehaviour {
         {
             if (Input.GetKeyUp(KeyCode.X))
             {
-                Skill s = Instantiate(playerSkills[0]) as Skill;
-                StartCoroutine(s.activate());
-                print("player cast skill " + s.name + "!");
+                //Skill s = Instantiate(playerSkills[0]) as Skill;
+                //StartCoroutine(s.activate());
+                //print("player cast skill " + s.name + "!");
+                playerSkills[0].isActive = true;
             }
         }
 	}
