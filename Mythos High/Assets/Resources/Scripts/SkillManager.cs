@@ -24,16 +24,16 @@ public class SkillManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        for (int i = 0; i < playerSkills.Length; i++)
-        {
-            playerSkills[i] = new Skill();
-            playerSkills[i].caster = playerCaster;
-        }
-        for (int i = 0; i < enemySkills.Length; i++)
-        {
-            enemySkills[i] = new Skill();
-            enemySkills[i].caster = enemyCaster;
-        }
+//        for (int i = 0; i < playerSkills.Length; i++)
+//        {
+//            playerSkills[i] = new Skill();
+//            playerSkills[i].caster = playerCaster;
+//        }
+//        for (int i = 0; i < enemySkills.Length; i++)
+//        {
+//            enemySkills[i] = new Skill();
+//            enemySkills[i].caster = enemyCaster;
+//        }
 	}
 	
 	// Update is called once per frame
@@ -42,10 +42,12 @@ public class SkillManager : MonoBehaviour {
         {
             if (Input.GetKeyUp(KeyCode.X))
             {
-                //Skill s = Instantiate(playerSkills[0]) as Skill;
-                //StartCoroutine(s.activate());
+                Skill s = Instantiate(playerSkills[0]) as Skill;
+				s.isActive = true;
+                StartCoroutine(s.activate());
                 //print("player cast skill " + s.name + "!");
-                playerSkills[0].isActive = true;
+                //playerSkills[0].isActive = true;
+				//StartCoroutine(playerSkills[0].activate());
             }
         }
 	}
