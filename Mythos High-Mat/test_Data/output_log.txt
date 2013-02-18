@@ -13,7 +13,7 @@ Platform assembly: C:\Users\Matthew\Documents\GitHub\Mythos-High\Mythos High-Mat
 Loading C:\Users\Matthew\Documents\GitHub\Mythos-High\Mythos High-Mat\test_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
 Platform assembly: C:\Users\Matthew\Documents\GitHub\Mythos-High\Mythos High-Mat\test_Data\Managed\Assembly-UnityScript.dll (this message is harmless)
 Loading C:\Users\Matthew\Documents\GitHub\Mythos-High\Mythos High-Mat\test_Data\Managed\Assembly-UnityScript.dll into Unity Child Domain
-- Completed reload, in  0.101 seconds
+- Completed reload, in  0.046 seconds
 desktop: 1280x1024 75Hz; virtual: 1280x1024 at 0,0
 <RI> Initializing input.
 <RI> Input initialized.
@@ -21,7 +21,70 @@ Platform assembly: C:\Users\Matthew\Documents\GitHub\Mythos-High\Mythos High-Mat
 Platform assembly: C:\Users\Matthew\Documents\GitHub\Mythos-High\Mythos High-Mat\test_Data\Managed\UnityScript.dll (this message is harmless)
 Platform assembly: C:\Users\Matthew\Documents\GitHub\Mythos-High\Mythos High-Mat\test_Data\Managed\UnityScript.Lang.dll (this message is harmless)
 Platform assembly: C:\Users\Matthew\Documents\GitHub\Mythos-High\Mythos High-Mat\test_Data\Managed\Boo.Lang.dll (this message is harmless)
-The referenced script on this Behaviour is missing!
+Unloading 3 Unused Serialized files (Serialized files now loaded: 0 / Dirty serialized files: 0)
+
+Unloading 3 unused Assets to reduce memory usage. Loaded Objects now: 267. Operation took 2.679664 ms.
+Platform assembly: C:\Users\Matthew\Documents\GitHub\Mythos-High\Mythos High-Mat\test_Data\Managed\Boo.Lang.Compiler.dll (this message is harmless)
+Unloading 2 Unused Serialized files (Serialized files now loaded: 0 / Dirty serialized files: 0)
+
+Unloading 3 unused Assets to reduce memory usage. Loaded Objects now: 275. Operation took 2.967362 ms.
+Level 'MaleDialogue' (-1) couldn't be loaded because it has not been added to the build settings.
+To add a level to the build settings use the menu File->Build Settings...
  
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Mono/MonoBehaviour.cpp Line: 1591)
+(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Misc/Player.cpp Line: 260)
+
+Level 'MaleDialogue' (-1) couldn't be loaded because it has not been added to the build settings.
+To add a level to the build settings use the menu File->Build Settings...
+ 
+(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Misc/Player.cpp Line: 260)
+
+Level 'MaleDialogue' (-1) couldn't be loaded because it has not been added to the build settings.
+To add a level to the build settings use the menu File->Build Settings...
+ 
+(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Misc/Player.cpp Line: 260)
+
+Level 'MaleDialogue' (-1) couldn't be loaded because it has not been added to the build settings.
+To add a level to the build settings use the menu File->Build Settings...
+ 
+(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Misc/Player.cpp Line: 260)
+
+Level 'FemaleDialogue' (-1) couldn't be loaded because it has not been added to the build settings.
+To add a level to the build settings use the menu File->Build Settings...
+ 
+(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Misc/Player.cpp Line: 260)
+
+Level 'MaleDialogue' (-1) couldn't be loaded because it has not been added to the build settings.
+To add a level to the build settings use the menu File->Build Settings...
+ 
+(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Misc/Player.cpp Line: 260)
+
+Level 'MaleDialogue' (-1) couldn't be loaded because it has not been added to the build settings.
+To add a level to the build settings use the menu File->Build Settings...
+ 
+(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Misc/Player.cpp Line: 260)
+
+Level 'MaleDialogue' (-1) couldn't be loaded because it has not been added to the build settings.
+To add a level to the build settings use the menu File->Build Settings...
+ 
+(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Misc/Player.cpp Line: 260)
+
+Level 'MaleDialogue' (-1) couldn't be loaded because it has not been added to the build settings.
+To add a level to the build settings use the menu File->Build Settings...
+ 
+(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Misc/Player.cpp Line: 260)
+
+Level 'MaleDialogue' (-1) couldn't be loaded because it has not been added to the build settings.
+To add a level to the build settings use the menu File->Build Settings...
+ 
+(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Misc/Player.cpp Line: 260)
+
+Level 'MaleDialogue' (-1) couldn't be loaded because it has not been added to the build settings.
+To add a level to the build settings use the menu File->Build Settings...
+ 
+(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Misc/Player.cpp Line: 260)
+
+Level 'MaleDialogue' (-1) couldn't be loaded because it has not been added to the build settings.
+To add a level to the build settings use the menu File->Build Settings...
+ 
+(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Misc/Player.cpp Line: 260)
 
