@@ -7,48 +7,21 @@ Direct3D:
     VRAM:     1012 MB (via DXGI)
     Caps:     Shader=30 DepthRT=1 NativeDepth=1 NativeShadow=1 DF16=1 DF24=1 INTZ=1 RAWZ=0 NULL=1 RESZ=1 SlowINTZ=1
 Begin MonoManager ReloadAssembly
-Platform assembly: C:\Users\Matthew\Desktop\Mythos-High-master\Mythos High-Mat\test_Data\Managed\UnityEngine.dll (this message is harmless)
-Loading C:\Users\Matthew\Desktop\Mythos-High-master\Mythos High-Mat\test_Data\Managed\UnityEngine.dll into Unity Child Domain
-Platform assembly: C:\Users\Matthew\Desktop\Mythos-High-master\Mythos High-Mat\test_Data\Managed\Assembly-CSharp.dll (this message is harmless)
-Loading C:\Users\Matthew\Desktop\Mythos-High-master\Mythos High-Mat\test_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
-Platform assembly: C:\Users\Matthew\Desktop\Mythos-High-master\Mythos High-Mat\test_Data\Managed\Assembly-UnityScript.dll (this message is harmless)
-Loading C:\Users\Matthew\Desktop\Mythos-High-master\Mythos High-Mat\test_Data\Managed\Assembly-UnityScript.dll into Unity Child Domain
-- Completed reload, in  0.050 seconds
+Platform assembly: C:\Users\Matthew\Documents\GitHub\Mythos-High\Mythos High-Mat\test_Data\Managed\UnityEngine.dll (this message is harmless)
+Loading C:\Users\Matthew\Documents\GitHub\Mythos-High\Mythos High-Mat\test_Data\Managed\UnityEngine.dll into Unity Child Domain
+Platform assembly: C:\Users\Matthew\Documents\GitHub\Mythos-High\Mythos High-Mat\test_Data\Managed\Assembly-CSharp.dll (this message is harmless)
+Loading C:\Users\Matthew\Documents\GitHub\Mythos-High\Mythos High-Mat\test_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
+Platform assembly: C:\Users\Matthew\Documents\GitHub\Mythos-High\Mythos High-Mat\test_Data\Managed\Assembly-UnityScript.dll (this message is harmless)
+Loading C:\Users\Matthew\Documents\GitHub\Mythos-High\Mythos High-Mat\test_Data\Managed\Assembly-UnityScript.dll into Unity Child Domain
+- Completed reload, in  0.101 seconds
 desktop: 1280x1024 75Hz; virtual: 1280x1024 at 0,0
 <RI> Initializing input.
 <RI> Input initialized.
-Platform assembly: C:\Users\Matthew\Desktop\Mythos-High-master\Mythos High-Mat\test_Data\Managed\System.Xml.dll (this message is harmless)
-Platform assembly: C:\Users\Matthew\Desktop\Mythos-High-master\Mythos High-Mat\test_Data\Managed\UnityScript.dll (this message is harmless)
-Platform assembly: C:\Users\Matthew\Desktop\Mythos-High-master\Mythos High-Mat\test_Data\Managed\UnityScript.Lang.dll (this message is harmless)
-Platform assembly: C:\Users\Matthew\Desktop\Mythos-High-master\Mythos High-Mat\test_Data\Managed\Boo.Lang.dll (this message is harmless)
-Unloading 3 Unused Serialized files (Serialized files now loaded: 0 / Dirty serialized files: 0)
-
-Unloading 3 unused Assets to reduce memory usage. Loaded Objects now: 263. Operation took 2.987529 ms.
-Platform assembly: C:\Users\Matthew\Desktop\Mythos-High-master\Mythos High-Mat\test_Data\Managed\Boo.Lang.Compiler.dll (this message is harmless)
-Unloading 2 Unused Serialized files (Serialized files now loaded: 0 / Dirty serialized files: 0)
-
-Unloading 4 unused Assets to reduce memory usage. Loaded Objects now: 417. Operation took 2.897479 ms.
-Unit Minion added.
+Platform assembly: C:\Users\Matthew\Documents\GitHub\Mythos-High\Mythos High-Mat\test_Data\Managed\System.Xml.dll (this message is harmless)
+Platform assembly: C:\Users\Matthew\Documents\GitHub\Mythos-High\Mythos High-Mat\test_Data\Managed\UnityScript.dll (this message is harmless)
+Platform assembly: C:\Users\Matthew\Documents\GitHub\Mythos-High\Mythos High-Mat\test_Data\Managed\UnityScript.Lang.dll (this message is harmless)
+Platform assembly: C:\Users\Matthew\Documents\GitHub\Mythos-High\Mythos High-Mat\test_Data\Managed\Boo.Lang.dll (this message is harmless)
+The referenced script on this Behaviour is missing!
  
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-CoStart() called.
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Unit EnemyMinion added.
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-CoStart() called.
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-EnemyMinion has died. :(
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Minion has died. :(
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
+(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Mono/MonoBehaviour.cpp Line: 1591)
 

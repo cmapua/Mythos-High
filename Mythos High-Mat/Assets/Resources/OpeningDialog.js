@@ -205,7 +205,7 @@ switch(display.mode) {
 		} else {
 		if (GUI.Button(Rect(Screen.width-84,Screen.height-84,64,64),"Next","arrow"))
 			{ 
-				Application.LoadLevel ("hello");
+				Application.LoadLevel ("GenderChoice");
 			}
 		}
 	break;
