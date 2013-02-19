@@ -1,5 +1,5 @@
-@CustomEditor (DialogueInstance)
-class DialogueInstanceEditor extends Editor {
+@CustomEditor (FemaleDialogue)
+class FemaleDialogueEditor extends Editor {
 
 var style : GUIStyle = new GUIStyle();
 
