@@ -1,0 +1,67 @@
+﻿
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+# On branch master
+# Your branch is ahead of 'origin/master' by 1 commit.
+#
+# Changes to be committed:
+#   (use "git reset HEAD <file>..." to unstage)
+#
+#	modified:   Mythos High-Mat/Library/ScriptAssemblies/Assembly-CSharp-Editor.dll
+#	modified:   Mythos High-Mat/Library/ScriptAssemblies/Assembly-CSharp-Editor.dll.mdb
+#	modified:   Mythos High-Mat/Library/ScriptAssemblies/Assembly-CSharp.dll
+#	modified:   Mythos High-Mat/Library/ScriptAssemblies/Assembly-CSharp.dll.mdb
+#	modified:   Mythos High-Mat/Library/ScriptAssemblies/Assembly-UnityScript-Editor.dll
+#	modified:   Mythos High-Mat/Library/ScriptAssemblies/Assembly-UnityScript-Editor.dll.mdb
+#	modified:   Mythos High-Mat/Library/ScriptAssemblies/Assembly-UnityScript.dll
+#	modified:   Mythos High-Mat/Library/ScriptAssemblies/Assembly-UnityScript.dll.mdb
+#	modified:   Mythos High-Mat/ProjectSettings/EditorBuildSettings.asset
+#	modified:   Mythos High-Mat/test_Data/Managed/Assembly-CSharp.dll
+#	modified:   Mythos High-Mat/test_Data/Managed/Assembly-UnityScript.dll
+#	modified:   Mythos High-Mat/test_Data/PlayerConnectionConfigFile
+#	modified:   Mythos High-Mat/test_Data/level0
+#	modified:   Mythos High-Mat/test_Data/level1
+#	modified:   Mythos High-Mat/test_Data/level2
+#	modified:   Mythos High-Mat/test_Data/level3
+#	modified:   Mythos High-Mat/test_Data/level4
+#	modified:   Mythos High-Mat/test_Data/level5
+#	modified:   Mythos High-Mat/test_Data/level6
+#	modified:   Mythos High-Mat/test_Data/mainData
+#	modified:   Mythos High-Mat/test_Data/output_log.txt
+#	modified:   Mythos High-Mat/test_Data/sharedassets0.assets
+#	modified:   Mythos High-Mat/test_Data/sharedassets1.assets
+#	modified:   Mythos High-Mat/test_Data/sharedassets2.assets
+#	modified:   Mythos High-Mat/test_Data/sharedassets3.assets
+#
+# Untracked files:
+#   (use "git add <file>..." to include in what will be committed)
+#
+#	Mythos High-Mat/Assets/Editor/MaleAphroditeDialogue1Editor.js
+#	Mythos High-Mat/Assets/Resources/MaleAphroditeDialogue1.js
+#	Mythos High-Mat/Assets/Scenes/FemaleAnansiBuddha.unity
+#	Mythos High-Mat/Assets/Scenes/FemaleAphroditeOsiris.unity
+#	Mythos High-Mat/Assets/Scenes/FemaleThorShiva.unity
+#	Mythos High-Mat/Assets/Scenes/MaleAphroditeDialogue1.unity
+#	Mythos High-Mat/Assets/Scenes/MaleSecondQuestionB.unity
+#	Mythos High-Mat/Assets/Scenes/MaleThorShiva.unity
+#	Mythos High-Mat/Assets/Scripts/FemaleScripts/FemaleAnansiBuddha.cs
+#	Mythos High-Mat/Assets/Scripts/MaleScripts/MaleThorShiva.cs
+#	Mythos High-Mat/test_Data/level10
+#	Mythos High-Mat/test_Data/level11
+#	Mythos High-Mat/test_Data/level12
+#	Mythos High-Mat/test_Data/level13
+#	Mythos High-Mat/test_Data/level7
+#	Mythos High-Mat/test_Data/level8
+#	Mythos High-Mat/test_Data/level9
+#	Mythos High-Mat/test_Data/sharedassets10.assets
+#	Mythos High-Mat/test_Data/sharedassets11.assets
+#	Mythos High-Mat/test_Data/sharedassets12.assets
+#	Mythos High-Mat/test_Data/sharedassets13.assets
+#	Mythos High-Mat/test_Data/sharedassets14.assets
+#	Mythos High-Mat/test_Data/sharedassets4.assets
+#	Mythos High-Mat/test_Data/sharedassets5.assets
+#	Mythos High-Mat/test_Data/sharedassets6.assets
+#	Mythos High-Mat/test_Data/sharedassets7.assets
+#	Mythos High-Mat/test_Data/sharedassets8.assets
+#	Mythos High-Mat/test_Data/sharedassets9.assets
+
