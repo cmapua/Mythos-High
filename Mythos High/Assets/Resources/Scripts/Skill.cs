@@ -50,7 +50,7 @@ public class Skill : MonoBehaviour {
 
     public enum skillType
     {
-        instant,    //like BOOM.
+        instant,    //
         aura,       //casts aura around caster
         target,     //requires a target
         summon,     //instantiates summonables
@@ -151,6 +151,11 @@ public class Skill : MonoBehaviour {
                 isActive = false;
                 //destroy();
             }
+			
+			if (type == skillType.aura) {
+				applyEffectsOn(getAffectedUnits());
+				isActive = false;
+			}
         }
     }
 
