@@ -15,10 +15,10 @@ public class Effect
     {
         switch (op)
         {
-            case '0': return prevvalue + intensity;
-            case '1': return prevvalue - intensity;
-            case '2': return prevvalue * intensity;
-            case '3': return prevvalue / intensity;
+            case 0: return prevvalue + intensity;
+            case 1: return prevvalue - intensity;
+            case 2: return prevvalue * intensity;
+            case 3: return prevvalue / intensity;
             default: return prevvalue;
         }
     }
@@ -50,7 +50,7 @@ public class Skill : MonoBehaviour {
 
     public enum skillType
     {
-        instant,    //like BOOM.
+        instant,    //
         aura,       //casts aura around caster
         target,     //requires a target
         summon,     //instantiates summonables
@@ -94,12 +94,16 @@ public class Skill : MonoBehaviour {
     public void applyEffectsOn(Unit target)
     {
         //doesn't work
-        //FieldInfo[] fields = target.GetType().GetFields(flags);
+        FieldInfo[] fields = target.GetType().GetFields(flags);
 
         foreach (Effect e in effects)
         {
+			foreach(FieldInfo f in fields) {
+				if(e.name == f.Name) f.SetValue(target, e.result((float)f.GetValue(target)));
+			}
+			//print ("applying " + e.name + " effect on "+target.name);
             //if (e.name == "HP") //affect HP
-                target.HP = e.result(target.HP);
+                //target.HP *= e.intensity; //= e.result(target.HP);
         }
     }
 
@@ -135,6 +139,7 @@ public class Skill : MonoBehaviour {
                     target = hud.selectedUnit;
                     if (target)
                     {
+						
                         //play animation
                         GameObject obj = Instantiate(skillAnimation, target.transform.position, target.transform.rotation) as GameObject;
                         obj.transform.parent = target.gameObject.transform;
@@ -146,6 +151,11 @@ public class Skill : MonoBehaviour {
                 isActive = false;
                 //destroy();
             }
+			
+			if (type == skillType.aura) {
+				applyEffectsOn(getAffectedUnits());
+				isActive = false;
+			}
         }
     }
 
