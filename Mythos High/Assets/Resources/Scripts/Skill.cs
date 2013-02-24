@@ -93,7 +93,7 @@ public class Skill : MonoBehaviour {
     //
     public void applyEffectsOn(Unit target)
     {
-        //doesn't work
+        //doesn't work -- oh wait it does
         FieldInfo[] fields = target.GetType().GetFields(flags);
 
         foreach (Effect e in effects)

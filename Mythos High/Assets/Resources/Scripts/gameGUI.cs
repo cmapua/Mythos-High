@@ -5,9 +5,9 @@ using System.Collections.Generic;
 public class gameGUI : MonoBehaviour {
 	private UnitManager manager;
 	public Texture2D hpBackIcon, hpIcon, hpEnemyIcon;
-	public float hp_w = 60; 
+	public float hp_w = 70; 
 	public float hp_h = 10;
-	public float hp_yOffset = 120;
+	public float hp_yOffset = 190;
 	private static gameGUI instance;
 	public bool dialogue = true;
 

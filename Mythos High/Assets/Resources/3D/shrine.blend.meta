@@ -10,6 +10,21 @@ ModelImporter:
     100008: Plane_003
     100010: //RootNode
     100012: Cube_001
+    100014: Armature
+    100016: Bone_001
+    100018: Bone_002
+    100020: Bone_003
+    100022: Bone_L_001
+    100024: Bone_R_001
+    100026: root
+    100028: beam
+    100030: beam2
+    100032: crest1
+    100034: crest2
+    100036: pillar_L
+    100038: pillar_R
+    100040: root_empty
+    100042: table
     400000: Cube
     400002: Plane
     400004: Plane_001
@@ -17,6 +32,21 @@ ModelImporter:
     400008: Plane_003
     400010: //RootNode
     400012: Cube_001
+    400014: Armature
+    400016: Bone_001
+    400018: Bone_002
+    400020: Bone_003
+    400022: Bone_L_001
+    400024: Bone_R_001
+    400026: root
+    400028: beam
+    400030: beam2
+    400032: crest1
+    400034: crest2
+    400036: pillar_L
+    400038: pillar_R
+    400040: root_empty
+    400042: table
     2300000: Cube
     2300002: Plane
     2300004: Plane_001

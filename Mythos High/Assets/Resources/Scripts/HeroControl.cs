@@ -77,8 +77,8 @@ public class HeroControl : SpriteControl {
 	
 	void chargeAt(Unit u) {
 		targetUnit = u;
-		target = targetUnit.transform;
-		print (targetUnit.name);
+		target = u.transform;
+		print ("Charging at " + targetUnit.name);
 		if(u != null) {
 			if(currentState != heroState.attacking || currentState != heroState.chasing){
 				if(currentState == heroState.chasing)
