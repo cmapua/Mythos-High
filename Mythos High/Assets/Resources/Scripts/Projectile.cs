@@ -20,16 +20,22 @@ public class Projectile : MonoBehaviour {
 		myTransform = transform;
 		projectileSprite = GetComponent<OTSprite>();
 		projectileSprite.onCollision = OnCollision;
-		if(target != null)
-			trajectory = (target.sc.hitVector.position - myTransform.position).normalized;
-		else {
-			if(gameObject.layer == 8)
-				trajectory = Vector3.right;
-			if(gameObject.layer == 9) {
-				trajectory = -Vector3.right;
-				projectileSprite.flipHorizontal = true;
-			}
-		}
+        if (target != null)
+        {
+            if (target.isSprite)
+                trajectory = (target.sc.hitVector.position - myTransform.position).normalized;
+            else trajectory = (target.getUnitTransform().position - myTransform.position).normalized;
+        }
+        else
+        {
+            if (gameObject.layer == 8)
+                trajectory = Vector3.right;
+            if (gameObject.layer == 9)
+            {
+                trajectory = -Vector3.right;
+                projectileSprite.flipHorizontal = true;
+            }
+        }
 	}
 	
 	public void OnCollision(OTObject owner) {

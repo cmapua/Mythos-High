@@ -25,6 +25,13 @@ ModelImporter:
     100038: pillar_R
     100040: root_empty
     100042: table
+    100044: arch_thing
+    100046: shield
+    100048: table_001
+    100050: table_002
+    100052: table_003
+    100054: table_004
+    100056: table_005
     400000: Cube
     400002: Plane
     400004: Plane_001
@@ -47,6 +54,13 @@ ModelImporter:
     400038: pillar_R
     400040: root_empty
     400042: table
+    400044: arch_thing
+    400046: shield
+    400048: table_001
+    400050: table_002
+    400052: table_003
+    400054: table_004
+    400056: table_005
     2300000: Cube
     2300002: Plane
     2300004: Plane_001
@@ -54,6 +68,17 @@ ModelImporter:
     2300008: Plane_003
     2300010: Cube_001
     2300012: //RootNode
+    2300014: arch_thing
+    2300016: beam
+    2300018: pillar_L
+    2300020: pillar_R
+    2300022: shield
+    2300024: table
+    2300026: table_001
+    2300028: table_002
+    2300030: table_003
+    2300032: table_004
+    2300034: table_005
     3300000: Cube
     3300002: Plane
     3300004: Plane_001
@@ -61,12 +86,46 @@ ModelImporter:
     3300008: Plane_003
     3300010: Cube_001
     3300012: //RootNode
+    3300014: arch_thing
+    3300016: beam
+    3300018: pillar_L
+    3300020: pillar_R
+    3300022: shield
+    3300024: table
+    3300026: table_001
+    3300028: table_002
+    3300030: table_003
+    3300032: table_004
+    3300034: table_005
     4300000: Cube
     4300002: Plane_001
     4300004: Plane_002
     4300006: Plane_003
     4300008: Plane
     4300010: Cube_001
+    4300012: pillar_L
+    4300014: pillar_R
+    4300016: beam
+    4300018: arch_thing
+    4300020: shield
+    4300022: table
+    4300024: table_005
+    4300026: table_004
+    4300028: table_003
+    4300030: table_002
+    4300032: table_001
+    6400000: arch_thing
+    6400002: beam
+    6400004: pillar_L
+    6400006: pillar_R
+    6400008: shield
+    6400010: //RootNode
+    6400012: table
+    6400014: table_001
+    6400016: table_002
+    6400018: table_003
+    6400020: table_004
+    6400022: table_005
     7400000: Default Take
     9500000: //RootNode
   materials:
@@ -87,9 +146,9 @@ ModelImporter:
     lODScreenPercentages: []
     globalScale: 100
     meshCompression: 0
-    addColliders: 0
+    addColliders: 1
     swapUVChannels: 0
-    generateSecondaryUV: 1
+    generateSecondaryUV: 0
     useFileUnits: 1
     optimizeMeshForGPU: 1
     secondaryUVAngleDistortion: 8

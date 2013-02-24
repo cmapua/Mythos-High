@@ -197,8 +197,12 @@ public class faithHud : MonoBehaviour {
         }
         if (toggleUnitSelection)
         {
-            if(selectedUnit)
-                cam.target = selectedUnit.sc.sprite.transform;
+            if (selectedUnit)
+            {
+                if (selectedUnit.isSprite)
+                    cam.target = selectedUnit.sc.sprite.transform;
+                else cam.target = selectedUnit.getUnitTransform();
+            }
             else cam.target = cam.defaultTarget;
             if (Input.GetKeyUp(KeyCode.UpArrow)) mover += unitYOffset;
             if (Input.GetKeyUp(KeyCode.DownArrow)) mover += -unitYOffset;

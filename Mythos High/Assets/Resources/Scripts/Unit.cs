@@ -8,7 +8,8 @@ public class Unit : MonoBehaviour {
 	private int layer;
 	private Transform unitTransform; //cached
 	public SpriteControl sc;
-	public bool isStatic = false, isHero = false;
+	public bool isStatic = false, isHero = false, isSprite = true;
+    public ShrineRigidBody deathAnimation;
 	//public string name;
 
 	//put stats whatevs here
@@ -18,7 +19,8 @@ public class Unit : MonoBehaviour {
 	void Awake() {
 		manager = UnitManager.getInstance();
 		unitTransform = transform;
-		sc = GetComponent<SpriteControl>();
+        if (isSprite)
+            sc = GetComponent<SpriteControl>();
 	}
 	
 	// Use this for initialization
@@ -45,6 +47,10 @@ public class Unit : MonoBehaviour {
 	
 	void OnDestroy() {
 		//print (gameObject.name + " has died. :(");
+        if (!isSprite)
+        {
+            Instantiate(deathAnimation, transform.position, transform.rotation);
+        }
 		manager.removeUnit(this);
 	}
 	

@@ -96,7 +96,7 @@ public class HeroControl : SpriteControl {
 	bool beingAttacked() {
 		if(unit.getUnitManager().getYourUnits().Count > 0) {
 			foreach(Unit u in unit.getUnitManager().getYourUnits()) {
-				if(u.getSpriteControl().getTargetUnit() != null && u.getSpriteControl().getTargetUnit().name == gameObject.name) {
+				if(u.getSpriteControl() != null && u.getSpriteControl().getTargetUnit() != null && u.getSpriteControl().getTargetUnit().name == gameObject.name) {
 					targetUnit = u;
 					target = targetUnit.transform;
 					return true;

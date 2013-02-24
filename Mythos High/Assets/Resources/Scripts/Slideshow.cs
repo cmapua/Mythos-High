@@ -14,8 +14,8 @@ public class Slideshow : MonoBehaviour {
 	
 	void OnGUI() {
 		if(isEnabled) {
-            var grpWidth = 1024;
-            var grpHeight = 600;
+            float grpWidth = Screen.width * 0.6f; //1024
+            float grpHeight = Screen.height * 0.6f; //600 
             GUI.BeginGroup(new Rect(Screen.width/2 - grpWidth/2, Screen.height/2 - grpHeight/2, grpWidth, grpHeight));
 
             //display slides
