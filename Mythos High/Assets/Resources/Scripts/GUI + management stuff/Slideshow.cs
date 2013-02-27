@@ -19,7 +19,7 @@ public class Slideshow : MonoBehaviour {
             GUI.BeginGroup(new Rect(Screen.width/2 - grpWidth/2, Screen.height/2 - grpHeight/2, grpWidth, grpHeight));
 
             //display slides
-            GUI.DrawTexture(new Rect(0, 0, 1024, 512), slides[currSlide]);
+            GUI.DrawTexture(new Rect(0, 0, 768, 512), slides[currSlide]);
 
 			if(GUI.Button(new Rect(grpWidth-100, grpHeight-35, 100, 35), "I get it, on with the battle!")) {
 				//Application.LoadLevel("hello3");

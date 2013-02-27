@@ -14,7 +14,9 @@ public class faithHud : MonoBehaviour {
 	private bool hideHelp = false;
 	private bool dialogue = true;
 	private Unit playerCastle, aiCastle, playerHero;
-
+	
+	public GUIStyle style;
+	
 	private static faithHud instance;
 	private static UnitManager manager;
     private SkillManager skillManager;
@@ -316,14 +318,14 @@ public class faithHud : MonoBehaviour {
 
     void showSkillBar()
     {
-        float grpWidth = 256, grpHeight = 128, xOffset = 74;
-        int iconSize = 64;
+        float grpWidth = 246, grpHeight = 98;
+        int iconSize = 58;
         GUI.BeginGroup(new Rect(Screen.width-grpWidth-10, Screen.height-grpHeight-10, grpWidth, grpHeight));
         GUI.DrawTexture(new Rect(0, 0, grpWidth, grpHeight), skillWindow);
         for(int i = 0; i < skillManager.playerSkills.Length; i++)
         {
             Skill currSkill = skillManager.playerSkills[i];
-            if (GUI.Button(new Rect(xOffset * i + 10, 30, iconSize, iconSize), currSkill.icon))
+            if (GUI.Button(new Rect(iconSize * i + 3, 3, iconSize, iconSize), currSkill.icon, style))
             {
                 if (currSkill.type == Skill.skillType.aura && currSkill.isActive == false)
                 {
