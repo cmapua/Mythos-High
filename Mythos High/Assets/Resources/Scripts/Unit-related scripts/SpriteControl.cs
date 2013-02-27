@@ -7,6 +7,7 @@ public class SpriteControl : MonoBehaviour {
 	public OTAnimation anim;
 	public OTAnimatingSprite sprite;
 	public int unitTypeNumber;
+	private int levelLength;
 	protected string unitType;
 	protected bool isArcher = false, isMage = false, isSwordsman = false, isCastle = false;
 	protected bool wait = false, isAttacking = false, isCasting = false, playAnimation = false;
@@ -60,6 +61,8 @@ public class SpriteControl : MonoBehaviour {
 	}
 	
 	void Start() {
+		levelLength = unit.getUnitManager().getLevelLength();
+		
 	}
 	
 	public void hpRegen(){
@@ -126,12 +129,12 @@ public class SpriteControl : MonoBehaviour {
 
                 else if (Input.GetKey(KeyCode.LeftArrow))
                 {
-                    if (sprite.transform.position.x > -1050)
+                    if (sprite.transform.position.x > -(levelLength))
                         move(-Vector3.right, unitType);
                 }
                 else if (Input.GetKey(KeyCode.RightArrow))
                 {
-                    if (sprite.transform.position.x < 1050)
+                    if (sprite.transform.position.x < levelLength)
                         move(Vector3.right, unitType);
                 }
                 else if (Input.GetKey(KeyCode.UpArrow))

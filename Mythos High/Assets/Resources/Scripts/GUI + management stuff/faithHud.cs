@@ -6,6 +6,7 @@ public class faithHud : MonoBehaviour {
 	
 	private int maxFaith = 150;
 	public int shrineLevel = 1;
+	public int stageLevel = 0;
 	public float currentFaith = 0;
     public Texture2D skillWindow;
 	private float resourceGatherRate = .55f;
