@@ -30,7 +30,8 @@ public class Unit : MonoBehaviour {
 		swordsman,
 		archer,
 		mage,
-		shrine
+		shrine,
+        summon
 	}
 	public type unit_type;
 	

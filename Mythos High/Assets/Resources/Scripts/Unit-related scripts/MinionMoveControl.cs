@@ -79,6 +79,14 @@ public class MinionMoveControl : SpriteControl {
 				isAttacking = false;
 				playAnimation = false;
 			}
+            //summons
+            else if (unit_type == Unit.type.summon && isAttacking && sprite.CurrentFrame().index  == 1)
+            {
+                targetUnit.dealDamage(unit.damage / 10);
+
+                isAttacking = false;
+                playAnimation = false;
+            }
 			
 			//if it has a target within range, play the attack animation
 			if(playAnimation) {
@@ -91,6 +99,10 @@ public class MinionMoveControl : SpriteControl {
 				else if(unit_type == Unit.type.archer) {
 					sprite.PlayLoop("archer-attack");
 				}
+                else if (unit_type == Unit.type.summon)
+                {
+                    sprite.PlayLoop("attack");
+                }
 				isAttacking = true;
 			}
 			

@@ -178,6 +178,7 @@ public class SpriteControl : MonoBehaviour {
 			case Unit.type.archer: sprite.PlayLoop("archer-run"); break;
 			case Unit.type.swordsman: sprite.PlayLoop("swordie-run"); break;
 			case Unit.type.mage: sprite.PlayLoop("mage-run"); break;
+            case Unit.type.summon: sprite.PlayLoop("run"); break;
 			default: break;
 		}
 	}
