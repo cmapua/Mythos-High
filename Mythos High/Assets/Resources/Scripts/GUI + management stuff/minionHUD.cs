@@ -7,6 +7,7 @@ public class minionHUD : MonoBehaviour {
 	private static faithHud faith;
 	private int archerCost=35, swordCost=20, mageCost=50, shrineLevel = 1;
 	public float swordOffset, archerOffset, mageOffset, shrineOffset;
+	public Texture2D window;
 	
 	void Start(){
 		mCool = minionCooldown.getInstance();

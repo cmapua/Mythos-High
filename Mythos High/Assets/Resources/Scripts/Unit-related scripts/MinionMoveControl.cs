@@ -3,7 +3,7 @@ using System.Collections;
 
 public class MinionMoveControl : SpriteControl {
 	//public int unitTypeNumber;
-	public int maxDistance=1900;
+	private int maxDistance;
 	public bool newType = false;
 	public OTObject projectile;
 
@@ -16,6 +16,8 @@ public class MinionMoveControl : SpriteControl {
 	}
 
 	void Start() {
+		maxDistance = unit.getUnitManager().getLevelLength();
+		
 		if(!hitVector) hitVector = transform;
 		if(newType) {
 			anim = gameObject.GetComponentInChildren<OTAnimation>(); //transform.Find("animSprite").GetComponent<OTAnimation>();

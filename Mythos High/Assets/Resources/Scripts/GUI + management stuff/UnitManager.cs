@@ -7,6 +7,7 @@ public class UnitManager : MonoBehaviour {
 	private List<Unit> theirUnits;
 	[HideInInspector]
 	public const int yourUnitLayer = 8, theirUnitLayer = 9;
+	public int levelLength = 1050;
     private bool togglePause = true;
 
 	//singleton design pattern
@@ -24,7 +25,11 @@ public class UnitManager : MonoBehaviour {
 		yourUnits = new List<Unit>();
 		theirUnits = new List<Unit>();
 	}
-
+	
+	public int getLevelLength(){
+		return levelLength;
+	}
+	
 	public void addUnit(Unit u) {
 		switch(u.getLayer()) {
 			case yourUnitLayer:
