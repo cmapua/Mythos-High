@@ -3,6 +3,8 @@ using System.Collections;
 
 public class HeroControl : SpriteControl {
 	int unitCountDiff;
+	
+	[HideInInspector]
 	public Transform fallbackPoint;
 	
 	// Use this for initialization
@@ -116,15 +118,15 @@ public class HeroControl : SpriteControl {
 			switch(currentState) {
 			case heroState.attacking:
 				if(isAttacking) {
-					print ("not yet...");
+					//print ("not yet...");
 					if (sprite.CurrentFrame().index  == 5){
-						print ("DAMAGE HIM!!!");
+						//print ("DAMAGE HIM!!!");
 						targetUnit.HP -= unit.damage/10;
 						playAnimation = false;
 						isAttacking = false;
 					}
 				}
-				if(Mathf.Abs(target.position.x- transform.position.x) <= range) {
+				if(Mathf.Abs(target.position.x- transform.position.x) <= unit.range) {
 					playAnimation = true;
 				} else {
 					playAnimation = false;
@@ -138,8 +140,8 @@ public class HeroControl : SpriteControl {
 				break;
 				
 			case heroState.chasing:
-				move((target.position - transform.position).normalized, unitType);
-				if(Mathf.Abs(target.position.x- transform.position.x) <= range) {
+				move((target.position - transform.position).normalized);
+				if(Mathf.Abs(target.position.x- transform.position.x) <= unit.range) {
 					currentState = heroState.attacking;
 				} else {
 					sprite.PlayLoop ("hero-run");
@@ -159,13 +161,13 @@ public class HeroControl : SpriteControl {
 					sprite.PlayLoop("hero-attack");
 					isAttacking = true;
 				}
-				if(Mathf.Abs(target.position.x- transform.position.x) <= range) {
+				if(Mathf.Abs(target.position.x- transform.position.x) <= unit.range) {
 					playAnimation = true;
 				} else currentState = heroState.chasing;
 				break;
 				
 			case heroState.fallingBack:
-				move ((fallbackPoint.position - transform.position).normalized, unitType);
+				move ((fallbackPoint.position - transform.position).normalized);
 				if(Mathf.Abs(fallbackPoint.position.x - transform.position.x) <= 0.1) {
 					currentState = heroState.standby;
 				}

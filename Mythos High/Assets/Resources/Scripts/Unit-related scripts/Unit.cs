@@ -8,15 +8,31 @@ public class Unit : MonoBehaviour {
 	//
 	private int layer;
 	private Transform unitTransform; //cached
+	
+	[HideInInspector]
 	public SpriteControl sc;
+	
 	public bool isStatic = false, isHero = false, isSprite = true;
     public ShrineRigidBody deathAnimation;
 	//public string name;
 
 	//put stats whatevs here
-	public float HP, maxHP, def = 10f;
-	public float damage;
-    public List<Effect> statusEffects;
+	public float HP = 100f, maxHP = 100f, HPRegenRate = 0.01f, def = 10f;
+	public float damage = 10f;
+	public float moveSpeed = 100f, range = 80f;
+    
+	[HideInInspector]
+	public List<Effect> statusEffects;
+	
+	public enum type {
+		hero,
+		enemyHero,
+		swordsman,
+		archer,
+		mage,
+		shrine
+	}
+	public type unit_type;
 	
 	void Awake() {
 		manager = UnitManager.getInstance();
@@ -27,17 +43,8 @@ public class Unit : MonoBehaviour {
 	
 	// Use this for initialization
 	void Start () {
-		//name = gameObject.name;
 		layer = gameObject.layer;
 		manager.addUnit(this);
-		//print ("Unit "+gameObject.name+" added.");
-	}
-	
-	// Update is called once per frame
-	void Update () {
-        if (Time.deltaTime > 0)
-        {
-        }
 	}
 
     public void dealDamage(float atk)

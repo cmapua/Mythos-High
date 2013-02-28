@@ -13,7 +13,7 @@ public class faithHud : MonoBehaviour {
 	protected int xOffset = 0, yOffset = 0;
 	private bool hideHelp = false;
 	private bool dialogue = true;
-	private Unit playerCastle, aiCastle, playerHero;
+	private Unit playerShrine, enemyShrine, playerHero;
 	
 	public GUIStyle style;
 	
@@ -84,57 +84,57 @@ public class faithHud : MonoBehaviour {
 
 	protected void searchCastle() {
 		foreach(Unit u in manager.getTheirUnits()) {
-			if(u.name=="enemyShrine"){
-				aiCastle=u;
-				//print("Enemy Castle Found!");
+			if(u.unit_type == Unit.type.shrine){
+				enemyShrine=u;
+				break;
 			}
 		}
 		foreach(Unit u in manager.getYourUnits()) {
-			if(u.name=="playerShrine"){
-				playerCastle=u;
-
-				//print("Player Castle Found!");
+			if(u.unit_type == Unit.type.shrine){
+				playerShrine=u;
+				break;
 			}
-			if(u.name=="Hero"){
+		}
+		foreach(Unit u in manager.getYourUnits()) {
+			if(u.unit_type == Unit.type.hero){
 				playerHero=u;
-
-				//print("Player Hero Found!");
+				break;
 			}
 		}
 	}
 
 	protected int checkVictory(){
-		if(aiCastle == null || playerCastle == null || playerHero == null){
+		if(enemyShrine == null || playerShrine == null || playerHero == null){
 			searchCastle();
 		}
-		else if(aiCastle.HP <= 0){
+		else if(enemyShrine.HP <= 0){
 			return 1;
 		}
-		else if(playerCastle.HP <= 0){
+		else if(playerShrine.HP <= 0){
 			return 2;
 		}else if (playerHero.HP <= 0){
 			return 2;
 		}
-		//AI Shrine
-		if(aiCastle.HP<= aiCastle.maxHP*.25){
-			aiCastle.getSpriteControl().sprite.PlayLoop("quarter-health");
-		}
-		else if(aiCastle.HP<= aiCastle.maxHP*.5){
-			aiCastle.getSpriteControl().sprite.PlayLoop("half-health");
-		}
-		else if(aiCastle.HP<= aiCastle.maxHP*.75){
-			aiCastle.getSpriteControl().sprite.PlayLoop("3/4-health");
-		}
-		//PLAYER Shrine
-		if(playerCastle.HP<= playerCastle.maxHP*.25){
-			playerCastle.getSpriteControl().sprite.PlayLoop("quarter-health");
-		}
-		else if(playerCastle.HP<= playerCastle.maxHP*.5){
-			playerCastle.getSpriteControl().sprite.PlayLoop("half-health");
-		}
-		else if(playerCastle.HP<= playerCastle.maxHP*.75){
-			playerCastle.getSpriteControl().sprite.PlayLoop("3/4-health");
-		}
+//		//AI Shrine
+//		if(aiCastle.HP<= aiCastle.maxHP*.25){
+//			aiCastle.getSpriteControl().getSprite().PlayLoop("quarter-health");
+//		}
+//		else if(aiCastle.HP<= aiCastle.maxHP*.5){
+//			aiCastle.getSpriteControl().getSprite().PlayLoop("half-health");
+//		}
+//		else if(aiCastle.HP<= aiCastle.maxHP*.75){
+//			aiCastle.getSpriteControl().getSprite().PlayLoop("3/4-health");
+//		}
+//		//PLAYER Shrine
+//		if(playerCastle.HP<= playerCastle.maxHP*.25){
+//			playerCastle.getSpriteControl().getSprite().PlayLoop("quarter-health");
+//		}
+//		else if(playerCastle.HP<= playerCastle.maxHP*.5){
+//			playerCastle.getSpriteControl().getSprite().PlayLoop("half-health");
+//		}
+//		else if(playerCastle.HP<= playerCastle.maxHP*.75){
+//			playerCastle.getSpriteControl().getSprite().PlayLoop("3/4-health");
+//		}
 		return 0;
 	}
 
@@ -163,11 +163,7 @@ public class faithHud : MonoBehaviour {
 	
 	void OnGUI() {
 		if(!dialogue){
-            if (toggleUnitSelection)
-            {
-                displayUnitSelectionWindow();
-                //print(">>>>>>>>> display selection window called");
-            }
+            if (toggleUnitSelection) displayUnitSelectionWindow();
 
 			displayResource();
             showSkillBar();
@@ -213,7 +209,7 @@ public class faithHud : MonoBehaviour {
             if (selectedUnit)
             {
                 if (selectedUnit.isSprite)
-                    cam.target = selectedUnit.sc.sprite.transform;
+                    cam.target = selectedUnit.sc.getSprite().transform;
                 else cam.target = selectedUnit.getUnitTransform();
             }
             else cam.target = cam.defaultTarget;
@@ -266,13 +262,11 @@ public class faithHud : MonoBehaviour {
 				Application.LoadLevel("hello5");
 
 		}
-
 	}
 	
 	IEnumerator resourceIncrement(){
-		if(currentFaith<=maxFaith){
-			currentFaith++;
-		}
+		if(currentFaith<maxFaith) currentFaith++;
+		if(currentFaith > maxFaith) currentFaith = maxFaith;
 		yield return new WaitForSeconds(resourceGatherRate);
 	}
 

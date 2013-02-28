@@ -2,9 +2,7 @@ using UnityEngine;
 using System.Collections;
 
 public class MinionMoveControl : SpriteControl {
-	//public int unitTypeNumber;
 	private int maxDistance;
-	public bool newType = false;
 	public OTObject projectile;
 
 	public override bool canSearch(){
@@ -16,14 +14,11 @@ public class MinionMoveControl : SpriteControl {
 	}
 
 	void Start() {
+		base.Start();
 		maxDistance = unit.getUnitManager().getLevelLength();
 		
 		if(!hitVector) hitVector = transform;
-		if(newType) {
-			anim = gameObject.GetComponentInChildren<OTAnimation>(); //transform.Find("animSprite").GetComponent<OTAnimation>();
-			sprite = gameObject.GetComponentInChildren<OTAnimatingSprite>(); //transform.Find("animSprite").GetComponent<OTAnimatingSprite>();
-		}
-
+		
 		if(target)
 			targetUnit = target.gameObject.GetComponent<Unit>();
 		
@@ -31,7 +26,6 @@ public class MinionMoveControl : SpriteControl {
 	}
 	
 	protected virtual IEnumerator CoStart() {
-		//print (gameObject.name + "'s CoStart() called.");
 		while(true) {
 			yield return StartCoroutine(CoUpdate());
 		}
@@ -43,7 +37,6 @@ public class MinionMoveControl : SpriteControl {
 			if(newTarget) {
 				target = newTarget.transform;
 				targetUnit = newTarget;
-				//print (gameObject.name + " found a target. --> " + newTarget.name);
 			}
 		}
 		yield return new WaitForSeconds(0.2f);
@@ -52,16 +45,8 @@ public class MinionMoveControl : SpriteControl {
 	// Update is called once per frame
 	void Update () {
 		if(Time.timeScale !=0){	//deltaTime or TimeScale?
-			//kill v2's
-			if( newType && Input.GetKeyUp(KeyCode.K) ) {
-				DestroyObject(gameObject);
-			}
-			
-			if (isCastle) {
-				playAnimation = true;
-			}
 			//if at last frame of attack animation for archer, stop playing and deal damage
-			else if(isArcher && isAttacking && sprite.CurrentFrame().index  == 13) {
+			if(unit_type == Unit.type.archer && isAttacking && sprite.CurrentFrame().index  == 13) {
 				frames++;
 				if(frames == 5) {
 					GameObject arrow = OT.CreateObject("projectile");
@@ -77,7 +62,7 @@ public class MinionMoveControl : SpriteControl {
 				playAnimation = false;
 			}
 			//if at last frame of attack animation for swordsman, stop playing and deal damage
-			else if(isSwordsman && isAttacking && sprite.CurrentFrame().index  == 32) {
+			else if(unit_type == Unit.type.swordsman && isAttacking && sprite.CurrentFrame().index  == 32) {
 				//targetUnit.HP -= unit.damage/5;
                 targetUnit.dealDamage(unit.damage / 5);
 	
@@ -85,7 +70,7 @@ public class MinionMoveControl : SpriteControl {
 				playAnimation = false;
 			}
 			//if at last frame of attack animation for mage, stop playing and deal damage
-			else if(isMage && isAttacking && sprite.CurrentFrame().index  == 53) {
+			else if(unit_type == Unit.type.mage && isAttacking && sprite.CurrentFrame().index  == 53) {
 				//targetUnit.HP -= unit.damage/5;
                 targetUnit.dealDamage(unit.damage / 5);
 	
@@ -95,13 +80,13 @@ public class MinionMoveControl : SpriteControl {
 			
 			//if it has a target within range, play the attack animation
 			if(playAnimation) {
-				if(isMage) {
+				if(unit_type == Unit.type.mage) {
 					sprite.PlayLoop("mage-attack");
 				}
-				else if(isSwordsman) {
+				else if(unit_type == Unit.type.swordsman) {
 					sprite.PlayLoop("swordie-attack");
 				}
-				else if(isArcher) {
+				else if(unit_type == Unit.type.archer) {
 					sprite.PlayLoop("archer-attack");
 				}
 				isAttacking = true;
@@ -112,27 +97,27 @@ public class MinionMoveControl : SpriteControl {
 				if(!target) {
 					if(unit.getLayer() == 8) {
 						if(sprite.transform.position.x<maxDistance)
-							move(Vector3.right, unitType);
+							move(Vector3.right);
 					}
 					else {
 						if(sprite.transform.position.x>-(maxDistance))
-							move (-Vector3.right, unitType);
+							move (-Vector3.right);
 					}
 				}
 				// if it has a target, either start playing attack animation (if close enough) or move closer
 				else {
-					if(Mathf.Abs(target.position.x- transform.position.x) <= range) { //within range
+					if(Mathf.Abs(target.position.x- transform.position.x) <= unit.range) { //within range
 						//attack
 						playAnimation = true;
 					}
 					else {
 						if(unit.getLayer() == 8) {
 							if(sprite.transform.position.x<maxDistance)
-								move((target.position - transform.position).normalized, unitType); //move closer
+								move((target.position - transform.position).normalized); //move closer
 						}
 						else {
 							if(sprite.transform.position.x>-(maxDistance))
-								move((target.position - transform.position).normalized, unitType); //move closer
+								move((target.position - transform.position).normalized); //move closer
 						}
 					}
 				}
