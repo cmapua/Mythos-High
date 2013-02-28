@@ -39,7 +39,7 @@ public class Skill : MonoBehaviour {
     public Effect[] effects;
     public LayerMask mask;
 
-    private UnitManager manager;
+    //private UnitManager manager;
     private faithHud hud;
     private List<Unit> affectedUnitsCache;
 
@@ -48,7 +48,7 @@ public class Skill : MonoBehaviour {
 
     void Awake()
     {
-        manager = UnitManager.getInstance();
+        //manager = UnitManager.getInstance();
         hud = faithHud.getInstance();
         //Invoke("destroy", duration);
     }

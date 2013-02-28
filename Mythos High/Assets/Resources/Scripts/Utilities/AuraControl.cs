@@ -3,7 +3,7 @@ using System.Collections;
 
 public class AuraControl : MonoBehaviour {
     public Projector projector;
-    bool playBirthAnimation = true;
+    //bool playBirthAnimation = true;
 	// Use this for initialization
 	void Start () {
         //StartCoroutine(birthAnimation());

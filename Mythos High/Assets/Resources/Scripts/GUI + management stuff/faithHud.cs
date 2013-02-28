@@ -8,7 +8,7 @@ public class faithHud : MonoBehaviour {
 	public int shrineLevel = 1;
 	public int stageLevel = 0;
 	public float currentFaith = 0;
-    public Texture2D skillWindow;
+    
 	private float resourceGatherRate = .55f;
 	protected int xOffset = 0, yOffset = 0;
 	private bool hideHelp = false;
@@ -21,11 +21,15 @@ public class faithHud : MonoBehaviour {
 	private static UnitManager manager;
     private SkillManager skillManager;
 
-    //textures for HUD
+    //textures for faith meter
     public Texture2D helpBoxBG, shieldIcon, 
         lv1bar, lv2bar, lv3bar, lv4bar, 
-        lv1barBack, lv2barBack, lv3barBack, lv4barBack;
-
+        lv1barBack, lv2barBack, lv3barBack, lv4barBack, 
+	//textures for SkillShelf
+	skillWindow,
+	//textures for MinionShelf
+	minionWindow, swordieIcon, mageIcon, archerIcon;
+	
     //for unit selection window
     public float unitYOffset = 30;
     [HideInInspector]
@@ -167,6 +171,7 @@ public class faithHud : MonoBehaviour {
 
 			displayResource();
             showSkillBar();
+			showMinionShelf();
 			//displayHelp();
 			switch(checkVictory()){
 				case 0:
@@ -349,12 +354,33 @@ public class faithHud : MonoBehaviour {
                     }
                 }
             }
-            GUI.Label(new Rect(xOffset * i + 10, iconSize + 30, iconSize, 30), skillManager.playerSkills[i].skillName);
+            GUI.Label(new Rect(iconSize * i + 3, iconSize + 5, iconSize, 30), skillManager.playerSkills[i].skillName);
         }
 
         GUI.EndGroup();
     }
-
+	
+	void showMinionShelf() {
+		float grpWidth = 246, grpHeight = 98;
+		int iconSize = 64;
+		GUI.BeginGroup(new Rect(10, Screen.height - grpHeight - 10, grpWidth, grpHeight));
+		
+		GUI.DrawTexture(new Rect(0,0,grpWidth,grpHeight), minionWindow);
+		
+		if(GUI.Button(new Rect(0 * iconSize + 3, 3, iconSize, iconSize), swordieIcon, style)) {
+			
+		}
+		if(GUI.Button(new Rect(1 * iconSize + 3, 3, iconSize, iconSize), archerIcon, style)) {
+			
+		}
+		if(GUI.Button(new Rect(2 * iconSize + 3, 3, iconSize, iconSize), mageIcon, style)) {
+			
+		}
+		
+		GUI.EndGroup();
+	}
+	
+	
 	public void levelShrine(){
 		shrineLevel++;
 		if(shrineLevel==2){

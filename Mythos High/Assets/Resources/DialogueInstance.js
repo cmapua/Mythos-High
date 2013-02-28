@@ -4,9 +4,13 @@
 
 var dialogueSkin : GUISkin;
 var startOn : int = 0;
+var boy: boolean = false;
+var girl: boolean = false;
+
 var defaultImg : Texture2D;
 var defaultAudio : AudioClip;
 var dialogue : DialogueEntry[] = [new DialogueEntry()];
+var PPref: Component;
 private var display : DialogueEntry = new DialogueEntry();
 private var waitTime : float = 0.2;
 private var lineCount : int = 0;
@@ -55,8 +59,9 @@ class DialogueEntry {
 		align = 0;
 		exit = new DialogueChoice("Exit");
 		mode = 0;
-	}
+	}	
 }
+
 class DialogueChoice {
 	var shortText : String;
 	var next : int;
@@ -96,6 +101,19 @@ function OnDisable () {
 }
 
 function Update () {
+
+	if(boy){
+		PPref = GameObject.Find("GameObject").GetComponent("PlayerPref");
+		PPref.setName("Finn");
+		PPref.setGender(0);
+		boy = false;
+	}
+	else if (girl){
+		PPref = GameObject.Find("GameObject").GetComponent("PlayerPref");
+		PPref.setName("Fionna");
+		PPref.setGender(1);
+		girl = false;
+	}
 	var text = parsedText[lineCount];
 	var chars = (Time.time-timeStart)*textSpeed;
 	if (chars<text.length) text = text.Substring(0,chars);
@@ -158,6 +176,15 @@ if (curContent) {
 }
 
 function DoNextButton () {
+	if(display.script == "boy"){
+		boy = true;
+		display.script = "";
+	}
+	if(display.script == "girl"){
+		girl = true;
+		display.script = "";
+	}
+
 	switch(display.mode) {
 	case 0:
 	if (lineCount<parsedText.length-1) {
@@ -184,7 +211,7 @@ function DoNextButton () {
 		} else {
 		if (GUI.Button(Rect(Screen.width-84,Screen.height-84,64,64),"Next","arrow")) {
 			var d = gameObject.GetComponent("DialogueInstance");
-			eval(display.script);
+			eval(display.script, "unsafe");
 		}
 		}
 	break;
@@ -199,10 +226,12 @@ function DoNextButton () {
 }
 
 function Restart() {
+
 	LoadDialogue(startOn);
 	timeStart = Time.time;
 	lineCount = 0;
 }
+
 
 function LoadDialogue (i:int) {
 	curItem = i;

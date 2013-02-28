@@ -17,7 +17,7 @@ public class Unit : MonoBehaviour {
 	public float HP, maxHP, def = 10f;
 	public float damage;
     public List<Effect> statusEffects;
-
+	
 	void Awake() {
 		manager = UnitManager.getInstance();
 		unitTransform = transform;
