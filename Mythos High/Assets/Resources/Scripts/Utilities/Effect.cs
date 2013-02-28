@@ -42,6 +42,11 @@ public class Effect : MonoBehaviour
 				prevValues[i] = u.moveSpeed;
 				u.moveSpeed = 0;
 			}
+            if (effectName == "slow")
+            {
+                prevValues[i] = u.moveSpeed;
+                u.moveSpeed = u.moveSpeed * intensity;
+            }
         }
         Invoke("destroy", buffDuration);
     }
@@ -54,7 +59,7 @@ public class Effect : MonoBehaviour
             {
                 if (effectName == "damage") u.damage = prevValues[i];
                 if (effectName == "def") u.def = prevValues[i];
-				if (effectName == "stun") u.moveSpeed = prevValues[i];
+				if (effectName == "stun" || effectName == "slow") u.moveSpeed = prevValues[i];
                 u.statusEffects.Remove(this);
             }
         }

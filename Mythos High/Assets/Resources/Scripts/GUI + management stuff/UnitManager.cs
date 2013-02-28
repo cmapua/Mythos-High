@@ -10,6 +10,8 @@ public class UnitManager : MonoBehaviour {
 	public int levelLength = 1050;
     private bool togglePause = true;
 
+    public GameObject contraption;
+
 	//singleton design pattern
 	private static UnitManager instance;
 

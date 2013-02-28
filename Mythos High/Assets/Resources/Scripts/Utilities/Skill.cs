@@ -35,7 +35,7 @@ public class Skill : MonoBehaviour {
     public GameObject skillAnimation, secondaryAnimation; //summon;
     public Texture2D icon, normalIcon, cooldownIcon;
     public string skillName;
-    public bool isActive = true; //
+    public bool isActive = true, isConstant = false; //
 
     public Effect[] effects;
     public LayerMask mask;
@@ -43,6 +43,7 @@ public class Skill : MonoBehaviour {
     private UnitManager manager;
     private faithHud hud;
     private List<Unit> affectedUnitsCache;
+    private GameObject summon;
 
     //for reflection.
     private const BindingFlags flags = /*BindingFlags.NonPublic | */ BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static;
@@ -79,11 +80,12 @@ public class Skill : MonoBehaviour {
 
     IEnumerator CoUpdate()
     {
-        if (isActive && Time.deltaTime > 0)
+        if (isConstant && Time.deltaTime > 0)
         {
-            if (type == skillType.aura) applyEffectsOn(getAffectedUnits());
+            if (type == skillType.aura || (type == skillType.summon && skillName == "Ghost Busters")) applyEffectsOn(getAffectedUnits());
         }
         yield return new WaitForSeconds(duration);
+        if(skillName == "Ghost Busters") isConstant = false;
     }
 
     public enum skillType
@@ -99,6 +101,13 @@ public class Skill : MonoBehaviour {
 
     public Collider[] getAffectedUnits()
     {
+        if (type == skillType.summon)
+        {
+            //GameObject summoned = manager.contraption; //GameObject.Find("summon-" + skillName);
+            if (!summon) print("contraption not found");
+            else print("contraption found, coords: " + summon.transform.position);
+            if (aoe > 0 && summon != null) return Physics.OverlapSphere(summon.transform.position, aoe, mask.value);
+        }
         if ((type == skillType.instant || type == skillType.aura)) //
         {
 			if(aoe > 0)
@@ -198,8 +207,22 @@ public class Skill : MonoBehaviour {
 				Vector3 summonPos = new Vector3(caster.transform.position.x + Mathf.Cos(rad) * distanceFromCaster, caster.transform.position.y + 100, caster.transform.position.z + Mathf.Sin(rad) * distanceFromCaster);
 				GameObject familiar = OT.CreateObject("summon-"+skillName);
 				familiar.transform.position = summonPos;
+                familiar.layer = caster.getLayer();
+                summon = familiar;
 			}
-			
+
+            if (skillName == "Ghost Busters")
+            {
+                Collider[] units = getAffectedUnits();
+                foreach (Collider c in units)
+                {
+                    GameObject obj = Instantiate(skillAnimation, c.gameObject.transform.position, c.gameObject.transform.rotation) as GameObject;
+                    obj.transform.parent = c.gameObject.transform;
+                }
+                isConstant = true;
+                applyEffectsOn(units);
+            }
+
 			icon = cooldownIcon;
             isActive = false;
             StartCoroutine(cooldown());
@@ -224,13 +247,14 @@ public class Skill : MonoBehaviour {
             isActive = false;
             StartCoroutine(cooldown());
         }
-        if (type == skillType.aura)
+        if (type == skillType.aura && isActive)
         {
-            isActive = true;
             GameObject obj = Instantiate(skillAnimation, caster.transform.position, caster.transform.rotation) as GameObject;
             obj.transform.parent = caster.gameObject.transform;
 
+            isConstant = true;
             icon = cooldownIcon;
+            isActive = false;
         }
         if (type == skillType.target && isActive)
         {

@@ -47,6 +47,25 @@ public class SkillManager : MonoBehaviour {
         //}
 	}
 
+    public Skill findSkill(string name, int layer)
+    {
+        if (layer == 8)
+        {
+            foreach (Skill s in playerSkills)
+            {
+                if (s.skillName == name) return s;
+            }
+        }
+        if (layer == 9)
+        {
+            foreach (Skill s in enemySkills)
+            {
+                if (s.skillName == name) return s;
+            }
+        }
+        return null;
+    }
+
     public void activateSkill(int index)
     {
         //Skill s = Instantiate(playerSkills[index]) as Skill;
