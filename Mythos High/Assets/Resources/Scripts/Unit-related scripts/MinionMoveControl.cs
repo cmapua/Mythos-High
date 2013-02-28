@@ -44,7 +44,9 @@ public class MinionMoveControl : SpriteControl {
 	
 	// Update is called once per frame
 	void Update () {
-		if(Time.timeScale !=0){	//deltaTime or TimeScale?
+		if(Time.deltaTime > 0 && unit.moveSpeed > 0){	//deltaTime or TimeScale?
+			sprite.Resume();
+			
 			//if at last frame of attack animation for archer, stop playing and deal damage
 			if(unit_type == Unit.type.archer && isAttacking && sprite.CurrentFrame().index  == 13) {
 				frames++;
@@ -122,6 +124,6 @@ public class MinionMoveControl : SpriteControl {
 					}
 				}
 			}
-		}
+		} else sprite.Pauze();
 	}
 }

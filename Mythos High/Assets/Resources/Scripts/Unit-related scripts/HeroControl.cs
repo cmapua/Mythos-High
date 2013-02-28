@@ -110,7 +110,9 @@ public class HeroControl : SpriteControl {
 	
 	void Update() {
 		
-		if(Time.timeScale > 0) {
+		if(Time.deltaTime > 0 && unit.moveSpeed > 0) {
+			sprite.Resume();
+			
 			if(unit.HP<unit.maxHP){
 				hpRegen();
 			}
@@ -177,6 +179,6 @@ public class HeroControl : SpriteControl {
 				sprite.PlayLoop("hero-idle");
 				break;
 			}
-		}
+		} else sprite.Pauze();
 	}
 }

@@ -62,6 +62,26 @@ public class UnitManager : MonoBehaviour {
 		return yourUnits;
 	}
 	
+	public Collider[] getYourUnitColliders() {
+		Collider[] colArr = new Collider[yourUnits.Count];
+		for(int i = 0; i < colArr.Length; i++) colArr[i] = yourUnits[i].collider;
+		return colArr;
+	}
+	
+	public Collider[] getTheirUnitColliders() {
+		Collider[] colArr = new Collider[theirUnits.Count];
+		for(int i = 0; i < colArr.Length; i++) colArr[i] = theirUnits[i].collider;
+		return colArr;
+	}
+	
+	//this might not work :/
+	public Collider[] getAllColliders() {
+		Collider[] colArr = new Collider[theirUnits.Count + yourUnits.Count];
+		getYourUnitColliders().CopyTo(colArr, 0);
+		getTheirUnitColliders().CopyTo(colArr, yourUnits.Count);
+		return colArr;
+	}
+	
 	public List<Unit> getTheirUnits() {
 		return theirUnits;
 	}

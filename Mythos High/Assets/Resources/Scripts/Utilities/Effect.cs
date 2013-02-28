@@ -35,6 +35,13 @@ public class Effect : MonoBehaviour
                 prevValues[i] = u.def;
                 u.def += u.maxHP * intensity;
             }
+			if(effectName == "physical dmg") {
+				u.HP -= intensity;
+			}
+			if(effectName == "stun") {
+				prevValues[i] = u.moveSpeed;
+				u.moveSpeed = 0;
+			}
         }
         Invoke("destroy", buffDuration);
     }
@@ -47,6 +54,7 @@ public class Effect : MonoBehaviour
             {
                 if (effectName == "damage") u.damage = prevValues[i];
                 if (effectName == "def") u.def = prevValues[i];
+				if (effectName == "stun") u.moveSpeed = prevValues[i];
                 u.statusEffects.Remove(this);
             }
         }

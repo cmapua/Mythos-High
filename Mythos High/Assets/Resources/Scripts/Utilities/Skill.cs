@@ -39,7 +39,7 @@ public class Skill : MonoBehaviour {
     public Effect[] effects;
     public LayerMask mask;
 
-    //private UnitManager manager;
+    private UnitManager manager;
     private faithHud hud;
     private List<Unit> affectedUnitsCache;
 
@@ -48,7 +48,7 @@ public class Skill : MonoBehaviour {
 
     void Awake()
     {
-        //manager = UnitManager.getInstance();
+        manager = UnitManager.getInstance();
         hud = faithHud.getInstance();
         //Invoke("destroy", duration);
     }
@@ -56,12 +56,13 @@ public class Skill : MonoBehaviour {
     void Start()
     {
         icon = normalIcon;
-
-        //for (int i = 0; i < effects.Length; i++ )
-        //{
-        //    effects[i] = Instantiate(effects[i]) as Effect;
-        //}
-
+		if(caster.getLayer() == 9) { //enemy caster
+			int value = mask.value;
+			if(value == 1 << 8) value = 1 << 9;
+			if(value == 1 << 9) value = 1 << 8;
+			//mask.value = ~mask.value; //invert bits...??
+		}
+		
         if (type == skillType.aura)
             StartCoroutine(CoStart());
     }
@@ -97,34 +98,19 @@ public class Skill : MonoBehaviour {
 
     public Collider[] getAffectedUnits()
     {
-        //List<Unit> units = null;
-
-        if ((type == skillType.instant || type == skillType.aura) && aoe > 0) //
+        if ((type == skillType.instant || type == skillType.aura)) //
         {
-            //deprecated
-            //foreach (Unit u in manager.getTheirUnits())
-            //{
-            //    if (Vector3.Distance(caster.transform.position, u.transform.position) < aoe) units.Add(u);
-            //}
-            //foreach (Unit u in manager.getYourUnits())
-            //{
-            //    if (Vector3.Distance(caster.transform.position, u.transform.position) < aoe) units.Add(u);
-            //}
-
-            return Physics.OverlapSphere(caster.transform.position, aoe, mask.value);
+			if(aoe > 0)
+            	return Physics.OverlapSphere(caster.transform.position, aoe, mask.value);
+			else {
+				if(mask.value == 1 << 8) return manager.getYourUnitColliders();
+				if(mask.value == 1 << 9) return manager.getTheirUnitColliders();
+				if(mask.value == (1 << 8 | 1 << 9)) return manager.getAllColliders();
+			}
         }
 
         if (type == skillType.target && aoe > 0)
         {
-            //foreach (Unit u in manager.getTheirUnits())
-            //{
-            //    if (Vector3.Distance(target.transform.position, u.transform.position) < aoe) units.Add(u);
-            //}
-            //foreach (Unit u in manager.getYourUnits())
-            //{
-            //    if (Vector3.Distance(target.transform.position, u.transform.position) < aoe) units.Add(u);
-            //}
-
             return Physics.OverlapSphere(target.transform.position, aoe, mask.value);
         }
 
@@ -134,31 +120,32 @@ public class Skill : MonoBehaviour {
     //
     public void applyEffectsOn(Unit target)
     {
-        //doesn't work -- oh wait it does
+        
         if (target)
         {
-            FieldInfo[] fields = target.GetType().GetFields(flags);
+			//doesn't work -- oh wait it does
+			//edit: deprecated
+//            FieldInfo[] fields = target.GetType().GetFields(flags);
 
             foreach (Effect e in effects)
             {
-                if (e.isBuff == false)
-                {
-                    foreach (FieldInfo f in fields)
-                    {
-                        if (e.effectName == f.Name) f.SetValue(target, e.result((float)f.GetValue(target)));
-                    }
-                }
-                else
-                {
+				//deprecated
+//                if (e.isBuff == false)
+//                {
+//                    foreach (FieldInfo f in fields)
+//                    {
+//                        if (e.effectName == f.Name) f.SetValue(target, e.result((float)f.GetValue(target)));
+//                    }
+//                }
+//                else
+//                {
                     Effect eInstance = Instantiate(e) as Effect;
-                    //Effect eInstance = Instantiate(e) as Effect;
                     if (!target.statusEffects.Contains(eInstance) && target.isStatic == false)
                     {
                         target.statusEffects.Add(eInstance);
                         eInstance.referencedUnits.Add(target);
                     }
-
-                }
+//                }
             }
         }
     }

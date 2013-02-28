@@ -57,8 +57,10 @@ public class SpriteControl : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (Time.deltaTime > 0)
+        if (Time.deltaTime > 0 && unit.moveSpeed > 0)
         {
+			sprite.Resume();
+			
             if (unit.HP < unit.maxHP) hpRegen();
 
             if (wait)
@@ -130,7 +132,7 @@ public class SpriteControl : MonoBehaviour {
                     sprite.PlayLoop("hero-idle");
                 }
             }
-        }
+        } else sprite.Pauze();
 	}
 	
 	void actionChooser() {
