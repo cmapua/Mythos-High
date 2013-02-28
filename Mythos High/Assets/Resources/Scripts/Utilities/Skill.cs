@@ -31,7 +31,8 @@ public class Skill : MonoBehaviour {
     public float cooldownTime = 5f; //default
     public float aoe = 300f; //default, in meters (?). if 0, either target only or whole battle field is affected (note: this is the radius.)
     public float duration = 5f; //default (in seconds)
-    public GameObject skillAnimation;
+	public int summonCount = 5; //default
+    public GameObject skillAnimation, secondaryAnimation; //summon;
     public Texture2D icon, normalIcon, cooldownIcon;
     public string skillName;
     public bool isActive = true; //
@@ -189,6 +190,20 @@ public class Skill : MonoBehaviour {
 
     public IEnumerator activate()
     {
+		if(type == skillType.summon && isActive) {
+			//instantiate summons
+			float distanceFromCaster = 150; //1.5ft ?
+			for(int i = 0; i < summonCount; i++) {
+				float rad = 2 * Mathf.PI * i/summonCount;
+				Vector3 summonPos = new Vector3(caster.transform.position.x + Mathf.Cos(rad) * distanceFromCaster, caster.transform.position.y + 100, caster.transform.position.z + Mathf.Sin(rad) * distanceFromCaster);
+				GameObject familiar = OT.CreateObject("summon-"+skillName);
+				familiar.transform.position = summonPos;
+			}
+			
+			icon = cooldownIcon;
+            isActive = false;
+            StartCoroutine(cooldown());
+		}
         if (type == skillType.instant && isActive)
         {
             Collider[] units = getAffectedUnits();
@@ -198,6 +213,11 @@ public class Skill : MonoBehaviour {
                 obj.transform.parent = c.gameObject.transform;
             }
             
+			if(skillName == "Scary Face") {
+				GameObject obj = Instantiate(secondaryAnimation, caster.gameObject.transform.position, caster.gameObject.transform.rotation) as GameObject;
+                obj.transform.parent = caster.gameObject.transform;
+			}
+			
             applyEffectsOn(units);
 
             icon = cooldownIcon;
