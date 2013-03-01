@@ -60,8 +60,8 @@ public class Skill : MonoBehaviour {
         icon = normalIcon;
 		if(caster.getLayer() == 9) { //enemy caster
 			int value = mask.value;
-			if(value == 1 << 8) value = 1 << 9;
-			if(value == 1 << 9) value = 1 << 8;
+			if(value == 8) value = 9;
+			if(value == 9) value = 8;
 			//mask.value = ~mask.value; //invert bits...??
 		}
 		

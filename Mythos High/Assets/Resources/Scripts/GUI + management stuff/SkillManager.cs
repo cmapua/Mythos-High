@@ -60,7 +60,11 @@ public class SkillManager : MonoBehaviour {
         {
             foreach (Skill s in enemySkills)
             {
-                if (s.skillName == name) return s;
+                if (s.skillName == name)
+                {
+                    print("skill " + name + " found");
+                    return s;
+                }
             }
         }
         return null;
@@ -71,5 +75,13 @@ public class SkillManager : MonoBehaviour {
         //Skill s = Instantiate(playerSkills[index]) as Skill;
         //s.isActive = true;
         StartCoroutine(playerSkills[index].activate());
+    }
+
+    public void activateEnemySkill(int index)
+    {
+        //Skill s = Instantiate(playerSkills[index]) as Skill;
+        //s.isActive = true;
+        StartCoroutine(enemySkills[index].activate());
+        print("enemy skill " + enemySkills[index].skillName + " activated");
     }
 }

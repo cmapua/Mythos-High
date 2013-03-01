@@ -1,0 +1,88 @@
+basic loop:
+idle --> chasing --> attacking --> casting --> retreating --> idle
+
+#define unitDiff (enemyUnits - playerUnits)
+#define wounded HP < 25%
+#define healthy HP > 80%
+
+idle() {
+	searchForTarget();
+	if(wounded) woundedBehaviour();
+	if(healthy && target) dealWithTarget();
+	if(!target) doNothing();
+}
+
+searchForTarget() {
+	if(heroInRange()) target = hero;
+	else target = nearestTarget;
+	yield return new WaitForSeconds(1f);
+}
+
+doNothing() { 
+	idle(); 
+	yield return new WaitForSeconds(2f); 
+}
+
+woundedBehaviour() {
+	if(beingAttacked()) chasing();
+	else {
+		if(unitDiff > 10) casting(0);
+		if(9 > unitDiff > 7) casting(1);
+		if(6 > unitDiff > -6) casting(2);
+		if(-7 > unitDiff > -9) idle();
+		if(-10 > unitDiff) idle();
+	}
+}
+
+dealWithTarget() {
+	if(unitDiff > 5) chasing();
+	if(4 > unitDiff > 3) chasing();
+	if(2 > unitDiff > -2) casting(0);
+	if(-3 > unitDiff > -4) casting(1);
+	if(-5 > unitDiff) woundedBehaviour();
+}
+
+chasing() {
+	if(!target) retreating();
+	else if(target && farAway) moveTowards(target);
+	else attacking();
+}
+
+attacking() {
+	if(HP < 50%) retreating();
+	if(target && !farAway) {
+		playAnimation("attack");
+		while(animationPlaying) {
+			if(atLastFrame) { 
+				dealDamage();
+				stopAnimation();
+				break;
+			}
+			yield return null;
+		}
+	}
+	if(target && farAway) chasing();
+	if(!target) retreating();
+}
+
+casting(int slot) {
+	if(offensiveMagic) {
+		if(skill.type == target) {
+			if(target && !farAway) {
+				playAnimation("cast");
+				if(atLastFrame) dealDamage();
+			}
+			if(target && farAway) chasing();
+			if(!target) retreating();
+		}
+		//...
+	}
+	if(supportMagic) {
+		//...
+	}
+}
+
+retreating() {
+	if(!atFallbackPoint) moveTowards(fallbackPoint);
+	else idle();
+}
