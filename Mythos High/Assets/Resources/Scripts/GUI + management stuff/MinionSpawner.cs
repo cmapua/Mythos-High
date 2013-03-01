@@ -9,7 +9,7 @@ public class MinionSpawner : MonoBehaviour {
 	public bool dialoguePlaying = true;
 	
 	private static MinionSpawner instance;
-	
+	private UnitManager manager;
 		
 	public static MinionSpawner getInstance() {
 		if(instance == null) 
@@ -19,6 +19,7 @@ public class MinionSpawner : MonoBehaviour {
 	
 	// Use this for initialization
 	void Start(){
+		manager = UnitManager.getInstance();
 		StartCoroutine("CoStart");
 	}
 	IEnumerator CoStart() {
@@ -41,15 +42,15 @@ public class MinionSpawner : MonoBehaviour {
 		switch (enemyType){
 			case 0:
 				enemy = OT.CreateObject("enemy-Swordsman");
-				enemy.gameObject.transform.position = new Vector3(900, 0, Random.Range(-100, 100));
+				enemy.gameObject.transform.position = new Vector3(manager.getLevelLength() - 500, 0, Random.Range(-50, 150));
 				break;				
 			case 1:
 				enemy = OT.CreateObject("enemy-Mage");
-				enemy.gameObject.transform.position = new Vector3(900, 0, Random.Range(-100, 100));
+				enemy.gameObject.transform.position = new Vector3(manager.getLevelLength() - 500, 0, Random.Range(-50, 150));
 				break;				
 			case 2:
 				enemy = OT.CreateObject("enemy-Archer");
-				enemy.gameObject.transform.position = new Vector3(900, 0, Random.Range(-100, 100));
+				enemy.gameObject.transform.position = new Vector3(manager.getLevelLength() - 500, 0, Random.Range(-50, 150));
 				break;				
 		}		
 	}

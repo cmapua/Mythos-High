@@ -48,7 +48,7 @@ public class MinionMoveControl : SpriteControl {
 			sprite.Resume();
 			
 			//if at last frame of attack animation for archer, stop playing and deal damage
-			if(unit_type == Unit.type.archer && isAttacking && sprite.CurrentFrame().index  == 13) {
+			if(unit_type == Unit.type.archer && isAttacking && sprite.CurrentFrame().index  == 15) {
 				frames++;
 				if(frames == 5) {
 					GameObject arrow = OT.CreateObject("projectile");
@@ -64,7 +64,7 @@ public class MinionMoveControl : SpriteControl {
 				playAnimation = false;
 			}
 			//if at last frame of attack animation for swordsman, stop playing and deal damage
-			else if(unit_type == Unit.type.swordsman && isAttacking && sprite.CurrentFrame().index  == 32) {
+			else if(unit_type == Unit.type.swordsman && isAttacking && sprite.CurrentFrame().index  == 33) {
 				//targetUnit.HP -= unit.damage/5;
                 targetUnit.dealDamage(unit.damage / 5);
 	
@@ -72,10 +72,20 @@ public class MinionMoveControl : SpriteControl {
 				playAnimation = false;
 			}
 			//if at last frame of attack animation for mage, stop playing and deal damage
-			else if(unit_type == Unit.type.mage && isAttacking && sprite.CurrentFrame().index  == 53) {
-				//targetUnit.HP -= unit.damage/5;
-                targetUnit.dealDamage(unit.damage / 5);
-	
+			else if(unit_type == Unit.type.mage && isAttacking && sprite.CurrentFrame().index  == 66) {
+                //targetUnit.dealDamage(unit.damage / 5);
+				frames++;
+				if(frames == 5) {
+					GameObject spell = OT.CreateObject("mage-projectile");
+					if(target) {
+						Projectile proj = spell.GetComponent<Projectile>();
+						
+						spell.transform.position = arrowPoint.position;
+						proj.target = targetUnit;
+						spell.gameObject.layer = unit.getLayer();
+					}
+					frames = 0;
+				}
 				isAttacking = false;
 				playAnimation = false;
 			}

@@ -285,8 +285,8 @@ public class Skill : MonoBehaviour {
     void Update()
     {
         //just to 
-        if(type == skillType.aura)
-            Debug.DrawLine(caster.transform.position, new Vector3(caster.transform.position.x + aoe, caster.transform.position.y, caster.transform.position.z));
+        //if(type == skillType.aura)
+            //Debug.DrawLine(caster.transform.position, new Vector3(caster.transform.position.x + aoe, caster.transform.position.y, caster.transform.position.z));
     }
 
     void destroy()

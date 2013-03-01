@@ -9,6 +9,7 @@ public class minionCooldown : MonoBehaviour {
 	
 	private static minionCooldown instance;
 	private static faithHud faith;
+	private UnitManager manager;
 	
 	public static minionCooldown getInstance() {
 		if(instance == null) 
@@ -18,6 +19,7 @@ public class minionCooldown : MonoBehaviour {
 	
 	// Use this for initialization
 	void Start(){
+		manager = UnitManager.getInstance();
 		faith = faithHud.getInstance ();
 		StartCoroutine("CoStart");
 	}
@@ -58,7 +60,7 @@ public class minionCooldown : MonoBehaviour {
 		switch (cooldownType){
 		case "archer":
 			GameObject nArcher = OT.CreateObject("minion-Archer");
-			nArcher.transform.position = new Vector3(-900, 0, Random.Range(-100, 100));
+			nArcher.transform.position = new Vector3(-manager.getLevelLength() + 500, 0, Random.Range(-50, 150));
 			faith.currentFaith -= archerCost;
 
 			archerCanSpawn = false;
@@ -66,7 +68,7 @@ public class minionCooldown : MonoBehaviour {
 			break;
 		case "swordsman":
 			GameObject nSwordsman = OT.CreateObject("minion-Swordsman");
-			nSwordsman.transform.position = new Vector3(-900, 0, Random.Range(-100, 100));
+			nSwordsman.transform.position = new Vector3(-manager.getLevelLength() + 500, 0, Random.Range(-50, 150));
 			faith.currentFaith -= swordCost;
 
 			swordsmanCanSpawn = false;
@@ -74,7 +76,7 @@ public class minionCooldown : MonoBehaviour {
 			break;
 		case "mage":
 			GameObject nMage = OT.CreateObject("minion-Mage");
-			nMage.transform.position = new Vector3(-900, 0, Random.Range(-100, 100));
+			nMage.transform.position = new Vector3(-manager.getLevelLength() + 500, 0, Random.Range(-50, 150));
 			faith.currentFaith -= mageCost;
 
 			mageCanSpawn = false;
