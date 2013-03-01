@@ -2,8 +2,8 @@ var dialogueSkin : GUISkin;
 var startOn : int = 0;
 var defaultImg : Texture2D;
 var defaultAudio : AudioClip;
-var dialogue : DialogueEntry6[] = [new DialogueEntry6()];
-private var display : DialogueEntry6 = new DialogueEntry6();
+var dialogue : DialogueEntry7[] = [new DialogueEntry7()];
+private var display : DialogueEntry7 = new DialogueEntry7();
 private var waitTime : float = 0.2;
 private var lineCount : int = 0;
 private var timeStart : float = 0.0;
@@ -23,53 +23,53 @@ var strings : String[] = ["","","",""];
 private var jumpto : int;
 private var s : Vector2 = Vector2.zero;
 
-class DialogueEntry6 {
+class DialogueEntry7 {
 var name : String;
 var longText : String;
 var img : Texture2D;
-var choices : DialogueChoice6[];
+var choices : DialogueChoice7[];
 var choiceMode : int = 1;
-var Link6s : Link6[];
+var Link7s : Link7[];
 var next : int;
 var editor : boolean;
 var pos : int = 0;
 // 0 - top, 1 - bottom, 2 - middle
-var passwords : DialogueChoice6[];
+var passwords : DialogueChoice7[];
 var incorrect : int;
-var exit : DialogueChoice6;
+var exit : DialogueChoice7;
 var align : int;
 var mode : int;
 var narration : AudioClip[];
 var script : String;
 // 0 - next, 1 - choice, 2 - password, 3 - event, 4 - end
-function DialogueEntry6 () {
+function DialogueEntry7 () {
 name = "Name";
 longText = "New entry";
 next = 0;
 editor = false;
 incorrect = 0;
 align = 0;
-exit = new DialogueChoice6("Exit");
+exit = new DialogueChoice7("Exit");
 mode = 0;
 }
 }
-class DialogueChoice6 {
+class DialogueChoice7 {
 var shortText : String;
 var next : int;
 var editor : boolean;
-function DialogueChoice6 () {
+function DialogueChoice7 () {
 shortText = "New Choice";
 editor = false;
 }
-function DialogueChoice6 (s:String) {
+function DialogueChoice7 (s:String) {
 shortText = s;
 editor = false;
 }
 }
-class Link6 {
+class Link7 {
 var shortText : String;
 var url : String;
-function Link6 () {
+function Link7 () {
 shortText = "URL Description";
 url = "http://";
 }
@@ -134,7 +134,7 @@ case 2:
 GUI.Box(Rect(30,Screen.height/2-60,Screen.width-60,120),curContent,"textboxmiddle");	
 break;
 }
-/* for (var l in display.Link6s) {
+/* for (var l in display.Link7s) {
 GUILayout.Button(l.shortText);
 }*/
 DoNextButton();
@@ -221,7 +221,7 @@ lineCount = 0;
 function LoadDialogue (i:int) {
 curItem = i;
 timeStart = Time.time;
-display = new DialogueEntry6();
+display = new DialogueEntry7();
 display = dialogue[i];
 lineCount = 0;
 ParseText(display.longText);
