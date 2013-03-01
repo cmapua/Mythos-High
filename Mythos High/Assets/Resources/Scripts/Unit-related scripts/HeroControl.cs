@@ -4,6 +4,8 @@ using System.Collections;
 public class HeroControl : SpriteControl {
 	int unitCountDiff;
     public int attackLastFrame, castLastFrame, ability1CD = 30;
+
+	bool action1, action2, action3, action4;
 	
 	[HideInInspector]
 	public Transform fallbackPoint;

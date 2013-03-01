@@ -65,6 +65,7 @@ public class Unit : MonoBehaviour {
                 //DestroyObject(gameObject);
             }
             //else OT.DestroyObject(gameObject);
+			AudioSource.PlayClipAtPoint(AudioControl.getInstance().deathClip, transform.position);
 			DestroyObject(gameObject);
 		}
 	}

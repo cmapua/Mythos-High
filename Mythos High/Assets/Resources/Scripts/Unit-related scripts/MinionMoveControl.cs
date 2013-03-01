@@ -66,8 +66,12 @@ public class MinionMoveControl : SpriteControl {
 			//if at last frame of attack animation for swordsman, stop playing and deal damage
 			else if(unit_type == Unit.type.swordsman && isAttacking && sprite.CurrentFrame().index  == 33) {
 				//targetUnit.HP -= unit.damage/5;
-                targetUnit.dealDamage(unit.damage / 5);
-	
+                if(targetUnit)
+					AudioSource.PlayClipAtPoint(AudioControl.getInstance().hitClip, targetUnit.transform.position);
+				
+				targetUnit.dealDamage(unit.damage / 5);
+				//AudioClip a = Instantiate(AudioControl.getInstance().hitClip, targetUnit.transform.position, targetUnit.transform.rotation) as AudioClip;
+				
 				isAttacking = false;
 				playAnimation = false;
 			}
