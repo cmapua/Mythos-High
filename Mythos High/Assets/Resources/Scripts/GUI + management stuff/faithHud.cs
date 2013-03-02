@@ -13,7 +13,7 @@ public class faithHud : MonoBehaviour {
 	protected int xOffset = 0, yOffset = 0;
 	private bool hideHelp = false;
 	private bool dialogue = true;
-	private Unit playerShrine, enemyShrine, playerHero;
+	public Unit playerShrine, enemyShrine, playerHero;
 	
 	public GUIStyle style;
 	
@@ -108,7 +108,7 @@ public class faithHud : MonoBehaviour {
 			searchCastle();
 		}
 		else if(enemyShrine.HP <= 0){
-			return 1;
+			Application.LoadLevel("MaleAphroditeDialogue2");
 		}
 		else if(playerShrine.HP <= 0){
 			return 2;

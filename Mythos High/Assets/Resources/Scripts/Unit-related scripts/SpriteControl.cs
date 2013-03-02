@@ -9,6 +9,7 @@ public class SpriteControl : MonoBehaviour {
 	protected int frames = 0, lastFrame = 22; //default last frame for hero
 	private int levelLength, levelWidth;
 	private CharacterController cc;
+	protected AudioControl ac;
 	
 	[HideInInspector]
 	public bool isArcher = false, isMage = false, isSwordsman = false, isCastle = false, 
@@ -40,6 +41,7 @@ public class SpriteControl : MonoBehaviour {
 		sprite = GetComponent<OTAnimatingSprite>();
 		unit = GetComponent<Unit>();
         cc = GetComponent<CharacterController>();
+		ac = GetComponent<AudioControl>();
 	}
 	
 	protected void Start() {

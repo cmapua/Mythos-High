@@ -15,7 +15,7 @@ public class MaleAphroditeOsiris : MonoBehaviour {
 		if (GUI.Button (new Rect ((Screen.width/2)-150,(Screen.height/2)-200,200,400), 
 			"",AphroditeItem)) 
 		{
-			Application.LoadLevel ("MaleAphroditeDialogue");
+			Application.LoadLevel ("MaleAphroditeDialogue1");
 		}
 		GUI.Label(new Rect((Screen.width/2)+350,(Screen.height/2)-200,200,400), "",Osiris);
 		if (GUI.Button (new Rect ((Screen.width/2)+150,(Screen.height/2)-200,200,400),

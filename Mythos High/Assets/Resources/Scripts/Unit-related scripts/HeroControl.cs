@@ -3,7 +3,9 @@ using System.Collections;
 
 public class HeroControl : SpriteControl {
 	int unitCountDiff;
-    public int attackLastFrame, castLastFrame;
+    public int attackLastFrame, castLastFrame, ability1CD = 30;
+
+	bool action1, action2, action3, action4;
 	
 	[HideInInspector]
 	public Transform fallbackPoint;
@@ -21,10 +23,10 @@ public class HeroControl : SpriteControl {
 		unitCountDiff = unit.getUnitManager().getTheirUnits().Count - unit.getUnitManager().getYourUnits().Count;
 		if(unit.HP > (unit.maxHP * 0.75)) {
 			//activate super bass;
-            if (!skill1Triggered)
+            if (ability1CD<=0)
             {
                 currentState = heroState.castingSpell1;
-                skill1Triggered = true;
+				ability1CD = 300;
             }
             if (beingAttacked())
             {
@@ -211,7 +213,9 @@ public class HeroControl : SpriteControl {
     }
 
 	void Update() {
-		
+		if (ability1CD >0){
+			ability1CD--;
+		}
 		if(Time.timeScale > 0 && unit.moveSpeed > 0) {
 			sprite.Resume();
 			

@@ -61,6 +61,11 @@ public class PlayerInventory : MonoBehaviour {
 	 	 public int itemCount;
 		//Item Count
 	 	 public int itemPrice;
+		//Item Type
+		 public string itemType;
+		//Item Strength
+		 public int itemStrength;
+		
     }
 
 	List<PlayerItem> playerItemList = new List<PlayerItem>();
